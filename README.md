@@ -53,14 +53,14 @@ campus-stamp-tour/
 | HTML5 기본 구조 (`doctype`, `html lang`, `meta charset`, `viewport`, `title`, `body`) | 4개 파일 전부 |
 | 제목·문단·줄바꿈·강조 (`h1`~`h3`, `p`, `br`, `b`, `strong`) | 전 페이지 |
 | `style` 속성 | `index.html` 소개 문장 1곳 |
-| `div` 로 관련 내용 묶기 | 폼 입력 그룹, 상세 페이지 이미지 영역 |
+| `div` 로 관련 내용 묶기 | 상세 페이지 이미지 영역 |
 | 외부 링크 (`target="_blank" rel="noopener"`) | 카카오맵 지도 링크 3개 |
 | 문서 내 이동 링크 (`#id`) | `index.html` 목차, 맨 위로 |
 | `img` 와 대체 텍스트 `alt` | 장소 사진 6곳 |
-| `form` · `label` · `input` · `select` · `textarea` | `index.html` 장소 제보 양식 (화면 구조만) |
 | 시맨틱 구조 태그 (`header`, `main`, `section`, `article`, `nav`, `footer`) | 전 페이지 |
 
 `iframe`(YouTube 퍼가기)은 소개할 장소에 맞는 영상 중 이용 조건을 확인한 것이 없어 사용하지 않았습니다.
+`form`은 이번 과제에서 요구하지 않는 요소라 넣지 않았습니다. 사용자 입력은 6~7주차에 서버와 함께 설계할 예정입니다.
 별도의 CSS 파일과 JavaScript는 사용하지 않았습니다.
 
 ## 다음 주차 준비 상태
@@ -72,8 +72,7 @@ campus-stamp-tour/
   각 페이지에 `link` 한 줄만 추가하면 됩니다.
 - **4주차 (JavaScript)** — 각 장소에 `data-place-id`, `data-building`, `data-floor`,
   `data-time-of-day` 를 넣어 두었습니다. `dataset` 으로 읽어 marker·필터에 바로 쓸 수 있습니다.
-- **6~7주차 (Flask)** — `index.html` 의 장소 제보 폼이 이미 `name` 속성을 갖춘 상태라
-  서버 라우트만 연결하면 됩니다.
+- **6~7주차 (Flask)** — 장소 id 를 그대로 route 와 API 경로에 쓸 수 있게 맞춰 두었습니다.
 - 장소 id (`store`, `cafeteria`, `gym`) 는 이후 JSON·DB의 기본 키로 그대로 쓸 예정입니다.
 
 ## 출처

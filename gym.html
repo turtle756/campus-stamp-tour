@@ -3,74 +3,87 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>교내 트러스트짐 · 학교 밖으로 안 나가는 하루</title>
+    <title>교내 트러스트짐 · 캠퍼스 스탬프 투어</title>
   </head>
   <body>
-    <header>
-      <p><a href="index.html">← 핫스팟 첫 화면</a></p>
+    <header class="site-header">
+      <p class="back-link"><a href="index.html">← 핫스팟 첫 화면</a></p>
       <h1>교내 트러스트짐</h1>
-      <p>밖에 있었으면 안 다녔을 헬스장</p>
+      <p class="lead">밖에 있었으면 안 다녔을 헬스장</p>
     </header>
 
-    <main>
-      <img src="images/gym.jpg"
-           alt="트러스트짐 웨이트 기구가 놓인 운동 공간"
-           width="640">
+    <main class="explorer">
+      <div class="map" data-place-id="gym" data-building="교내 체육시설">
+        <img src="images/gym.jpg"
+             alt="트러스트짐 웨이트 기구가 놓인 운동 공간"
+             width="640">
+      </div>
 
-      <h2>이 장소가 의미 있는 이유</h2>
-      <p>
-        운동을 원래 좋아했던 것은 아니다. 이 헬스장에 다니는 이유는 단순하다.
-        캠퍼스 안에 있기 때문이다.
-      </p>
-      <p>
-        집 근처 헬스장을 끊었다가 두 달을 못 채우고 그만둔 적이 있다.
-        수업이 끝나고 집에 갔다가 옷 갈아입고 다시 나오는 그 단계 하나가
-        매번 발목을 잡았다. 여기는 그 단계가 없다. 수업 끝나고 그냥 걸어가면 도착한다.
-      </p>
-      <p>
-        의지가 강해져서 운동을 계속하게 된 게 아니라, 안 갈 핑계가 사라져서 계속하게 됐다.
-        이 장소를 세 곳 중 하나로 고른 이유가 그거다.
-        거리가 습관을 만든다는 걸 여기서 처음 체감했다.
-      </p>
+      <article class="place-panel">
+        <section class="place-meaning">
+          <h2>이 장소가 의미 있는 이유</h2>
+          <p>
+            운동을 원래 좋아했던 것은 아니다. 이 헬스장에 다니는 이유는 단순하다.<br>
+            캠퍼스 안에 있기 때문이다.
+          </p>
+          <p>
+            집 근처 헬스장을 끊었다가 오래 못 가고 그만둔 적이 있다.
+            수업이 끝나고 집에 갔다가 옷 갈아입고 다시 나오는 그 한 단계가 매번 발목을 잡았다.
+            여기는 그 단계가 없다. 수업 끝나고 그냥 걸어가면 도착한다.
+          </p>
+          <p>
+            의지가 강해져서 운동을 계속하게 된 게 아니라, <strong>안 갈 핑계가 사라져서</strong>
+            계속하게 됐다. 이 장소를 세 곳 중 하나로 고른 이유가 그거다.
+            거리가 습관을 만든다는 걸 여기서 처음 체감했다.
+          </p>
+        </section>
 
-      <h2>찾아가는 방법</h2>
-      <p>
-        성심교정 안에 있는 헬스장으로, 카카오맵에서도 학교와 같은 주소(지봉로 43)로 등록되어 있다.
-        수업 건물에서 걸어서 갈 수 있는 거리이며, 이용 방법과 등록 절차는
-        이용 전에 안내를 확인하는 것이 좋다.
-      </p>
-      <p>
-        <a href="https://place.map.kakao.com/986693554" target="_blank" rel="noopener">
-          트러스트짐(교내) 위치를 카카오맵에서 열기
-        </a>
-      </p>
+        <section class="place-access">
+          <h2>찾아가는 방법</h2>
+          <p>
+            성심교정 안에 있는 헬스장으로, 카카오맵에도 학교와 같은 주소(지봉로 43)로 등록되어 있다.<br>
+            수업 건물에서 걸어갈 수 있는 거리이며, 이용 방법과 등록 절차는 방문 전에 안내를 확인하는 것이 좋다.
+          </p>
+          <p>
+            <a class="map-link primary-action"
+               href="https://place.map.kakao.com/986693554"
+               target="_blank" rel="noopener">
+              트러스트짐(교내) 위치를 카카오맵에서 열기
+            </a>
+          </p>
+        </section>
 
-      <h2>여기에서 해볼 것</h2>
-      <ul>
-        <li>수업 끝나고 집에 들르지 않고 바로 오는 날이 며칠인지 세어 보기</li>
-        <li>기구별로 대기가 가장 긴 시간대 찾아 두기</li>
-        <li>가장 가벼운 무게로 한 달만 같은 루틴 반복해 보기</li>
-        <li>운동 전후로 학관 편의점에서 뭘 사게 되는지 기록해 보기</li>
-      </ul>
+        <section class="place-activity">
+          <h2>여기에서 해볼 것</h2>
+          <ul>
+            <li>수업 끝나고 집에 들르지 않고 바로 오는 날이 며칠인지 세어 보기</li>
+            <li>기구별로 대기가 가장 긴 시간대 찾아 두기</li>
+            <li>가장 가벼운 무게로 한 달만 같은 루틴 반복해 보기</li>
+            <li>운동 전후로 학관 편의점에서 뭘 사게 되는지 기록해 보기</li>
+          </ul>
+        </section>
 
-      <h2>가기 좋은 시간</h2>
-      <p>
-        저녁 수업이 끝나는 시간대에는 사람이 몰린다.
-        공강이 긴 날 오후에 오면 기구를 기다리지 않고 쓸 수 있다.
-      </p>
+        <section class="place-timing">
+          <h2>가기 좋은 시간</h2>
+          <p>
+            저녁 수업이 끝나는 시간대에는 사람이 몰린다.
+            공강이 긴 날 오후에 오면 기구를 기다리지 않고 쓸 수 있다.
+          </p>
+        </section>
+      </article>
     </main>
 
-    <nav aria-label="장소 페이지 이동">
+    <nav class="place-nav" aria-label="장소 페이지 이동">
       <hr>
       <p>
         <a href="cafeteria.html">← 이전 장소: 학관 2층 학생식당</a>
         &nbsp;|&nbsp;
         <a href="store.html">다음 장소: 학관 1층 GS25 →</a>
       </p>
-      <p><a href="index.html">첫 화면으로 돌아가기</a></p>
+      <p><a class="primary-action" href="index.html">첫 화면으로 돌아가기</a></p>
     </nav>
 
-    <footer>
+    <footer class="site-footer">
       <h2>출처</h2>
       <ul>
         <li>사진: 작성자 직접 촬영</li>

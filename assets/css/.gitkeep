@@ -1,0 +1,3 @@
+3주차 CSS 파일이 들어갈 자리입니다. (2주차 과제는 별도 CSS 파일을 사용하지 않습니다)
+HTML에 .explorer / .place-panel / .place-card / .primary-action 등 class를 미리 부여해 두었으므로,
+3주차에는 이 폴더에 style.css 를 만들고 각 페이지 <head>에 link 한 줄만 추가하면 됩니다.

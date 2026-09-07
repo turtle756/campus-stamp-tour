@@ -3,79 +3,92 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>학관 2층 학생식당 · 학교 밖으로 안 나가는 하루</title>
+    <title>학관 2층 학생식당 · 캠퍼스 스탬프 투어</title>
   </head>
   <body>
-    <header>
-      <p><a href="index.html">← 핫스팟 첫 화면</a></p>
+    <header class="site-header">
+      <p class="back-link"><a href="index.html">← 핫스팟 첫 화면</a></p>
       <h1>학관 2층 학생식당</h1>
-      <p>혼자 먹어도 아무도 신경 쓰지 않는 곳</p>
+      <p class="lead">혼자 먹어도 아무도 신경 쓰지 않는 곳</p>
     </header>
 
-    <main>
-      <img src="images/cafeteria.jpg"
-           alt="학생식당 배식대와 식판을 든 줄, 창가 좌석이 보이는 모습"
-           width="640">
+    <main class="explorer">
+      <div class="map" data-place-id="cafeteria" data-building="학관" data-floor="2">
+        <img src="images/cafeteria.jpg"
+             alt="학생식당 배식대와 식판을 든 줄, 창가 좌석이 보이는 모습"
+             width="640">
+      </div>
 
-      <h2>이 장소가 의미 있는 이유</h2>
-      <p>
-        여기서는 대부분 혼자 먹는다. 처음에는 혼자 앉는 게 신경 쓰였는데,
-        몇 번 와보니 주변 절반이 혼자였다. 식판 들고 아무 자리나 앉아서 먹고 일어나면 끝이다.
-        누구를 기다릴 필요도, 메뉴를 맞출 필요도 없다.
-      </p>
-      <p>
-        솔직히 맛 때문에 오는 곳은 아니다. 학교 밖 식당은 한 끼에 만 원이 넘어가는데
-        여기는 그 절반도 안 된다. 매일 먹는 밥에서 그 차이는 한 학기 단위로 쌓인다.
-        가성비가 이유라는 게 낭만적이지는 않지만, 그게 내가 이 식당에 계속 오는 진짜 이유다.
-      </p>
-      <p>
-        그리고 편의점 바로 위층이라는 게 크다. 아침을 1층에서 때운 날 점심을 2층에서 먹으면,
-        하루 동안 학관 계단 한 층이 내 이동 거리의 전부가 된다.
-      </p>
+      <article class="place-panel">
+        <section class="place-meaning">
+          <h2>이 장소가 의미 있는 이유</h2>
+          <p>
+            여기서는 대부분 혼자 먹는다. 처음에는 혼자 앉는 게 신경 쓰였는데,
+            몇 번 와보니 주변 절반이 혼자였다. 식판 들고 아무 자리나 앉아서 먹고 일어나면 끝이다.
+            누구를 기다릴 필요도, 메뉴를 맞출 필요도 없다.
+          </p>
+          <p>
+            솔직히 맛 때문에 오는 곳은 아니다. 학교 밖에서 한 끼 먹으면 만 원이 훌쩍 넘는데
+            여기는 그 절반도 안 된다. 매일 먹는 밥에서 그 차이는 한 학기 단위로 쌓인다.
+            <strong>가성비가 이유라는 게 낭만적이지는 않지만, 그게 계속 오는 진짜 이유다.</strong>
+          </p>
+          <p>
+            편의점 바로 위층이라는 점도 크다. 아침을 1층에서 때운 날 점심을 2층에서 먹으면,
+            그날 내 이동 거리는 학관 계단 한 층이 전부가 된다.
+          </p>
+        </section>
 
-      <h2>찾아가는 방법</h2>
-      <p>
-        학생회관(학관) 1층 편의점에서 계단으로 한 층만 올라가면 2층이 식당이다.
-        배식대에서 식권을 내고 식판을 받은 뒤 자리를 잡는 구조다.
-        방학과 시험 기간에는 운영 시간이 달라지므로 미리 확인하는 편이 좋다.
-      </p>
-      <p>
-        <a href="https://place.map.kakao.com/11344864" target="_blank" rel="noopener">
-          가톨릭대학교 성심교정 위치를 카카오맵에서 열기 (학관 2층)
-        </a>
-      </p>
+        <section class="place-access">
+          <h2>찾아가는 방법</h2>
+          <p>
+            학생회관(학관) 1층 편의점에서 계단으로 한 층만 올라가면 2층이 식당이다.<br>
+            방학과 시험 기간에는 운영 시간이 달라지므로 미리 확인하는 편이 좋다.
+          </p>
+          <p>
+            <a class="map-link primary-action"
+               href="https://place.map.kakao.com/11344864"
+               target="_blank" rel="noopener">
+              가톨릭대학교 성심교정 위치를 카카오맵에서 열기 (학관 2층)
+            </a>
+          </p>
+        </section>
 
-      <h2>여기에서 해볼 것</h2>
-      <ul>
-        <li>혼자 온 사람과 여럿이 온 사람의 비율을 눈으로 세어 보기</li>
-        <li>같은 메뉴를 학교 밖에서 먹었을 때 가격과 비교해 보기</li>
-        <li>줄이 가장 짧은 시간대를 찾아 다음 주에 그 시간에 와 보기</li>
-        <li>창가 자리와 안쪽 자리 중 어디가 더 빨리 차는지 관찰하기</li>
-      </ul>
+        <section class="place-activity">
+          <h2>여기에서 해볼 것</h2>
+          <ul>
+            <li>혼자 온 사람과 여럿이 온 사람의 비율을 눈으로 세어 보기</li>
+            <li>같은 메뉴를 학교 밖에서 먹었을 때 가격과 비교해 보기</li>
+            <li>줄이 가장 짧은 시간대를 찾아 다음 주에 그 시간에 와 보기</li>
+            <li>창가 자리와 안쪽 자리 중 어디가 더 빨리 차는지 관찰하기</li>
+          </ul>
+        </section>
 
-      <h2>가기 좋은 시간</h2>
-      <p>
-        12시 정각에는 줄이 가장 길다. 11시 40분쯤이나 1시 이후에 가면
-        기다리지 않고 자리도 고를 수 있다.
-      </p>
+        <section class="place-timing">
+          <h2>가기 좋은 시간</h2>
+          <p>
+            12시 정각에는 줄이 가장 길다. 11시 40분쯤이나 1시 이후에 가면
+            기다리지 않고 자리도 고를 수 있다.
+          </p>
+        </section>
+      </article>
     </main>
 
-    <nav aria-label="장소 페이지 이동">
+    <nav class="place-nav" aria-label="장소 페이지 이동">
       <hr>
       <p>
         <a href="store.html">← 이전 장소: 학관 1층 GS25</a>
         &nbsp;|&nbsp;
         <a href="gym.html">다음 장소: 교내 트러스트짐 →</a>
       </p>
-      <p><a href="index.html">첫 화면으로 돌아가기</a></p>
+      <p><a class="primary-action" href="index.html">첫 화면으로 돌아가기</a></p>
     </nav>
 
-    <footer>
+    <footer class="site-footer">
       <h2>출처</h2>
       <ul>
         <li>사진: 작성자 직접 촬영</li>
         <li>지도 링크: <a href="https://place.map.kakao.com/11344864" target="_blank" rel="noopener">카카오맵 · 가톨릭대학교 성심교정</a></li>
-        <li>학사 및 시설 정보: <a href="https://www.catholic.ac.kr/" target="_blank" rel="noopener">가톨릭대학교 공식 홈페이지</a></li>
+        <li>학사와 시설 정보: <a href="https://www.catholic.ac.kr/" target="_blank" rel="noopener">가톨릭대학교 공식 홈페이지</a></li>
       </ul>
     </footer>
   </body>

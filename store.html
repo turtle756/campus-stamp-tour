@@ -4,16 +4,33 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>학관 1층 GS25 · 캠퍼스 스탬프 투어</title>
+    <meta name="description" content="학관 1층 GS25 · 살 게 없어도 일단 들어가게 되는 곳. 아침·점심 대용을 책임지는 하루의 기본값.">
+    <meta property="og:title" content="학관 1층 GS25 · 캠퍼스 스탬프 투어">
+    <meta property="og:description" content="살 게 없어도 일단 들어가게 되는 곳. 하루의 기본값이 된 자리.">
+    <meta property="og:image" content="https://turtle756.github.io/campus-stamp-tour/images/store.jpg">
+    <meta property="og:url" content="https://turtle756.github.io/campus-stamp-tour/store.html">
+    <meta property="og:type" content="article">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8F%AA%3C/text%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="assets/css/style.css">
   </head>
   <body class="page-store">
+    <a class="skip-link" href="#main-content">본문 바로가기</a>
     <header class="site-header">
       <p class="back-link"><a href="index.html">← 핫스팟 첫 화면</a></p>
+      <nav class="stamp-tour" aria-label="캠퍼스 스탬프 투어 진행 상황">
+        <ol>
+          <li class="is-current" aria-current="step"><span class="stamp-dot">1</span>아침 · GS25</li>
+          <li><a href="cafeteria.html"><span class="stamp-dot">2</span>점심 · 학생식당</a></li>
+          <li><a href="gym.html"><span class="stamp-dot">3</span>저녁 · 트러스트짐</a></li>
+        </ol>
+      </nav>
       <h1>학관 1층 GS25</h1>
       <p class="lead">살 게 없어도 일단 들어가게 되는 곳</p>
     </header>
 
-    <main class="explorer">
+    <main class="explorer" id="main-content">
       <div class="map" data-place-id="store" data-building="학관" data-floor="1">
         <img src="images/store.jpg"
              alt="학관 1층 편의점 입구와 진열대가 보이는 모습"

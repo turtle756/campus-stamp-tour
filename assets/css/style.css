@@ -208,18 +208,16 @@ hr {
 }
 
 .stamp-tour .is-current .stamp-dot {
-  background: currentColor;
+  background: var(--accent);
   color: white;
+  border-color: var(--accent);
   transform: scale(1.15);
   transition: transform 200ms ease;
 }
 
+/* gym은 어두운 배경 위에서 dot 텍스트를 배경색으로 대비 강화 */
 .page-gym .stamp-tour .is-current .stamp-dot {
   color: var(--bg);
-}
-
-.page-store .stamp-tour .is-current .stamp-dot {
-  color: white;
 }
 
 /* 공통 인터랙션 컴포넌트 */

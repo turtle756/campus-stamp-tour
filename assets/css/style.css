@@ -1,0 +1,820 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Nanum+Myeongjo:wght@400;700;800&family=JetBrains+Mono:wght@400;700&display=swap");
+
+/* ========================================================================
+   base — 4개 페이지가 공유하는 기본값
+   ------------------------------------------------------------------------
+   - 1단 중앙 레이아웃(.page의 margin: 0 auto + max-width)
+   - box-sizing: border-box 표준화
+   - 링크/포커스/이미지 기본 규칙
+   ======================================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: light dark;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-weight: 400;
+  line-height: 1.75;
+  min-height: 100vh;
+}
+
+.page,
+.site-header,
+main.explorer,
+.place-nav,
+.site-footer {
+  width: 92%;
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.site-header {
+  padding: 2.5rem 0 1rem;
+}
+
+main.explorer {
+  padding: 1rem 0 2rem;
+}
+
+.site-footer {
+  padding: 1.5rem 0 2.5rem;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+
+a {
+  color: inherit;
+  text-underline-offset: 3px;
+  transition: color 180ms ease, background-color 180ms ease, transform 180ms ease;
+}
+
+a:hover {
+  text-decoration-thickness: 2px;
+}
+
+a:focus-visible {
+  outline: 3px solid currentColor;
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+h1, h2, h3 {
+  line-height: 1.3;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+h1 { font-size: 2.4rem; }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.15rem; }
+
+blockquote {
+  margin: 1.5em 0;
+  padding: 0.8em 1.2em;
+  border-left: 4px solid currentColor;
+  font-style: italic;
+  opacity: 0.9;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5em 0;
+}
+
+th, td {
+  padding: 0.6em 0.8em;
+  text-align: left;
+  border-bottom: 1px solid currentColor;
+}
+
+caption {
+  padding-bottom: 0.5em;
+  font-weight: 700;
+  text-align: left;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid currentColor;
+  opacity: 0.3;
+  margin: 2rem 0;
+}
+
+/* 공통 인터랙션 컴포넌트 */
+.primary-action {
+  display: inline-block;
+  padding: 0.7em 1.1em;
+  border: 2px solid currentColor;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 700;
+  transition: transform 180ms ease, background-color 180ms ease, color 180ms ease, box-shadow 180ms ease;
+}
+
+.primary-action:hover {
+  transform: translateY(-2px);
+}
+
+.primary-action:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.toc {
+  margin: 1.5rem 0;
+  padding: 1rem 1.25rem;
+  border-radius: 10px;
+  background: rgb(0 0 0 / 5%);
+}
+
+.toc h2 {
+  margin: 0 0 0.4em;
+  font-size: 1rem;
+}
+
+.toc ul {
+  margin: 0;
+  padding-left: 1.2em;
+}
+
+.place-card,
+.place-panel,
+.map,
+.intro,
+.route,
+.place-list-section {
+  transition: transform 220ms ease, box-shadow 220ms ease;
+}
+
+.place-list {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.place-card {
+  padding: 1.25rem;
+  border-radius: 12px;
+  border: 1px solid currentColor;
+}
+
+.place-card:hover {
+  transform: translateY(-4px);
+}
+
+.place-card h3 {
+  margin-top: 0;
+}
+
+.place-panel {
+  margin: 1.5rem 0;
+  padding: 1.5rem;
+  border-radius: 12px;
+}
+
+.back-link,
+.place-nav {
+  font-size: 0.95rem;
+}
+
+/* ========================================================================
+   PAGE 1: page-home — 손글씨 메모패드
+   ------------------------------------------------------------------------
+   크림색 종이 + 밑줄 반복 배경 + 큼직한 제목 + 녹색 강조.
+   "실제 동선 기록"이라는 프로젝트 톤에 맞춘 노트 느낌.
+   ======================================================================== */
+.page-home {
+  --ink: #2b2118;
+  --paper: #fdf6e3;
+  --rule: rgb(45 80 22 / 18%);
+  --accent: #2d5016;
+  --accent-soft: #a8c686;
+
+  background-color: var(--paper);
+  /* 노트 밑줄 반복 — repeating-linear-gradient */
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 31px,
+    var(--rule) 31px,
+    var(--rule) 32px
+  );
+  color: var(--ink);
+}
+
+.page-home h1 {
+  font-size: 3rem;
+  letter-spacing: -0.02em;
+  font-weight: 900;
+  border-bottom: 4px solid var(--accent);
+  padding-bottom: 0.2em;
+  display: inline-block;
+}
+
+.page-home h2 {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.page-home h2::before {
+  content: "▸ ";
+  color: var(--accent-soft);
+}
+
+.page-home .lead {
+  font-size: 1.15rem;
+  color: #5a4b3a;
+}
+
+.page-home .intro strong,
+.page-home .place-summary strong {
+  background: linear-gradient(180deg, transparent 60%, #ffe066 60%);
+  padding: 0 2px;
+}
+
+.page-home blockquote {
+  background: white;
+  border-left-color: var(--accent);
+  border-radius: 0 8px 8px 0;
+  box-shadow: 2px 4px 12px rgb(0 0 0 / 8%);
+}
+
+.page-home .toc {
+  background: white;
+  border: 1px dashed var(--accent);
+}
+
+.page-home .place-card {
+  background: white;
+  border: 1px solid rgb(45 80 22 / 25%);
+  box-shadow: 0 6px 18px rgb(0 0 0 / 6%);
+  animation: home-slide-up 500ms ease both;
+}
+
+.page-home .place-list > li:nth-child(1) { animation-delay: 80ms; }
+.page-home .place-list > li:nth-child(2) { animation-delay: 160ms; }
+.page-home .place-list > li:nth-child(3) { animation-delay: 240ms; }
+
+.page-home .place-card:hover {
+  box-shadow: 0 14px 28px rgb(0 0 0 / 12%);
+}
+
+.page-home .primary-action {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+
+.page-home .primary-action:hover {
+  background: #1e380f;
+  border-color: #1e380f;
+}
+
+.page-home table {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 6%);
+}
+
+.page-home th {
+  background: var(--accent);
+  color: white;
+  border-bottom: none;
+}
+
+.page-home td {
+  border-bottom: 1px solid rgb(45 80 22 / 12%);
+}
+
+@keyframes home-slide-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ========================================================================
+   PAGE 2: page-store — 편의점 형광등
+   ------------------------------------------------------------------------
+   순백 배경 + GS25 청록 강조 + 각진 모서리.
+   진열대 라인 느낌으로 상단 스트라이프.
+   ======================================================================== */
+.page-store {
+  --ink: #17223b;
+  --bg: #ffffff;
+  --accent: #00aeef;
+  --accent-dark: #0080b3;
+  --stripe: #f0f7ff;
+
+  background-color: var(--bg);
+  color: var(--ink);
+  font-family: "Noto Sans KR", -apple-system, sans-serif;
+  letter-spacing: -0.01em;
+}
+
+/* 상단 진열대 스트라이프 */
+.page-store::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(90deg, var(--accent) 0%, var(--accent) 33%, var(--accent-dark) 33%, var(--accent-dark) 66%, var(--accent) 66%);
+  z-index: 100;
+}
+
+.page-store h1 {
+  font-weight: 900;
+  color: var(--accent);
+  text-transform: none;
+  border: 3px solid var(--accent);
+  padding: 0.2em 0.4em;
+  display: inline-block;
+  border-radius: 0;
+  background: white;
+  box-shadow: 4px 4px 0 var(--accent-dark);
+}
+
+.page-store h2 {
+  border-left: 6px solid var(--accent);
+  padding-left: 0.6em;
+  border-radius: 0;
+  font-weight: 700;
+}
+
+.page-store .lead {
+  font-weight: 500;
+  color: var(--accent-dark);
+}
+
+.page-store .place-panel {
+  background: white;
+  border: 2px solid var(--accent);
+  border-radius: 4px;
+  box-shadow: 4px 4px 0 rgb(0 174 239 / 20%);
+}
+
+.page-store .map img {
+  border: 2px solid var(--accent);
+  border-radius: 4px;
+}
+
+.page-store .place-activity ul {
+  padding-left: 1.2em;
+}
+
+.page-store .place-activity li {
+  padding: 0.2em 0;
+  border-bottom: 1px dashed rgb(0 174 239 / 30%);
+}
+
+.page-store .primary-action {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+  border-radius: 2px;
+  animation: store-pulse 2.4s ease-in-out infinite;
+}
+
+.page-store .primary-action:hover {
+  background: var(--accent-dark);
+  border-color: var(--accent-dark);
+  animation: none;
+}
+
+.page-store .back-link a::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+@keyframes store-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgb(0 174 239 / 50%); }
+  50%      { box-shadow: 0 0 0 8px rgb(0 174 239 / 0%); }
+}
+
+/* ========================================================================
+   PAGE 3: page-cafeteria — 따뜻한 식당
+   ------------------------------------------------------------------------
+   크림 배경 + 갈색 텍스트 + 명조체(Nanum Myeongjo).
+   부드러운 모서리와 그림자.
+   ======================================================================== */
+.page-cafeteria {
+  --ink: #45372b;
+  --bg: #faf3e6;
+  --accent: #a0522d;
+  --accent-soft: #d4a574;
+  --panel: #ffffff;
+
+  background-color: var(--bg);
+  color: var(--ink);
+  font-family: "Nanum Myeongjo", "Noto Serif KR", Georgia, serif;
+  font-weight: 400;
+}
+
+.page-cafeteria h1 {
+  font-family: "Nanum Myeongjo", serif;
+  font-weight: 800;
+  font-size: 2.6rem;
+  color: var(--accent);
+  letter-spacing: 0.02em;
+}
+
+.page-cafeteria h1::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: var(--accent-soft);
+  margin-top: 0.4em;
+}
+
+.page-cafeteria h2 {
+  font-family: "Nanum Myeongjo", serif;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.page-cafeteria .lead {
+  font-style: italic;
+  color: #7a5f3f;
+  font-size: 1.1rem;
+}
+
+.page-cafeteria .place-panel {
+  background: var(--panel);
+  border: 1px solid var(--accent-soft);
+  border-radius: 24px;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgb(69 55 43 / 8%);
+  animation: cafe-fade-in 700ms ease both;
+}
+
+.page-cafeteria .map img {
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgb(69 55 43 / 15%);
+}
+
+.page-cafeteria .place-activity li {
+  list-style: none;
+  padding: 0.4em 0 0.4em 1.4em;
+  position: relative;
+}
+
+.page-cafeteria .place-activity li::before {
+  content: "◆";
+  position: absolute;
+  left: 0;
+  color: var(--accent-soft);
+}
+
+.page-cafeteria .place-activity ul {
+  padding-left: 0;
+}
+
+.page-cafeteria blockquote {
+  background: rgb(160 82 45 / 6%);
+  border-left-color: var(--accent);
+  border-radius: 12px;
+}
+
+.page-cafeteria .primary-action {
+  background: var(--accent);
+  color: #fffaf0;
+  border-color: var(--accent);
+  border-radius: 999px;
+  padding: 0.8em 1.6em;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 500;
+}
+
+.page-cafeteria .primary-action:hover {
+  background: #7a3f22;
+  border-color: #7a3f22;
+  box-shadow: 0 6px 16px rgb(160 82 45 / 30%);
+}
+
+.page-cafeteria .place-nav {
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+@keyframes cafe-fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ========================================================================
+   PAGE 4: page-gym — 짙은 네이비/청록 + 오렌지
+   ------------------------------------------------------------------------
+   #0f2027 딥 그린틴트 배경 + #ff6b35 오렌지 강조 + JetBrains Mono 제목.
+   왼쪽 오렌지 바로 강조.
+   ======================================================================== */
+.page-gym {
+  --ink: #e8eef2;
+  --bg: #0f2027;
+  --bg-panel: #16323d;
+  --accent: #ff6b35;
+  --accent-glow: rgb(255 107 53 / 40%);
+  --muted: #8ba1ad;
+
+  background: radial-gradient(ellipse at top, #1a3540 0%, var(--bg) 60%);
+  color: var(--ink);
+  font-family: "Noto Sans KR", -apple-system, sans-serif;
+  min-height: 100vh;
+}
+
+.page-gym h1 {
+  font-family: "JetBrains Mono", "Consolas", monospace;
+  font-weight: 700;
+  font-size: 2.5rem;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  -webkit-text-stroke: 0.5px var(--accent);
+}
+
+.page-gym h1::before {
+  content: "// ";
+  color: var(--muted);
+}
+
+.page-gym h2 {
+  font-family: "JetBrains Mono", "Consolas", monospace;
+  font-size: 1.2rem;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.page-gym .lead {
+  color: var(--muted);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.95rem;
+}
+
+.page-gym .place-panel {
+  background: var(--bg-panel);
+  border: 1px solid rgb(255 107 53 / 20%);
+  border-left: 5px solid var(--accent);
+  border-radius: 0 12px 12px 0;
+  padding: 1.75rem;
+  animation: gym-slide-in 500ms ease both;
+}
+
+.page-gym .place-panel:hover {
+  box-shadow: -5px 0 20px var(--accent-glow);
+}
+
+.page-gym .map img {
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  filter: saturate(0.9) contrast(1.05);
+}
+
+.page-gym .place-activity li {
+  list-style: none;
+  padding: 0.4em 0 0.4em 1.6em;
+  position: relative;
+  border-bottom: 1px solid rgb(255 255 255 / 5%);
+}
+
+.page-gym .place-activity li::before {
+  content: "▶";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-size: 0.75em;
+  top: 0.7em;
+}
+
+.page-gym .place-activity ul {
+  padding-left: 0;
+}
+
+.page-gym blockquote {
+  background: rgb(255 107 53 / 8%);
+  border-left-color: var(--accent);
+  color: var(--ink);
+}
+
+.page-gym .primary-action {
+  background: transparent;
+  color: var(--accent);
+  border: 2px solid var(--accent);
+  border-radius: 2px;
+  font-family: "JetBrains Mono", monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.9rem;
+}
+
+.page-gym .primary-action:hover {
+  background: var(--accent);
+  color: var(--bg);
+  box-shadow: 0 0 20px var(--accent-glow);
+}
+
+.page-gym .back-link a {
+  color: var(--muted);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.85rem;
+}
+
+.page-gym .back-link a:hover {
+  color: var(--accent);
+}
+
+.page-gym hr {
+  border-top-color: var(--accent);
+  opacity: 0.4;
+}
+
+.page-gym a:focus-visible {
+  outline-color: var(--accent);
+}
+
+.page-gym .place-nav a {
+  color: var(--muted);
+}
+
+.page-gym .place-nav a:hover {
+  color: var(--accent);
+}
+
+@keyframes gym-slide-in {
+  from { opacity: 0; transform: translateX(-16px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* ========================================================================
+   Vendor prefix 예시 — 강의에서 다룬 backdrop-filter 대응
+   ======================================================================== */
+.page-gym .toc {
+  background: rgb(255 255 255 / 4%);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+
+/* ========================================================================
+   @supports fallback — grid 미지원 브라우저 대비
+   ======================================================================== */
+@supports not (display: grid) {
+  .place-list {
+    display: block;
+  }
+  .place-list > li {
+    margin-bottom: 1.5rem;
+  }
+}
+
+/* ========================================================================
+   Responsive — 모바일 전용 @media (필수 요구사항)
+   ------------------------------------------------------------------------
+   글자 크기 · 여백 · 링크 크기 · 인터랙션 영역을 모두 조정한다.
+   ======================================================================== */
+@media (max-width: 600px) {
+  body {
+    line-height: 1.7;
+  }
+
+  .page,
+  .site-header,
+  main.explorer,
+  .place-nav,
+  .site-footer {
+    width: 94%;
+  }
+
+  .site-header {
+    padding: 1.5rem 0 0.5rem;
+  }
+
+  h1 { font-size: 1.9rem; }
+  h2 { font-size: 1.25rem; }
+  h3 { font-size: 1.05rem; }
+
+  .place-home h1,
+  .page-home h1 {
+    font-size: 2.2rem;
+  }
+
+  .page-store h1 {
+    font-size: 1.7rem;
+    box-shadow: 3px 3px 0 var(--accent-dark);
+  }
+
+  .page-cafeteria h1 {
+    font-size: 2rem;
+  }
+
+  .page-gym h1 {
+    font-size: 1.7rem;
+  }
+
+  .place-panel {
+    padding: 1.1rem;
+    margin: 1rem 0;
+  }
+
+  .place-card {
+    padding: 1rem;
+  }
+
+  /* 모바일에서 링크·버튼을 세로로 크게 — 터치 타깃 확대 */
+  .primary-action {
+    display: block;
+    text-align: center;
+    padding: 1em 1.2em;
+    font-size: 1rem;
+  }
+
+  .place-nav p {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6em;
+  }
+
+  .place-nav p span,
+  .place-nav p br {
+    display: none;
+  }
+
+  table {
+    font-size: 0.9rem;
+  }
+
+  th, td {
+    padding: 0.5em 0.4em;
+  }
+
+  /* 모바일에서 진열대 스트라이프는 4px로 살짝 얇게 */
+  .page-store::before {
+    height: 4px;
+  }
+}
+
+/* 태블릿 이상에서 세밀 조정 */
+@media (min-width: 601px) and (max-width: 959px) {
+  h1 { font-size: 2.2rem; }
+}
+
+/* ========================================================================
+   Print — 인쇄 시 배경/네비게이션 정리 (강의에서 다룬 @media print)
+   ======================================================================== */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  .place-nav,
+  .toc,
+  .back-link,
+  .primary-action {
+    display: none !important;
+  }
+  .place-panel,
+  .place-card {
+    break-inside: avoid;
+    box-shadow: none;
+    border: 1px solid #999;
+  }
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.85em;
+  }
+}
+
+/* ========================================================================
+   prefers-reduced-motion — 애니메이션 억제 (접근성)
+   ======================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

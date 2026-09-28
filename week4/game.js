@@ -9,18 +9,21 @@ const MEAL_PRICE = 5500;    // 학생식당 한 끼 (결과 화면 "N끼 분량"
 const MAX_ENEMIES = 60;
 const BULLET_SPEED = 420;
 const JOY_DEAD = 8;
-const JOY_MAX = 48;
+const JOY_MAX = 40;
 const BEST_KEY = 'campusSurvivorBest';
 const MUTE_KEY = 'campusSurvivorMuted';
 
+// spawnFrom→spawnTo: 시간대 안에서 선형 보간. hpBonusAt: 그 시각부터 hpBonus 적용(저녁 초반 80초 벽 완화). 마지막 행 = 밤(장소 없음, 처치금 30%)
 const PHASES = [
-  { name: '아침', from: 0,  to: 40,  color: '#00aeef', bg: '#16323d', spawnEvery: 1.0,  enemies: ['delivery'],                   hpBonus: 0, bonus: 3000 },
-  { name: '점심', from: 40, to: 80,  color: '#d4a574', bg: '#2b2a24', spawnEvery: 0.65, enemies: ['delivery', 'dining'],         hpBonus: 0, bonus: 4500 },
-  { name: '저녁', from: 80, to: 120, color: '#ff6b35', bg: '#1a1420', spawnEvery: 0.45, enemies: ['delivery', 'dining', 'taxi'], hpBonus: 1, bonus: 8000 },
+  { name: '아침', from: 0,   to: 40,       color: '#00aeef', bg: '#16323d', spawnFrom: 0.8,  spawnTo: 0.6,  enemies: ['delivery'],                   hpBonus: 0, bonus: 3000 },
+  { name: '점심', from: 40,  to: 80,       color: '#d4a574', bg: '#2b2a24', spawnFrom: 0.75, spawnTo: 0.55, enemies: ['delivery', 'dining'],         hpBonus: 0, bonus: 4500 },
+  { name: '저녁', from: 80,  to: 120,      color: '#ff6b35', bg: '#1a1420', spawnFrom: 0.55, spawnTo: 0.40, enemies: ['delivery', 'dining', 'taxi'], hpBonus: 1, hpBonusAt: 95, bonus: 8000 },
+  { name: '밤',   from: 120, to: Infinity, color: '#b39ddb', bg: '#0b0a14', spawnFrom: 0.7,  spawnTo: 0.7,  enemies: ['delivery', 'dining', 'taxi'], hpBonus: 1, bonus: 0 },
 ];
+const NIGHT_WON = 0.3;
 
 const ENEMY_TYPES = {
-  delivery: { name: '배달', shape: 'triangle', color: '#3ddc84', r: 11, hp: 1, speed: 70,  won: 3000,  loseText: '배달에 넘어갔다' },
+  delivery: { name: '배달', shape: 'triangle', color: '#3ddc84', r: 11, hp: 1, speed: 85,  won: 3000,  loseText: '배달에 넘어갔다' },
   dining:   { name: '외식', shape: 'square',   color: '#e63946', r: 13, hp: 3, speed: 50,  won: 10000, loseText: '결국 외식했다' },
   taxi:     { name: '택시', shape: 'rect',     color: '#ffd166', r: 12, hp: 2, speed: 120, won: 8000,  loseText: '택시 탔다' },
 };
@@ -29,10 +32,10 @@ const ENEMY_TYPES = {
 const BOSSES = [
   { at: 30,  name: 'GS25 야간 알바생',  label: '아침의 시험', look: 'student', attack: 'riceball', color: '#00aeef', hp: 20, speed: 40, won: 15000, gems: 8,  loseText: 'GS25 알바생한테 붙잡혔다' },
   { at: 70,  name: '학생식당 아주머니', label: '점심의 시험', look: 'ajumma',  attack: 'ladle',    color: '#d4a574', hp: 30, speed: 40, won: 20000, gems: 10, loseText: '학생식당 아주머니한테 붙잡혔다' },
-  { at: 110, name: '트러스트짐 헬창',   label: '저녁의 시험', look: 'gymbro',  attack: 'dash',     color: '#ff6b35', hp: 45, speed: 55, won: 30000, gems: 12, loseText: '헬창한테 깔렸다' },
+  { at: 110, name: '트러스트짐 헬창',   label: '저녁의 시험', look: 'gymbro',  attack: 'dash',     color: '#ff6b35', hp: 36, speed: 55, won: 30000, gems: 12, loseText: '헬창한테 깔렸다' },
 ];
 
-// 카드 3장 각각 독립 추첨: 전설 3% / 희귀 22% / 일반 75%
+// 카드 3장 각각 독립 추첨: 전설 6% / 희귀 22% / 일반 72%
 const TIERS = {
   common:    { label: '',     color: '#ffd166' },
   rare:      { label: '희귀', color: '#4cc9f0' },
@@ -44,11 +47,11 @@ const UPGRADES = [
   { tier: 'common', name: '큰 가방',     desc: '젬 자석 범위 +40',             apply: (p) => { p.magnet += 40; } },
   { tier: 'common', name: '든든한 아침', desc: '최대 하트 +1, 하트 +1',        apply: (p) => { p.maxHp += 1; p.hp += 1; } },
   { tier: 'rare',   name: '도장 하나 더', desc: '한 번에 한 발 더 (12° 부채꼴)', apply: (p) => { p.shots += 1; } },
-  { tier: 'rare',   name: '꽝 도장',     desc: '적을 하나 더 뚫고 지나감',      apply: (p) => { p.pierce += 1; } },
+  { tier: 'rare',   name: '관통 도장',   desc: '적을 하나 더 뚫고 지나감',      apply: (p) => { p.pierce += 1; } },
   { tier: 'rare',   name: '보온병',      desc: '맞은 뒤 무적 시간 +0.3초',      apply: (p) => { p.invTime += 0.3; } },
-  { tier: 'rare',   name: '삼각김밥 응급', desc: '최대 하트 +1, 하트 전부 회복', apply: (p) => { p.maxHp += 1; p.hp = p.maxHp; } },
-  { tier: 'legendary', flag: 'laser',   name: '레이저 스윕', desc: '6초마다 화면을 왼쪽→오른쪽으로 훑는 빔 (피해 6)',   apply: (p) => { p.laser = true; } },
-  { tier: 'legendary', flag: 'missile', name: '유도탄',     desc: '1.5초마다 가장 가까운 적을 쫓는 미사일 (피해 3)', apply: (p) => { p.missile = true; } },
+  { tier: 'rare',   name: '컵라면 응급', desc: '최대 하트 +1, 하트 전부 회복',  apply: (p) => { p.maxHp += 1; p.hp = p.maxHp; } },
+  { tier: 'legendary', flag: 'laser',   name: '교내 방송', desc: '6초마다 스피커 빔이 화면을 왼쪽→오른쪽으로 훑는다 (피해 6)',            apply: (p) => { p.laser = true; } },
+  { tier: 'legendary', flag: 'missile', name: '과방 선배', desc: '1초마다 가장 가까운 유혹(보스 우선)을 끝까지 쫓아가 막는다 (피해 4, 주변 2)', apply: (p) => { p.missile = true; } },
 ];
 
 const PLACES = [
@@ -79,13 +82,14 @@ const dom = {
 };
 const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-let mode = 'idle';          // idle | play | levelup | pause | intro | over
+let mode = 'idle';          // idle | play | levelup | pause | intro | dying | over
 let time, phaseIdx, bossIdx, night;   // night: 120초를 넘겼다. 보스를 다 잡을 때까지 끝나지 않는다
 let player, enemies, bullets, gems, particles, floats;
 let bossShots, missiles, laser, laserTimer, missileTimer;
 let stamps, money, xp, nextXp, level, kills, bossKills, lastHit;
-let spawnTimer, fireTimer, hintTimer = 0, played = false;
-let shake, hitStop, hurtFlash, banner, intro, choices = [];
+let spawnTimer, spawnCount, bossWarned, fireTimer, hintTimer = 0, played = false;
+let shake, hitStop, lastHitStop, hurtFlash, banner, intro, dying, choices = [];
+let legendaryOffered, levelupAt = 0, pauseAfterIntro = false;   // pity 플래그 / 카드 오픈 시각 / 컷신 중 탭 이탈
 let best = 0;
 try { best = Number(localStorage.getItem(BEST_KEY)) || 0; } catch (_) {}   // 저장소가 막힌 브라우저에서도 게임은 돌아가야 해서
 let last = 0;
@@ -94,11 +98,12 @@ function resetState() {
   time = 0; phaseIdx = 0; bossIdx = 0; night = false;
   player = { x: W / 2, y: (H + HUD_H) / 2, r: 14, hp: 3, maxHp: 3, inv: 0, invTime: 0.8, speed: 170, fireEvery: 0.5, shots: 1, pierce: 0, magnet: 60, laser: false, missile: false };
   enemies = []; bullets = []; gems = []; particles = []; floats = [];
-  bossShots = []; missiles = []; laser = null; laserTimer = 6; missileTimer = 1.5;
+  bossShots = []; missiles = []; laser = null; laserTimer = 6; missileTimer = 1.0;
   stamps = ['wait', 'wait', 'wait'];
   money = 0; xp = 0; nextXp = 5; level = 1; kills = 0; bossKills = 0; lastHit = null;
-  spawnTimer = 0.8; fireTimer = 0.3;
-  shake = { power: 0, time: 0 }; hitStop = 0; hurtFlash = 0; banner = null; intro = null;
+  spawnTimer = 0.8; spawnCount = 0; bossWarned = false; fireTimer = 0.3;
+  shake = { power: 0, time: 0 }; hitStop = 0; lastHitStop = -1; hurtFlash = 0; banner = null; intro = null; dying = 0;
+  legendaryOffered = false; pauseAfterIntro = false;
 }
 
 function setStatus(text) { dom.status.textContent = text; }
@@ -243,9 +248,13 @@ document.addEventListener('keydown', (e) => {
 document.addEventListener('keyup', (e) => { if (KEYMAP[e.code]) keys[KEYMAP[e.code]] = false; });
 
 canvas.addEventListener('pointerdown', (e) => {
-  if (mode !== 'play' || joy.active) return;   // 첫 손가락만
+  if (mode !== 'play' && mode !== 'intro') return;
   const p = toCanvasXY(e);
-  if (p.y < HUD_H) return;
+  if (p.y < HUD_H) {   // ‖ 버튼은 조이스틱을 잡은 채 두 번째 손가락으로도 눌려야 해서 joy.active 검사보다 앞에 둔다
+    if (mode === 'play' && p.x > W - 48) { e.preventDefault(); pauseGame(); }   // HUD 오른쪽 위 ‖ 버튼
+    return;
+  }
+  if (joy.active) return;   // 첫 손가락만. 컷신 중에도 잡아 둬야 끝난 뒤 바로 움직인다
   e.preventDefault();
   canvas.setPointerCapture(e.pointerId);
   joy.active = true; joy.id = e.pointerId; joy.ox = p.x; joy.oy = p.y; joy.dx = 0; joy.dy = 0;
@@ -255,18 +264,23 @@ canvas.addEventListener('pointermove', (e) => {
   if (!joy.active || e.pointerId !== joy.id) return;
   const p = toCanvasXY(e);
   const dx = p.x - joy.ox, dy = p.y - joy.oy;
-  const d = Math.hypot(dx, dy);
+  let d = Math.hypot(dx, dy);
+  if (d > JOY_MAX) {   // 손가락이 링 밖으로 나가면 원점이 끌려온다 — 화면을 안 보고도 방향을 꺾을 수 있게
+    joy.ox = p.x - dx / d * JOY_MAX; joy.oy = p.y - dy / d * JOY_MAX; d = JOY_MAX;
+  }
   if (d < JOY_DEAD) { joy.dx = 0; joy.dy = 0; return; }
-  const ratio = Math.min(d, JOY_MAX) / JOY_MAX;   // 많이 끌수록 빠르게
-  joy.dx = dx / d * ratio; joy.dy = dy / d * ratio;
+  const ratio = d / JOY_MAX;   // 많이 끌수록 빠르게
+  joy.dx = dx / Math.hypot(dx, dy) * ratio; joy.dy = dy / Math.hypot(dx, dy) * ratio;
 });
 function endJoy(e) { if (joy.id === e.pointerId) { joy.active = false; joy.id = null; joy.dx = 0; joy.dy = 0; } }
 canvas.addEventListener('pointerup', endJoy);
 canvas.addEventListener('pointercancel', endJoy);
 
 document.addEventListener('visibilitychange', () => {
-  if (document.hidden) { if (mode === 'play') pauseGame(); else if (audio) audio.suspend(); }
-  else if (audio && mode !== 'pause') audio.resume();
+  if (document.hidden) {
+    if (mode === 'play') pauseGame();
+    else { if (mode === 'intro') pauseAfterIntro = true; if (audio) audio.suspend(); }
+  } else if (audio && mode !== 'pause') audio.resume();
 });
 $('btn-start').addEventListener('click', startGame);
 $('btn-restart').addEventListener('click', startGame);
@@ -287,28 +301,36 @@ function spawnEnemy() {
   else if (side === 1) { x = W + 30; y = rand(HUD_H, H); }
   else if (side === 2) { x = rand(0, W); y = H + 30; }
   else { x = -30; y = rand(HUD_H, H); }
+  const hpBonus = time >= (phase.hpBonusAt || 0) ? phase.hpBonus : 0;
+  const won = night ? Math.round(T.won * NIGHT_WON) : T.won;   // 문 닫은 시간: 아낄 돈도 30%만
   enemies.push({
     name: T.name, shape: T.shape, color: T.color, x, y, r: T.r,
-    hp: T.hp + phase.hpBonus, maxHp: T.hp + phase.hpBonus, speed: T.speed, won: T.won, loseText: T.loseText,
+    hp: T.hp + hpBonus, maxHp: T.hp + hpBonus, speed: T.speed, won, closed: night, loseText: T.loseText,
     flash: 0, angle: 0, boss: false, dead: false,
   });
 }
 
-// 밤(120초 이후)엔 10초마다 5%씩 빨라진다 — 무한 농성 방지. 하한 0.3초
+// 낮: 시간대 안에서 spawnFrom→spawnTo 선형 보간. 밤: 0.7초에서 시작해 10초마다 5%씩 빨라진다(무한 농성 방지, 하한 0.3초)
 function currentSpawnEvery() {
-  const base = PHASES[phaseIdx].spawnEvery;
-  return night ? Math.max(0.3, base * Math.pow(0.95, Math.floor((time - DAY) / 10))) : base;
+  const p = PHASES[phaseIdx];
+  if (night) return Math.max(0.3, p.spawnFrom * Math.pow(0.95, Math.floor((time - DAY) / 10)));
+  const k = Math.min(1, Math.max(0, (time - p.from) / (p.to - p.from)));
+  return p.spawnFrom + (p.spawnTo - p.spawnFrom) * k;
 }
 
+// 보스는 거리를 0.45배(밤 0.3배)로 쳐서 잡몹 뒤에 숨어도 조준이 간다
 function nearestEnemy(x, y) {
   let target = null, nearest = Infinity;
+  const bossW = night ? 0.3 : 0.45;
   for (const e of enemies) {
     if (e.dead) continue;
-    const d = Math.hypot(e.x - x, e.y - y);
+    const d = Math.hypot(e.x - x, e.y - y) * (e.boss ? bossW : 1);
     if (d < nearest) { nearest = d; target = e; }
   }
   return target;
 }
+
+function missileTarget(x, y) { return enemies.find((e) => e.boss && !e.dead) || nearestEnemy(x, y); }
 
 function shoot() {
   const target = nearestEnemy(player.x, player.y);
@@ -328,24 +350,26 @@ function hitCircle(a, b) { return Math.hypot(a.x - b.x, a.y - b.y) < a.r + b.r; 
 
 function update(dt) {
   time += dt;
-  if (!night && time >= DAY) {   // 120초 = 밤. 시간으로는 끝나지 않는다 — 보스를 다 잡아야 하루가 끝난다
-    night = true;
-    for (let i = 0; i < PHASES.length; i += 1) if (stamps[i] === 'wait') stamps[i] = 'miss';   // 영업 종료. 이후 스탬프 보너스·놓침 처리는 없다
-    showBanner('밤 — 남은 보스를 쓰러뜨려야 하루가 끝난다');
-  }
-
-  let idx = PHASES.findIndex((p) => time < p.to);
-  if (idx < 0) idx = PHASES.length - 1;   // 밤에도 저녁 값(배경·적 종류·스폰 간격)을 그대로 쓴다
+  const idx = PHASES.findIndex((p) => time < p.to);   // 마지막 행(밤)은 to가 Infinity라 항상 걸린다
   if (idx !== phaseIdx) {
-    for (let i = 0; i < idx; i += 1) if (stamps[i] === 'wait') stamps[i] = 'miss';   // 지나간 시간대 스탬프는 놓침
+    for (let i = 0; i < Math.min(idx, stamps.length); i += 1) if (stamps[i] === 'wait') stamps[i] = 'miss';   // 지나간 시간대 스탬프는 놓침
     phaseIdx = idx;
-    showBanner(PHASES[idx].name + ' · ' + PLACES[idx].name + ' 영업 시작');
+    if (idx < PLACES.length) showBanner(PHASES[idx].name + ' · ' + PLACES[idx].name + ' 영업 시작');
+    else { night = true; showBanner('밤 — 남은 보스를 쓰러뜨려야 하루가 끝난다'); }   // 120초 = 밤. 시간으로는 끝나지 않는다 — 보스를 다 잡아야 하루가 끝난다
   }
-  if (bossIdx < BOSSES.length && time >= BOSSES[bossIdx].at) { startBossIntro(BOSSES[bossIdx]); bossIdx += 1; return; }
+  const nextBoss = BOSSES[bossIdx];
+  if (nextBoss && time >= nextBoss.at) { startBossIntro(nextBoss); bossIdx += 1; bossWarned = false; return; }
+  const bossSoon = nextBoss && time >= nextBoss.at - 5;   // 등장 5초 전: 예고 배너 + 잡몹 스폰 정지
+  if (bossSoon && !bossWarned) { bossWarned = true; showBanner('곧 ' + nextBoss.name); }
 
   movePlayer(dt);
-  spawnTimer -= dt;
-  if (spawnTimer <= 0) { spawnEnemy(); spawnTimer = currentSpawnEvery(); }
+  if (!bossSoon) spawnTimer -= dt;
+  if (spawnTimer <= 0) {
+    spawnCount += 1;
+    const n = time < 30 && spawnCount % 4 === 0 ? 3 : 1;   // 첫 30초는 4번째 스폰마다 3마리 묶음 — 한 마리씩은 심심해서
+    for (let i = 0; i < n; i += 1) spawnEnemy();
+    spawnTimer = currentSpawnEvery();
+  }
   fireTimer -= dt;
   if (fireTimer <= 0 && enemies.length) { shoot(); fireTimer = player.fireEvery; }
 
@@ -360,10 +384,11 @@ function update(dt) {
   updateEffects(dt);
 
   const place = PLACES[phaseIdx];
-  if (stamps[phaseIdx] === 'wait' && hitCircle(player, place)) {
+  if (!night && stamps[phaseIdx] === 'wait' && hitCircle(player, place)) {
     stamps[phaseIdx] = 'done';
     money += PHASES[phaseIdx].bonus;
     player.hp = Math.min(player.maxHp, player.hp + 1);
+    if (gems.length) { addFloat(player.x, player.y - 30, '젬 +' + gems.length, '#ffd166', 14); xp += gems.length; gems = []; }   // 장소에 들어가면 화면의 젬 전부 흡수
     addFloat(place.x, place.y - 50, '+' + PHASES[phaseIdx].bonus.toLocaleString('ko-KR'), PHASES[phaseIdx].color, 18);
     addParticles(place.x, place.y, PHASES[phaseIdx].color, 12, 140, 0.6);
     showBanner(PHASES[phaseIdx].name + ' 스탬프 ' + place.name + '!');
@@ -430,20 +455,21 @@ function updateGems(dt) {
 }
 
 /* ==========================================================================
-   7. 성장 — 레벨업 특전(등급 추첨) + 전설 무기(레이저·유도탄)
+   7. 성장 — 레벨업 특전(등급 추첨) + 전설 무기(교내 방송·과방 선배)
    ========================================================================== */
 // 카드 3장 각각 독립 추첨. 전설은 한 화면에 1장까지, 이미 얻은 전설은 빼고, 같은 카드는 두 번 안 나온다
 function rollUpgrades() {
   const picked = [];
   let legendaryShown = false;
+  const pity = !legendaryOffered && level >= 5;   // 4번째 레벨업까지 전설을 한 번도 못 봤으면 이번엔 1장 보장
   while (picked.length < 3) {
     const roll = Math.random();
-    let tier = roll < 0.03 ? 'legendary' : roll < 0.25 ? 'rare' : 'common';
+    let tier = pity && !picked.length ? 'legendary' : roll < 0.06 ? 'legendary' : roll < 0.28 ? 'rare' : 'common';
     if (tier === 'legendary' && legendaryShown) tier = 'rare';
     let pool = UPGRADES.filter((u) => u.tier === tier && !picked.includes(u) && !(u.flag && player[u.flag]));
     if (!pool.length) pool = UPGRADES.filter((u) => u.tier === 'common' && !picked.includes(u));
     const u = pool[Math.floor(Math.random() * pool.length)];
-    if (u.tier === 'legendary') legendaryShown = true;
+    if (u.tier === 'legendary') { legendaryShown = true; legendaryOffered = true; }
     picked.push(u);
   }
   return picked;
@@ -453,7 +479,8 @@ function openLevelUp() {
   mode = 'levelup';
   xp -= nextXp;
   level += 1;
-  nextXp += 3 + level;
+  nextXp += 2 + Math.ceil(level * 0.6);
+  levelupAt = performance.now();
   choices = rollUpgrades();
   choices.forEach((u, i) => {
     const btn = dom.upBtns[i];
@@ -470,8 +497,9 @@ function openLevelUp() {
 }
 
 function applyUpgrade(i) {
-  if (mode !== 'levelup' || !choices[i]) return;
+  if (mode !== 'levelup' || !choices[i] || performance.now() - levelupAt < 300) return;   // 오픈 직후 0.3초는 헛클릭
   choices[i].apply(player);
+  player.inv = Math.max(player.inv, 0.8);   // 카드 닫히는 순간 적이 붙어 있어도 한 번은 봐준다
   dom.levelup.hidden = true;
   mode = 'play';
   setStatus(choices[i].name + ' 획득');
@@ -501,18 +529,18 @@ function updateLaser(dt) {
 }
 
 function fireMissile() {
-  const target = nearestEnemy(player.x, player.y);
+  const target = missileTarget(player.x, player.y);
   if (!target) return;
   missiles.push({ x: player.x, y: player.y, angle: Math.atan2(target.y - player.y, target.x - player.x), vx: 0, vy: 0, r: 6, life: 3 });
 }
 
-// 매 프레임 가장 가까운 적 쪽으로 방향을 최대 4rad/초만 튼다 — 바로 꺾이면 유도탄 느낌이 안 난다
+// 매 프레임 목표(보스 우선) 쪽으로 방향을 최대 4rad/초만 튼다 — 바로 꺾이면 유도탄 느낌이 안 난다. 착탄 시 반경 36px 스플래시 2
 function updateMissiles(dt) {
-  if (player.missile) { missileTimer -= dt; if (missileTimer <= 0) { missileTimer = 1.5; fireMissile(); } }
+  if (player.missile) { missileTimer -= dt; if (missileTimer <= 0) { missileTimer = 1.0; fireMissile(); } }
   for (let i = missiles.length - 1; i >= 0; i -= 1) {
     const m = missiles[i];
     m.life -= dt;
-    const target = nearestEnemy(m.x, m.y);
+    const target = missileTarget(m.x, m.y);
     if (target) {
       let diff = Math.atan2(target.y - m.y, target.x - m.x) - m.angle;
       diff = Math.atan2(Math.sin(diff), Math.cos(diff));   // -π~π로 접기
@@ -522,7 +550,11 @@ function updateMissiles(dt) {
     m.x += m.vx * dt; m.y += m.vy * dt;
     particles.push({ kind: 'dot', x: m.x - m.vx * 0.02, y: m.y - m.vy * 0.02, vx: rand(-25, 25), vy: rand(-25, 25), size: 3, life: 0.3, max: 0.3, color: '#ffd166' });
     const hitE = enemies.find((e) => !e.dead && hitCircle(m, e));
-    if (hitE) { hurtEnemy(hitE, m, 3); addParticles(m.x, m.y, '#ff6b35', 8, 150, 0.35); missiles.splice(i, 1); continue; }
+    if (hitE) {
+      hurtEnemy(hitE, m, 4);
+      for (const e of enemies) if (e !== hitE && !e.dead && Math.hypot(e.x - m.x, e.y - m.y) < 36 + e.r) hurtEnemy(e, m, 2);
+      addParticles(m.x, m.y, '#ff6b35', 8, 150, 0.35); missiles.splice(i, 1); continue;
+    }
     if (m.life <= 0 || m.x < -20 || m.x > W + 20 || m.y < HUD_H - 20 || m.y > H + 20) missiles.splice(i, 1);
   }
 }
@@ -533,7 +565,7 @@ function updateMissiles(dt) {
 function startBossIntro(b) {
   mode = 'intro';
   intro = { boss: b, t: 0, dur: reduceMotion ? 1.2 : 1.6 };
-  resetInput();
+  joy.dx = 0; joy.dy = 0;   // 조이스틱 자체(active·원점)는 살려 둔다 — 컷신 중 누르고 있던 손가락이 끝난 뒤에도 먹어야 해서
   sfx('boss');
   setStatus('보스 등장: ' + b.name);
 }
@@ -546,6 +578,7 @@ function spawnBoss(b) {
     warm: 1, atkTimer: 1, atk2Timer: 2.5, swing: null, dash: null, wind: null,   // warm: 컷신 끝나고 1초는 공격 없음. wind: 투사체 던지기 예고
   });
   particles.push({ kind: 'ring', x: W / 2, y: HUD_H + 10, r: 10, life: 0.6, max: 0.6, color: b.color });
+  player.inv = Math.max(player.inv, 1.0);   // 컷신 동안 붙어 있던 잡몹에게 바로 맞지 않게
   addShake(4, 0.3);
   showBanner(b.name + ' 등장!');
 }
@@ -647,14 +680,21 @@ function killEnemy(e) {
   kills += 1;
   money += e.won;
   addParticles(e.x, e.y, e.color, e.boss ? 16 : 6 + Math.floor(Math.random() * 3), 170, 0.45);
-  addFloat(e.x, e.y - e.r, '+' + e.won.toLocaleString('ko-KR'), e.boss ? '#ffffff' : '#ffd166', e.boss ? 20 : 13);
-  if (reduceMotion === false) hitStop = 0.045;
+  addFloat(e.x, e.y - e.r, '+' + e.won.toLocaleString('ko-KR') + (e.closed ? ' (문 닫음)' : ''), e.boss ? '#ffffff' : '#ffd166', e.boss ? 20 : 14);
+  if (!reduceMotion && time - lastHitStop > 0.5) { hitStop = e.boss ? 0.09 : 0.02; lastHitStop = time; }   // 연속 처치마다 멈추면 끊겨 보여서 0.5초에 한 번만
   sfx('kill');
   if (e.boss) {
     bossKills += 1;
     addShake(8, 0.35);
+    for (let i = bossShots.length - 1; i >= 0; i -= 1) {   // 죽은 보스의 투사체는 함께 사라진다
+      const s = bossShots[i];
+      if (s.owner !== e) continue;
+      addParticles(s.x, s.y, e.color, 4, 120, 0.3);
+      bossShots.splice(i, 1);
+    }
+    player.hp = Math.min(player.maxHp, player.hp + 1);
     for (let i = 0; i < e.gems; i += 1) gems.push({ x: e.x + rand(-40, 40), y: e.y + rand(-40, 40), r: 6 });
-    setStatus(e.name + ' 퇴치!');
+    setStatus(e.name + ' 통과!');
     showBanner('보스 처치 ' + bossKills + '/' + BOSSES.length);
   } else {
     addShake(3, 0.12);
@@ -664,14 +704,15 @@ function killEnemy(e) {
 }
 
 function hurtPlayer(e) {
-  if (player.inv > 0) return;
+  if (player.inv > 0 || mode !== 'play') return;
   player.hp -= 1;
   player.inv = player.invTime;
   lastHit = e;
   hurtFlash = 0.25;
   addShake(6, 0.25);
   sfx('hurt');
-  if (player.hp <= 0) endGame(false);
+  navigator.vibrate?.(60);
+  if (player.hp <= 0) { mode = 'dying'; dying = 0.8; resetInput(); }   // 바로 결과창 대신 0.8초 슬로모
 }
 
 function addShake(power, dur) {
@@ -727,31 +768,38 @@ function startGame() {
 }
 
 function pauseGame() { mode = 'pause'; resetInput(); dom.pause.hidden = false; stopBgm(); if (audio) audio.suspend(); setStatus('일시정지'); }
-function resumeGame() { if (mode !== 'pause') return; dom.pause.hidden = true; mode = 'play'; last = performance.now(); if (audio) audio.resume(); startBgm(); setStatus(''); }
+function resumeGame() {
+  if (mode !== 'pause') return;
+  dom.pause.hidden = true; mode = 'play'; last = performance.now();
+  player.inv = Math.max(player.inv, 0.5);   // 재개 직후 바로 맞지 않게
+  if (audio) audio.resume(); startBgm(); setStatus('');
+}
 
 function endGame(won) {
   mode = 'over';
   resetInput();
   stopBgm();
+  shake.power = 0; shake.time = 0; hurtFlash = 0;   // 결과창 뒤에서 떨림·비네트가 남지 않게
+  const survived = Math.floor(time) + '초 버팀' + (night ? ' (밤 +' + Math.floor(time - DAY) + '초)' : '');
   if (won) {
-    const stampBonus = stamps.every((s) => s === 'done') ? 5000 : 0;
-    const bossBonus = bossKills === 3 ? 10000 : 0;
-    money += 20000 + player.hp * 5000 + stampBonus + bossBonus;
+    const stampBonus = stamps.every((s) => s === 'done') ? 30000 : 0;
+    const earlyBonus = time < DAY ? 50000 : 0;   // 밤이 오기 전에 보스 셋을 다 잡았다
+    money += 50000 + player.hp * 15000 + stampBonus + earlyBonus;
     dom.overTitle.textContent = '하루 완성!';
-    dom.overReason.textContent = '정문 밖으로 한 번도 안 나갔다. ' + Math.floor(time) + '초 버팀 · 밤 완주 +20,000 · 남은 하트 ' + player.hp + '×5,000'
-      + (stampBonus ? ' · 스탬프 3/3 +5,000' : '') + (bossBonus ? ' · 보스 3/3 +10,000' : '');
+    dom.overReason.textContent = '정문 밖으로 한 번도 안 나갔다. ' + survived + ' · 밤 완주 +50,000 · 남은 하트 ' + player.hp + '×15,000'
+      + (stampBonus ? ' · 스탬프 3/3 +30,000' : '') + (earlyBonus ? ' · 정시 퇴근 +50,000' : '');
   } else {
-    dom.overTitle.textContent = '결국 정문 밖으로 나갔다';
-    dom.overReason.textContent = lastHit ? lastHit.loseText + '. (' + Math.floor(time) + '초 버팀)' : '';
+    dom.overTitle.textContent = lastHit && lastHit.boss ? '시험에 떨어졌다' : '결국 정문 밖으로 나갔다';
+    dom.overReason.textContent = lastHit ? lastHit.loseText + '. (' + survived + ')' : '';
     dom.overLeft.textContent = '남은 보스 ' + (BOSSES.length - bossKills) + '명';
   }
   dom.overLeft.hidden = won;
   if (money > best) { best = money; try { localStorage.setItem(BEST_KEY, String(best)); } catch (_) {} }
   $('res-money').textContent = '₩ ' + money.toLocaleString('ko-KR');
-  $('res-meals').textContent = (money / MEAL_PRICE).toFixed(1) + '끼';
+  $('res-meals').textContent = '≈ ' + Math.round(money / MEAL_PRICE) + '끼';
   $('res-stamps').textContent = stamps.map((s) => (s === 'done' ? '●' : '○')).join(' ') + ' ' + stamps.filter((s) => s === 'done').length + '/3';
   $('res-boss').textContent = bossKills + '/3';
-  $('res-kills').textContent = kills + '마리';
+  $('res-kills').textContent = kills + '번';
   $('res-level').textContent = 'Lv.' + level;
   $('res-best').textContent = '₩ ' + best.toLocaleString('ko-KR');
   renderHud();
@@ -777,7 +825,7 @@ function draw() {
   ctx.strokeRect(8, HUD_H + 8, W - 16, H - HUD_H - 16);
   ctx.setLineDash([]);
   ctx.fillStyle = 'rgba(255,255,255,0.25)';
-  ctx.font = '700 12px "JetBrains Mono", monospace';
+  ctx.font = '700 14px "JetBrains Mono", monospace';
   ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
   ctx.fillText('정 문', W / 2, H - 14);
 
@@ -879,9 +927,8 @@ function drawPlace(p, i) {
   ctx.stroke();
   ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
   ctx.fillStyle = miss ? '#999' : '#fff';
-  ctx.font = '700 12px "Noto Sans KR", sans-serif';
-  ctx.fillText(p.name, 0, -8);
-  ctx.font = '700 12px "Noto Sans KR", sans-serif';
+  ctx.font = '700 14px "Noto Sans KR", sans-serif';
+  ctx.fillText(p.name, 0, -9);
   ctx.fillStyle = miss ? '#999' : color;
   ctx.fillText(done ? '완료' : miss ? '놓침' : open ? '영업 중' : PHASES[i].name, 0, 10);
   if (miss) {
@@ -1104,7 +1151,7 @@ function drawPlayer() {
   ctx.strokeStyle = '#ff6b35'; ctx.lineWidth = 3;
   ctx.beginPath(); ctx.arc(player.x, player.y, player.r, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
   ctx.fillStyle = '#17223b';
-  ctx.font = '900 12px "Noto Sans KR", sans-serif';
+  ctx.font = '900 14px "Noto Sans KR", sans-serif';
   ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
   ctx.fillText('나', player.x, player.y + 1);
   ctx.restore();
@@ -1137,21 +1184,26 @@ function drawHud() {
   ctx.fillText('₩ ' + money.toLocaleString('ko-KR'), W / 2, 20);
   ctx.font = '700 14px "JetBrains Mono", monospace';
   ctx.textAlign = 'right';
-  ctx.fillText('Lv.' + level, W - 12, 20);
+  ctx.fillText('Lv.' + level, W - 50, 20);
+  ctx.fillStyle = 'rgba(255,255,255,0.12)'; ctx.fillRect(W - 40, 4, 32, 32);   // 일시정지 버튼 32×32 — 폰엔 P 키가 없어서
+  ctx.fillStyle = '#fff'; ctx.textAlign = 'center';
+  ctx.fillRect(W - 29, 12, 4, 16); ctx.fillRect(W - 19, 12, 4, 16);
 
-  // 120초 진행 바 + 아침/점심/저녁 눈금
+  // 120초 진행 바 + 아침/점심/저녁 눈금 + 보스 예고 빨간 눈금
   const bx = 12, bw = W - 24, by = 38, bh = 6;
   ctx.fillStyle = 'rgba(255,255,255,0.15)'; ctx.fillRect(bx, by, bw, bh);
   ctx.fillStyle = PHASES[phaseIdx].color; ctx.fillRect(bx, by, bw * Math.min(1, time / DAY), bh);
   ctx.fillStyle = '#fff';
   ctx.fillRect(bx + bw / 3 - 1, by - 2, 2, bh + 4);
   ctx.fillRect(bx + bw * 2 / 3 - 1, by - 2, 2, bh + 4);
-  ctx.font = '700 12px "Noto Sans KR", sans-serif';
+  ctx.fillStyle = '#e63946';
+  for (const b of BOSSES) ctx.fillRect(bx + bw * b.at / DAY - 1, by - 3, 2, bh + 6);
+  ctx.font = '700 14px "Noto Sans KR", sans-serif';
   ctx.textAlign = 'center';
   if (night) {   // 밤: 바는 가득 찬 채로 남고, 눈금 자리에 남은 보스 수
     ctx.fillStyle = '#fff';
     ctx.fillText('밤 · 남은 보스 ' + (BOSSES.length - bossKills) + '명', W / 2, 54);
-  } else PHASES.forEach((p, i) => {
+  } else PHASES.slice(0, stamps.length).forEach((p, i) => {
     const cx = bx + bw * (i + 0.5) / 3;
     ctx.fillStyle = i === phaseIdx ? '#fff' : 'rgba(255,255,255,0.5)';
     ctx.fillText(p.name, cx - 8, 54);
@@ -1169,7 +1221,7 @@ function drawHud() {
     const y = HUD_H + i * 18;
     ctx.fillStyle = 'rgba(0,0,0,0.45)'; ctx.fillRect(0, y, W, 18);
     ctx.fillStyle = boss.color;
-    ctx.font = '700 13px "Noto Sans KR", sans-serif';
+    ctx.font = '700 14px "Noto Sans KR", sans-serif';
     ctx.textAlign = 'left';
     ctx.fillText(boss.name, 12, y + 9);
     ctx.fillStyle = 'rgba(255,255,255,0.15)'; ctx.fillRect(140, y + 5, W - 152, 8);
@@ -1202,7 +1254,7 @@ function drawIntro() {
   ctx.restore();
   ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
   ctx.strokeStyle = '#17223b'; ctx.lineJoin = 'round';   // 밝은 블록 위 흰 글씨라 외곽선으로 대비 확보
-  ctx.font = '700 12px "Noto Sans KR", sans-serif';
+  ctx.font = '700 14px "Noto Sans KR", sans-serif';
   ctx.lineWidth = 3; ctx.strokeText(b.label, plateX + 22, plateY - 13);
   ctx.fillStyle = 'rgba(255,255,255,0.9)';
   ctx.fillText(b.label, plateX + 22, plateY - 13);
@@ -1228,8 +1280,16 @@ function loop(now) {
   } else if (mode === 'intro') {   // 컷신: 시간만 흐르고 게임은 멈춤
     intro.t += dt;
     updateEffects(dt);
-    if (intro.t >= intro.dur) { spawnBoss(intro.boss); intro = null; mode = 'play'; }
-  }
+    if (intro.t >= intro.dur) {
+      spawnBoss(intro.boss); intro = null; mode = 'play';
+      if (pauseAfterIntro) { pauseAfterIntro = false; pauseGame(); }   // 컷신 중 탭을 떠났으면 끝나는 즉시 멈춤
+    }
+  } else if (mode === 'dying') {   // 죽는 순간: 0.8초 슬로모(×0.25), 입력 없음
+    const s = dt * 0.25;
+    dying -= dt;
+    updateBullets(s); updateEnemies(s); updateBossShots(s); updateEffects(s);
+    if (dying <= 0) endGame(false);
+  } else if (mode !== 'idle') updateEffects(dt);   // 오버레이 뒤에서 떨림·배너가 굳어 있지 않게
   draw();
   requestAnimationFrame(loop);
 }

@@ -1,0 +1,22 @@
+year,item,rate_pct,source_key
+2021,외식,2.8,kostat-2021-annual
+2022,외식,7.7,kostat-2022-annual
+2023,외식,6.0,kostat-2023-annual
+2024,외식,3.1,kostat-2024-annual
+2025,외식,2.9,kostat-2025-annual
+2021,구내식당식사비,4.1,etoday-2024-01-09
+2022,구내식당식사비,4.2,etoday-2024-01-09
+2023,구내식당식사비,6.9,etoday-2024-01-09
+2024,구내식당식사비,,pending-kosis-DT_1J20003
+2025,구내식당식사비,,pending-kosis-DT_1J20003
+2021,소비자물가 전체,2.5,kostat-2021-annual
+2022,소비자물가 전체,5.1,kostat-2022-annual
+2023,소비자물가 전체,3.6,kostat-2023-annual
+2024,소비자물가 전체,2.3,kostat-2024-annual
+2025,소비자물가 전체,2.1,kostat-2025-annual
+2024,삼각김밥,3.7,kosis-DT_1J20003
+2024,편의점도시락,4.9,kosis-DT_1J20003
+2024,김밥,5.3,kosis-DT_1J20003
+2024,햄버거,5.4,kosis-DT_1J20003
+2024,떡볶이,5.8,kosis-DT_1J20003
+2024,도시락,5.9,kosis-DT_1J20003

@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>스탬프 투어 러시 · 캠퍼스 스탬프 투어</title>
+    <meta name="description" content="아침·점심·저녁 스탬프가 반짝인 순서를 기억해 빠르게 누르는 Canvas 게임. 4주차 실습.">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%AE%3C/text%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="styles.css?v=1">
+    <style>
+      .page-game { background: #0f2027; color: #e8eef2; }
+      .page-game .site-footer { border-top-color: rgb(255 255 255 / 12%); }
+      .page-game a:focus-visible, .page-game button:focus-visible { outline-color: #ff6b35; }
+      .game-shell { display: grid; gap: 1rem; margin: 1rem 0 2rem; }
+      .game-stage { position: relative; width: 100%; max-width: 420px; margin: 0 auto; }
+      canvas { display: block; width: 100%; height: auto; border-radius: 16px; background: #16323d; touch-action: manipulation; }
+      .hud { display: flex; justify-content: space-between; gap: 1rem; font-family: "JetBrains Mono", monospace; font-size: 0.9rem; max-width: 420px; margin: 0 auto; width: 100%; }
+      .hud b { color: #ff6b35; }
+      .overlay { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 1.5rem; background: rgb(15 32 39 / 88%); border-radius: 16px; }
+      .overlay[hidden] { display: none; }
+      .overlay h2 { margin: 0 0 0.5rem; color: #ff6b35; font-family: "JetBrains Mono", monospace; }
+      .overlay p { margin: 0.3rem 0; font-size: 0.95rem; }
+      .overlay .big { font-size: 2rem; font-weight: 900; }
+      .btn { font: inherit; font-weight: 700; cursor: pointer; padding: 0.8em 1.6em; border-radius: 8px; border: 2px solid #ff6b35; background: #ff6b35; color: #0f2027; margin-top: 0.8rem; transition: transform 150ms ease; }
+      .btn:hover { transform: translateY(-2px); }
+      .btn:active { transform: scale(0.98); }
+      .rules { max-width: 420px; margin: 0 auto; font-size: 0.92rem; opacity: 0.85; }
+      .rules ol { padding-left: 1.2em; }
+      .status { min-height: 1.5em; text-align: center; font-weight: 700; color: #ffd166; }
+      @media (max-width: 600px) { .hud { font-size: 0.8rem; } }
+    </style>
+  </head>
+  <body class="page-game">
+    <a class="skip-link" href="#main-content">본문 바로가기</a>
+
+    <header class="site-header">
+      <p class="back-link"><a href="../index.html">← 캠퍼스 스탬프 투어 첫 화면</a></p>
+      <h1>스탬프 투어 러시</h1>
+      <p class="lead">
+        아침·점심·저녁 스탬프가 차례로 반짝입니다. 순서를 외웠다가 <strong>같은 순서로 빠르게</strong> 눌러 하루를 완성하세요.
+        라운드가 오를수록 순서가 길어지고, 입력 시간은 짧아집니다.
+      </p>
+    </header>
+
+    <main class="explorer" id="main-content">
+      <div class="game-shell">
+        <div class="hud" aria-live="polite">
+          <span>라운드 <b id="hud-round">1</b></span>
+          <span>점수 <b id="hud-score">0</b></span>
+          <span>목숨 <b id="hud-lives">♥♥♥</b></span>
+          <span>최고 <b id="hud-best">0</b></span>
+        </div>
+
+        <div class="game-stage">
+          <canvas id="game" width="420" height="520" aria-label="스탬프 투어 러시 게임 화면" role="img"></canvas>
+
+          <div class="overlay" id="overlay-start">
+            <div>
+              <h2>READY</h2>
+              <p>반짝이는 순서를 기억하고 똑같이 누르세요.</p>
+              <p>틀리거나 시간이 끝나면 목숨이 하나 줄어듭니다.</p>
+              <button type="button" class="btn" id="btn-start">시작</button>
+            </div>
+          </div>
+
+          <div class="overlay" id="overlay-over" hidden>
+            <div>
+              <h2>GAME OVER</h2>
+              <p>최종 점수</p>
+              <p class="big" id="final-score">0</p>
+              <p id="final-note"></p>
+              <button type="button" class="btn" id="btn-restart">다시 시작</button>
+            </div>
+          </div>
+        </div>
+
+        <p class="status" id="status" aria-live="assertive"></p>
+
+        <section class="rules">
+          <h3>규칙</h3>
+          <ol>
+            <li>라운드가 시작되면 스탬프가 하나씩 반짝입니다. 처음엔 3개, 라운드마다 1개씩 늘어납니다.</li>
+            <li>반짝임이 끝나면 같은 순서로 스탬프를 누릅니다. 마우스·터치 모두 됩니다.</li>
+            <li>순서를 다 맞히면 <code>순서 길이 × 10점</code> + 남은 시간 보너스. 틀리거나 시간이 다 되면 목숨 −1.</li>
+            <li>목숨 3개를 모두 잃으면 종료. 최고 점수는 이 브라우저에 저장됩니다.</li>
+          </ol>
+        </section>
+      </div>
+    </main>
+
+    <nav class="week-nav" aria-label="4주차 실습 이동">
+      <a href="index.html">← 장소 탐험</a>
+      <a href="statistics.html">통계 · 외식비 vs 구내식당 →</a>
+    </nav>
+
+    <footer class="site-footer">
+      <p>그림은 모두 Canvas API로 직접 그렸습니다. 외부 이미지·라이브러리 없음.</p>
+    </footer>
+
+    <script src="game.js?v=1"></script>
+  </body>
+</html>

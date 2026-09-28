@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>장소 탐험 · 한 번에 하나씩 · 캠퍼스 스탬프 투어</title>
+    <meta name="description" content="성심교정 안 세 장소를 버튼으로 하나씩 골라 보는 탐험 페이지. 4주차 JavaScript·DOM 실습.">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A7%AD%3C/text%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="styles.css?v=1">
+  </head>
+  <body class="page-explore">
+    <a class="skip-link" href="#main-content">본문 바로가기</a>
+
+    <header class="site-header">
+      <p class="back-link"><a href="../index.html">← 캠퍼스 스탬프 투어 첫 화면</a></p>
+      <h1>장소 탐험 · 한 번에 하나씩</h1>
+      <p class="lead">
+        버튼을 누르면 그 장소의 사진·이야기·지도만 남고 나머지는 숨습니다.
+        아침 → 점심 → 저녁 순서로 하루를 따라가 보세요.
+      </p>
+
+      <nav class="place-tabs" aria-label="장소 선택">
+        <button type="button" class="tab" data-place="store" aria-pressed="false" aria-controls="place-store">
+          <span class="tab-time">아침</span>
+          <span class="tab-name">학관 1층 GS25</span>
+        </button>
+        <button type="button" class="tab" data-place="cafeteria" aria-pressed="false" aria-controls="place-cafeteria">
+          <span class="tab-time">점심</span>
+          <span class="tab-name">학관 2층 학생식당</span>
+        </button>
+        <button type="button" class="tab" data-place="gym" aria-pressed="false" aria-controls="place-gym">
+          <span class="tab-time">저녁</span>
+          <span class="tab-name">교내 트러스트짐</span>
+        </button>
+      </nav>
+    </header>
+
+    <main class="explorer" id="main-content" aria-live="polite">
+
+      <section class="place" id="place-store" data-place="store" data-building="학관" data-floor="1" data-time-of-day="morning">
+        <h2>학관 1층 GS25 <small>· 살 게 없어도 일단 들어가게 되는 곳</small></h2>
+        <img src="../images/store.jpg" alt="학관 1층 편의점 입구와 진열대가 보이는 모습" loading="lazy">
+        <p>
+          여기서 뭘 사겠다고 결심하고 가는 일은 거의 없다. 학관에 들어가면 발이 먼저 꺾인다.
+          1교시가 있는 날은 삼각김밥으로 아침을 때우고, 점심시간이 애매하게 잘린 날도 여기서 해결한다.
+          계획해서 오는 곳이 아니라 <strong>하루가 계획대로 안 풀렸을 때 오는 곳</strong>이다.
+        </p>
+        <h3>추천 이유</h3>
+        <ul>
+          <li>수업 건물에서 내려오는 길목이라 왕복 시간이 안 붙는다.</li>
+          <li>같은 건물 2층이 학생식당이라 아침·점심이 계단 한 층으로 이어진다.</li>
+        </ul>
+        <div class="map-frame">
+          <iframe title="학관 1층 GS25 위치 지도"
+                  data-src="https://www.google.com/maps?q=GS25+%EA%B0%80%ED%86%A8%EB%A6%AD%EB%8C%80%ED%95%99%EA%B5%90%EC%A0%90&z=17&output=embed"
+                  loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+        </div>
+        <p class="place-actions">
+          <a class="primary-action" href="https://place.map.kakao.com/870364688" target="_blank" rel="noopener">카카오맵에서 열기</a>
+          <a class="secondary-action" href="../store.html">3주차 상세 페이지 →</a>
+        </p>
+      </section>
+
+      <section class="place" id="place-cafeteria" data-place="cafeteria" data-building="학관" data-floor="2" data-time-of-day="noon">
+        <h2>학관 2층 학생식당 <small>· 혼자 먹어도 아무도 신경 쓰지 않는 곳</small></h2>
+        <img src="../images/cafeteria.jpg" alt="학생식당 배식대와 식판을 든 줄, 창가 좌석이 보이는 모습" loading="lazy">
+        <p>
+          여기서는 대부분 혼자 먹는다. 몇 번 와보니 주변 절반이 혼자였다.
+          맛 때문에 오는 곳은 아니다. 학교 밖 한 끼가 만 원을 훌쩍 넘는데 여기는 그 절반도 안 된다.
+          <strong>가성비가 이유라는 게 낭만적이지는 않지만, 그게 계속 오는 진짜 이유다.</strong>
+        </p>
+        <h3>추천 이유</h3>
+        <ul>
+          <li>혼밥이 기본값이라 눈치 볼 일이 없다.</li>
+          <li>편의점 바로 위층. 아침을 1층에서 때운 날 점심을 2층에서 먹으면 이동 거리가 계단 한 층이다.</li>
+        </ul>
+        <div class="map-frame">
+          <iframe title="가톨릭대학교 성심교정 학관 위치 지도"
+                  data-src="https://www.google.com/maps?q=37.4865549,126.8018828&z=17&output=embed"
+                  loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+        </div>
+        <p class="place-actions">
+          <a class="primary-action" href="https://place.map.kakao.com/11344864" target="_blank" rel="noopener">카카오맵에서 열기</a>
+          <a class="secondary-action" href="../cafeteria.html">3주차 상세 페이지 →</a>
+        </p>
+      </section>
+
+      <section class="place" id="place-gym" data-place="gym" data-building="교내 체육시설" data-time-of-day="evening">
+        <h2>교내 트러스트짐 <small>· 밖에 있었으면 안 다녔을 헬스장</small></h2>
+        <img src="../images/gym.jpg" alt="트러스트짐 웨이트 기구가 놓인 운동 공간" loading="lazy">
+        <p>
+          집 근처 헬스장을 끊었다가 오래 못 가고 그만둔 적이 있다. 집에 갔다가 옷 갈아입고 다시 나오는
+          그 한 단계가 매번 발목을 잡았다. 여기는 그 단계가 없다.
+          의지가 강해진 게 아니라 <strong>안 갈 핑계가 사라져서</strong> 계속하게 됐다.
+        </p>
+        <h3>추천 이유</h3>
+        <ul>
+          <li>수업 끝나고 그냥 걸어가면 도착한다. 거리가 습관을 만든다.</li>
+          <li>공강이 긴 날 오후에 오면 기구를 기다리지 않는다.</li>
+        </ul>
+        <div class="map-frame">
+          <iframe title="트러스트짐(교내) 위치 지도"
+                  data-src="https://www.google.com/maps?q=%ED%8A%B8%EB%9F%AC%EC%8A%A4%ED%8A%B8%EC%A7%90+%EB%B6%80%EC%B2%9C+%EC%A7%80%EB%B4%89%EB%A1%9C+43&z=17&output=embed"
+                  loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+        </div>
+        <p class="place-actions">
+          <a class="primary-action" href="https://place.map.kakao.com/986693554" target="_blank" rel="noopener">카카오맵에서 열기</a>
+          <a class="secondary-action" href="../gym.html">3주차 상세 페이지 →</a>
+        </p>
+      </section>
+
+    </main>
+
+    <nav class="week-nav" aria-label="4주차 실습 이동">
+      <a href="statistics.html">통계 · 외식비 vs 구내식당 →</a>
+      <a href="game.html">게임 · 스탬프 투어 러시 →</a>
+    </nav>
+
+    <footer class="site-footer">
+      <h2>출처</h2>
+      <ul>
+        <li>사진: 작성자 직접 촬영</li>
+        <li>지도: Google 지도 퍼가기(iframe) · 카카오맵 장소 링크</li>
+        <li>학교 정보: <a href="https://www.catholic.ac.kr/" target="_blank" rel="noopener">가톨릭대학교 공식 홈페이지</a></li>
+      </ul>
+    </footer>
+
+    <script src="app.js?v=1"></script>
+  </body>
+</html>

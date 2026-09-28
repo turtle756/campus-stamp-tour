@@ -1,8 +1,8 @@
-// 세 곳 모두 성심교정 안이라 건물별 좌표를 얻지 못하면 교정 대표 좌표를 함께 씁니다.
+// 학관(GS25·학생식당)은 성심교정 대표 좌표, 트러스트짐은 Google 지도가 '지봉로 43 트러스트짐'으로 찍는 좌표.
 const PLACES = [
   { id: 'store',     name: '학관 1층 GS25',    lat: 37.4865549, lng: 126.8018828, href: 'store.html' },
   { id: 'cafeteria', name: '학관 2층 학생식당', lat: 37.4865549, lng: 126.8018828, href: 'cafeteria.html' },
-  { id: 'gym',       name: '교내 트러스트짐',   lat: 37.4865549, lng: 126.8018828, href: 'gym.html' },
+  { id: 'gym',       name: '교내 트러스트짐',   lat: 37.4859124, lng: 126.8019788, href: 'gym.html' },
 ];
 const WALK_M_PER_MIN = 80;
 

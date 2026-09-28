@@ -142,8 +142,8 @@ campus-stamp-tour/
 
 - 2주차 세 장소의 사진·설명·추천 이유를 `section` 세 개에 모두 넣고, `app.js`가 `section.style.display`를 `block`/`none`으로 바꿔 **한 번에 하나만** 보이게 합니다.
 - 버튼은 `aria-pressed`로 현재 선택을 표시하고, `#store` 같은 URL 해시와 동기화해 새로고침·공유 시 같은 장소가 열립니다.
-- 지도는 Google 지도 퍼가기(`output=embed`) iframe입니다. 카카오맵은 JavaScript API 앱키 발급과 도메인 등록이 필수라 iframe만으로는 넣을 수 없어, "카카오맵에서 열기" 링크로 대신했습니다.
-- 보이지 않는 장소의 iframe은 `data-src`로 두었다가 선택될 때만 `src`를 넣어 첫 로딩에서 지도 세 개를 동시에 받지 않게 했습니다.
+- 지도는 카카오맵 **지도 퍼가기**(roughmap) 코드입니다. 카카오 JavaScript API는 앱키·도메인 등록이 필요하지만, map.kakao.com의 "지도 퍼가기"는 키 없이 `timestamp`·`key` 한 쌍으로 동작합니다. GS25와 학생식당은 같은 학관이라 지도 하나를 공유하고, "카카오맵에서 열기" 링크는 그대로 둡니다.
+- 지도는 선택된 장소에서만 `renderKakaoMap()`으로 그립니다(`app.js`). 퍼가기 지도는 640×360 고정 크기라 `.map-frame` 폭에 맞춰 `transform: scale()`로 줄이고, 같은 지도를 쓰는 두 장소는 이미 그려진 노드를 옮겨 씁니다(컨테이너 id가 `timestamp`로 고정되어 있어서).
 
 ### 실습 2 · 통계 시각화 (`week4/statistics.html`, `statistics.js`, `data/cpi_food.csv`)
 
@@ -168,7 +168,7 @@ Copilot 대신 Claude Code(터미널 에이전트)를 사용했습니다. 실제
 
 - "세 장소를 한 페이지에서 버튼으로 하나씩 보이게, `display` 토글로" → 초안에서 `hidden` 속성을 쓰길래 채점 기준대로 `style.display`로 바꾸게 함.
 - "공공데이터 CSV로 외식 vs 학식 그래프" → 처음 제안한 '천원의 아침밥' 데이터는 공공데이터포털에 CSV가 없어서 폐기하고, 같은 KOSIS 표 안의 외식·구내식당식사비로 바꿈. 없는 값은 0으로 채우지 말라고 지시.
-- "카카오맵 iframe" → 앱키 없이는 불가하다는 반론을 받고 Google 임베드 + 카카오 링크로 결정.
+- "카카오맵 iframe" → JavaScript API는 앱키가 필요하다는 반론을 받아 잠시 Google 임베드로 갔다가, map.kakao.com에서 "지도 퍼가기" 코드를 직접 받아 교체. Google 텍스트 검색 임베드가 GS25를 서울 좌표로 찍는 문제도 이때 발견해 없앰.
 - 코드는 `node --check`로 문법을 확인하고, 배포 후 `curl`로 파일과 마크업이 올라갔는지 검증했습니다. 화면에서 실제로 눌러 보는 확인은 아래 "휴대전화 확인 결과"에서 직접 합니다.
 
 ### 휴대전화 확인 결과

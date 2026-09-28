@@ -997,6 +997,40 @@ hr {
   border-bottom: 1px dashed rgb(0 0 0 / 15%);
 }
 
+/* 실습 페이지 목록 (첫 화면) */
+.labs-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0;
+  display: grid;
+  gap: 0.6rem;
+}
+
+.labs-list li {
+  display: grid;
+  gap: 0.15rem;
+  padding: 0.8rem 1rem;
+  background: white;
+  border: 1px solid rgb(45 80 22 / 25%);
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 5%);
+}
+
+.labs-list a {
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--accent, #2d5016);
+}
+
+.labs-list a:hover {
+  text-decoration: underline;
+}
+
+.labs-list span {
+  font-size: 0.9rem;
+  color: #5a4b3a;
+}
+
 /* ========================================================================
    Responsive — 모바일 전용 @media (필수 요구사항)
    ------------------------------------------------------------------------

@@ -33,7 +33,7 @@ const WIN_DELAY = 0.6;      // 마지막 보스 처치 → 결과창까지의 �
 const END_BONUS = { clear: 5000, heart: 1500, zones: 3000, early: 5000 };   // 종료 보너스: 클리어 / 남은 하트 1개당 / 구역 3/3 / 120초 안 클리어
 const DEBUG_LOG = false;    // true면 보스 처치 시각을 console.log로 남긴다
 const PLAYER_HP = 3;        // 시작 하트. 최대 체력 패시브가 4/5/6으로 올린다
-const PLAYER_SPEED = 190;   // 기본 이동 속도(초속 px). 폰 실측 뒤 170 → 190. 이동 속도 패시브가 213/238/267으로 올린다
+const PLAYER_SPEED = 210;   // 기본 이동 속도(초속 px). 폰 실측 뒤 170 → 190 → 210(슈팅 느낌이라 더 빠르게). 이동 속도 패시브가 235/263/295으로 올린다
 const PLAYER_INV = 0.8;     // 맞은 뒤 무적(초). 무적 연장 패시브가 1.05/1.30/1.55로 올린다
 const SHOT_SPREAD = 12;     // 탄 여러 발일 때 발 사이 각도(°)
 const ORB_R = 8;            // 위성 구체 몸 반지름(접촉 판정·그리기)
@@ -148,7 +148,7 @@ const UPGRADES = [
     perLevel: [{ r: 40, dur: 2, dmg: 1, n: 1, grow: 1 }, { r: 50, dur: 2, dmg: 1, n: 1, grow: 1 }, { r: 50, dur: 2, dmg: 1, n: 2, grow: 1 }, { r: 50, dur: 3, dmg: 1, n: 2, grow: 1 }, { r: 60, dur: 3, dmg: 2, n: 2, grow: 1 }],
     desc: ['2.5초마다 적이 가장 많은 곳에 바닥 피해 구역 · 반경 40 · 2초 · 피해 1', '반경 50', '동시 2개', '지속 3초', '반경 60 · 피해 2'] },
   { id: 'cooldown', name: '연사',      tier: 'passive', kind: 'passive', max: 3, pair: null,     perLevel: [0.88, 0.77, 0.68], desc: ['탄·펄스·장판 주기 ×0.88', '주기 ×0.77', '주기 ×0.68'] },
-  { id: 'speed',    name: '이동 속도', tier: 'passive', kind: 'passive', max: 3, pair: 'orbit',  perLevel: [213, 238, 267],    desc: ['이동 속도 190 → 213', '이동 속도 238', '이동 속도 267'] },
+  { id: 'speed',    name: '이동 속도', tier: 'passive', kind: 'passive', max: 3, pair: 'orbit',  perLevel: [235, 263, 295],    desc: ['이동 속도 210 → 235', '이동 속도 263', '이동 속도 295'] },
   { id: 'hp',       name: '최대 체력', tier: 'passive', kind: 'passive', max: 3, pair: 'pulse',  perLevel: [4, 5, 6],          desc: ['최대 하트 4 · 하트 +1', '최대 하트 5 · 하트 +1', '최대 하트 6 · 하트 +1'] },
   { id: 'inv',      name: '무적 연장', tier: 'passive', kind: 'passive', max: 3, pair: null,     perLevel: [1.05, 1.30, 1.55], desc: ['맞은 뒤 무적 1.05초', '무적 1.30초', '무적 1.55초'] },
   { id: 'might',    name: '공격력',    tier: 'passive', kind: 'passive', max: 3, pair: 'shot',   perLevel: [1.3, 1.6, 1.9],    desc: ['모든 무기 피해 ×1.3', '피해 ×1.6', '피해 ×1.9'] },

@@ -1,0 +1,830 @@
+{
+  "nodes": [
+    {
+      "key": "",
+      "place": "학관 3층 강의실",
+      "text": "책상에 엎드려 있던 당신이 눈을 뜬다. 강의실 불은 꺼져 있고 창밖 운동장에 느리게 움직이는 형체들이 보인다. 폰 배터리 9%, 신호 없음. 복도 끝에서 무언가 끌리는 소리가 난다.",
+      "a": "불을 켜지 않고 문 앞에서 복도 소리를 듣는다",
+      "b": "가방을 챙겨 조용히 문을 열고 복도로 나간다",
+      "prompt_en": "A dark university lecture room at night, moonlight through tall windows, an overturned chair, a phone glowing faintly on a desk, a person seen from behind looking down at a dim sports field where slow shapes move, no text."
+    },
+    {
+      "key": "A",
+      "place": "학관 3층 복도·계단",
+      "text": "문에 귀를 대고 기다린 덕에 끌리는 소리가 계단 쪽으로 멀어지는 것을 확인했다. 복도로 나서니 비상등만 붉게 깜빡인다. 계단은 조용하지만 반대편 강의실 문이 열려 있다.",
+      "a": "벽에 붙어 열린 강의실을 먼저 살핀 뒤 계단으로 간다",
+      "b": "소리가 사라진 틈에 곧장 계단으로 내려간다",
+      "prompt_en": "A long dark university corridor lit only by a blinking red emergency light, one classroom door ajar, a stairwell sign at the far end, a person's silhouette pressed against the wall, no text."
+    },
+    {
+      "key": "B",
+      "place": "학관 3층 복도·계단",
+      "text": "문을 열자마자 복도 끝의 형체가 고개를 돌렸다. 소리에 반응한 듯 천천히 다가온다. 당신은 숨을 죽이고 계단 쪽으로 물러선다. 계단참 아래에서도 발 끄는 소리가 올라온다.",
+      "a": "계단참 구석에 웅크려 형체가 지나가기를 기다린다",
+      "b": "두 형체 사이 틈으로 계단을 뛰어 내려간다",
+      "prompt_en": "A dim university stairwell at night, a slow humanoid shape approaching from the corridor end, another shape climbing from below, a person's back view retreating toward the landing, cold fluorescent flicker, no text."
+    },
+    {
+      "key": "AA",
+      "place": "학관 2층 학생식당 홀",
+      "text": "열린 강의실에서 손전등 하나를 챙긴 뒤 계단을 내려왔다. 2층 식당 홀은 의자가 넘어져 있고 배식대 너머 주방에서 희미한 불빛이 샌다. 누군가 낮은 목소리로 거기 누구냐고 묻는다.",
+      "a": "손전등을 끄고 배식대 뒤에서 목소리의 정체를 살핀다",
+      "b": "사람이라 답하며 주방 불빛 쪽으로 다가간다",
+      "prompt_en": "A dark university cafeteria hall at night, overturned chairs and trays, a faint warm light leaking from the kitchen behind the serving counter, a person from behind holding a small flashlight beam, no text."
+    },
+    {
+      "key": "AB",
+      "place": "학관 2층 학생식당 홀",
+      "text": "계단을 서둘러 내려오다 2층 문을 세게 밀었다. 식당 홀에 쇠문 소리가 울리고 창가에 서 있던 형체 둘이 천천히 몸을 돌린다. 주방 쪽에서 누군가 이쪽으로 오라고 속삭인다.",
+      "a": "테이블 아래로 몸을 숨기고 형체가 흥미를 잃기를 기다린다",
+      "b": "속삭임을 따라 주방 문으로 곧장 달린다",
+      "prompt_en": "A wide dark cafeteria hall at night, two slow silhouettes turning near tall windows with pale moonlight, a metal door swinging open in the foreground, a kitchen doorway glowing dimly on the far side, no text."
+    },
+    {
+      "key": "BA",
+      "place": "학관 2층 학생식당 홀",
+      "text": "계단참에서 숨죽인 십 분이 지나 형체는 위층으로 사라졌다. 다리가 저린 채 2층 식당 홀에 들어서니 바닥에 식판과 밥알이 흩어져 있고, 주방에서 가스레인지 켜는 소리가 들린다.",
+      "a": "홀 입구에 남아 주방 소리가 사람인지 확인한다",
+      "b": "주방으로 가서 소리의 주인에게 말을 건다",
+      "prompt_en": "An empty university cafeteria hall at night, scattered trays and spilled rice on the floor, a blue gas flame glow visible through the kitchen window, a person's silhouette standing still in the entrance doorway, no text."
+    },
+    {
+      "key": "BB",
+      "place": "학관 2층 학생식당 홀",
+      "text": "두 형체 사이를 뚫고 내려오며 어깨를 부딪쳤다. 2층 식당 홀로 뛰어들어 문을 닫자 뒤에서 문을 긁는 소리가 이어진다. 홀 안쪽에서 다리를 저는 아주머니가 문을 잡으라고 외친다.",
+      "a": "문을 등으로 막고 버티며 아주머니를 기다린다",
+      "b": "문을 놓고 아주머니를 부축해 주방으로 달린다",
+      "prompt_en": "A cafeteria hall entrance at night, a person's back pressed against a closed metal door with shadows scratching beyond its narrow window, a limping figure silhouetted among tables under dim emergency light, no text."
+    },
+    {
+      "key": "AAB",
+      "place": "학관 2층 식당 주방",
+      "text": "사람이라고 답하자 주방 문이 조금 열린다. 식당 아주머니가 가스레인지 불을 낮춘 채 쌀 포대에 기대 앉아 있다. 왼쪽 다리를 앞치마로 감아 묶었고 손에는 국자를 쥐고 있다. 아침까지 같이 버티자고 한다.",
+      "a": "아주머니 곁에 남아 다리를 다시 묶고 밤을 버틸 준비를 한다",
+      "b": "1층 편의점에 약과 물이 있을 거라며 혼자 내려가겠다고 한다",
+      "prompt_en": "A dim university cafeteria kitchen at night, a low blue gas flame on a stove, sacks of rice stacked against steel counters, a seated figure in silhouette with a ladle resting nearby, no text."
+    },
+    {
+      "key": "AABA",
+      "place": "학관 1층 GS25 매장",
+      "text": "다리를 다시 묶고 쌀을 안치자 아주머니가 편의점에 진통제가 있을 거라며 뒷계단 열쇠를 건넨다. 뒷계단으로 내려온 1층 GS25는 셔터가 반쯤 내려가 있고 안쪽 창고 문틈에서 누군가 숨을 죽이고 있다.",
+      "a": "셔터 앞에 앉아 낮게 부르고 창고 안 사람의 대답을 기다린다",
+      "b": "셔터 밑으로 기어 들어가 진열대에서 약과 물을 먼저 챙긴다",
+      "prompt_en": "A convenience store inside a university building at night, its metal shutter half lowered, dark shelves inside, a thin line of light under a storage room door at the back, a crouching silhouette outside the shutter, no text."
+    },
+    {
+      "key": "AABB",
+      "place": "학관 1층 GS25 매장",
+      "text": "아주머니는 국자를 쥔 채 조심하라고만 한다. 손전등을 끄고 앞계단을 내려오니 1층 GS25 유리문이 활짝 열려 있고 바닥에 라면 봉지가 흩어져 있다. 창고 쪽에서 문 열지 말라는 작은 목소리가 들린다.",
+      "a": "창고 문 앞에 앉아 안에 있는 사람에게 상황을 묻고 함께 기다린다",
+      "b": "물 몇 병을 가방에 담고 곧장 밖으로 나가 운동장으로 향한다",
+      "prompt_en": "A convenience store at night with its glass door wide open, instant noodle packets scattered on the floor, toppled shelves, a closed storage door at the back with faint light beneath it, a silhouette standing in the doorway, no text."
+    },
+    {
+      "key": "AABAA",
+      "place": "운동장 → 김수환관 트러스트짐 입구",
+      "text": "창고 안 알바생이 셔터 밑으로 진통제와 물 두 병을 밀어 준다. 김수환관 헬스장에 라디오를 듣는 사람이 있다고도 한다. 약을 아주머니께 올려 드리고 뒷문으로 나오니 운동장 건너 김수환관 1층에 불빛 하나가 켜져 있다.",
+      "a": "건물 벽을 따라 돌아 소리 없이 헬스장 입구까지 간다",
+      "b": "운동장을 가로질러 뛰어가 헬스장 문을 두드린다",
+      "prompt_en": "A dark university sports field at night seen from a building's back door, a single lit window in a gym building across the field, slow shapes along the far track edge, a silhouette holding a small bottle, no text."
+    },
+    {
+      "key": "AABAB",
+      "place": "운동장 → 김수환관 트러스트짐 입구",
+      "text": "진열대가 넘어지며 유리문 밖 형체들이 고개를 돌렸다. 창고의 속삭임을 뒤로 하고 뒷문으로 빠져나왔다. 약과 물은 챙겼지만 아주머니께 올라갈 계단은 형체들로 막혔다. 운동장 건너 김수환관 입구가 러닝머신으로 막혀 있는 것이 보인다.",
+      "a": "학관 뒷벽에 붙어 형체들이 흩어질 때까지 기다린다",
+      "b": "물병을 반대편으로 던져 소리를 보내고 입구로 뛴다",
+      "prompt_en": "The back wall of a university building at night, a silhouette pressed flat against the bricks holding a backpack, a wide dark sports field ahead, a gym entrance across the field blocked by a treadmill behind glass, no text."
+    },
+    {
+      "key": "AABBA",
+      "place": "운동장 → 김수환관 트러스트짐 입구",
+      "text": "창고 안 알바생은 김수환관 관장이 라디오로 구조 소식을 들었다고 전한다. 같이 나가자고 하자 한참 뒤에야 문이 열린다. 둘이 뒷문으로 나온 운동장은 넓고 조용하다. 김수환관 입구는 러닝머신으로 막혀 있고 안쪽에 손전등 불빛이 있다.",
+      "a": "알바생과 벽을 따라 천천히 가서 입구 유리를 낮게 두드린다",
+      "b": "알바생을 뒤에 두고 먼저 뛰어가 입구의 러닝머신을 밀어 본다",
+      "prompt_en": "Two silhouettes stepping out of a building's back door onto a dark university sports field at night, a gym entrance across the field with a treadmill pushed against its glass door and a flashlight glow inside, no text."
+    },
+    {
+      "key": "AABBB",
+      "place": "운동장 → 김수환관 트러스트짐 입구",
+      "text": "물병으로 무거워진 가방을 메고 유리문을 나섰다. 창고의 목소리는 뒤에 남았다. 운동장 조명은 꺼져 있고 트랙 위 형체 셋이 당신 쪽으로 천천히 몸을 돌린다. 김수환관까지 백 미터, 입구 안쪽에서 손전등 불빛이 흔들린다.",
+      "a": "관중석 아래 그늘에 엎드려 형체들이 지나가기를 기다린다",
+      "b": "가방을 앞으로 안고 곧장 백 미터를 달린다",
+      "prompt_en": "A dark university sports field at night with its floodlights off, three slow shapes on the running track turning toward a lone silhouette with a heavy backpack, a gym building with a wavering flashlight beam in its entrance, no text."
+    },
+    {
+      "key": "BAB",
+      "place": "학관 2층 학생식당 주방",
+      "text": "주방에 들어서며 낮게 말을 건다. 가스레인지 앞에 앉은 아주머니가 놀라 국자를 떨어뜨린다. 다리를 다쳐 걷지 못한다며, 쌀 포대 뒤를 가리킨다. 같이 버티자는 말에 홀 쪽 문이 덜컹인다.",
+      "a": "쌀 포대 뒤에 아주머니와 함께 숨어 문이 잠잠해지길 기다린다",
+      "b": "아주머니를 부축해 뒷계단으로 1층에 내려간다",
+      "prompt_en": "A university cafeteria kitchen at night, a single blue gas flame, sacks of rice stacked against steel counters, a seated figure in silhouette with one leg stretched out, a person's back view in the doorway, no text."
+    },
+    {
+      "key": "BABA",
+      "place": "학관 1층 GS25 매장",
+      "text": "쌀 포대 뒤에서 문이 잠잠해질 때까지 버텼다. 아주머니는 아침까지 남겠다며 손전등과 라면 봉지를 쥐여 준다. 홀로 뒷계단을 내려와 1층 GS25 앞에 서니 유리문 안이 캄캄하고 창고 쪽에서 작은 기척이 난다.",
+      "a": "문 앞에 손전등을 끄고 창고 기척이 무엇인지 지켜본다",
+      "b": "유리문을 밀고 들어가 창고 문을 두드린다",
+      "prompt_en": "A dark campus convenience store at night seen through glass doors, shelves in shadow, a faint light leaking under a storeroom door at the back, a person's silhouette holding an unlit flashlight outside, no text."
+    },
+    {
+      "key": "BABB",
+      "place": "학관 1층 GS25 매장",
+      "text": "아주머니를 부축해 뒷계단을 내려왔다. 한 층마다 그녀의 다리가 끌려 소리가 났고, 뒤에서 형체 하나가 따라붙는다. 1층 GS25 유리문은 안에서 잠겨 있고, 창고 쪽에서 '문 열지 마세요' 하는 목소리가 새어 나온다.",
+      "a": "아주머니를 기둥 뒤에 앉히고 소리 없이 형체를 피한다",
+      "b": "유리문을 두드리며 알바생에게 열어 달라고 외친다",
+      "prompt_en": "A dim campus convenience store entrance at night, locked glass doors reflecting a corridor, a person supporting a limping figure seen from behind, a slow humanoid shape further down the hallway, cold vending machine glow, no text."
+    },
+    {
+      "key": "BABAA",
+      "place": "운동장 → 김수환관 트러스트짐 입구",
+      "text": "지켜보니 창고 기척은 알바생이었다. 문틈으로 물 한 병만 건네고는 다시 문을 걸었다. 당신은 혼자 운동장으로 나선다. 100m 앞 김수환관 트러스트짐 창에 불빛이 하나 켜져 있고, 잔디 위에 형체 셋이 느리게 흩어져 있다.",
+      "a": "운동장 가장자리 관중석 그늘을 따라 천천히 돌아간다",
+      "b": "형체들이 등을 보인 틈에 잔디를 가로질러 달린다",
+      "prompt_en": "A dark university sports field at night, a single lit window in a gym building across the grass, three slow humanoid shapes scattered on the field, a person's back view at the edge of the track holding a flashlight, no text."
+    },
+    {
+      "key": "BABAB",
+      "place": "운동장 → 김수환관 트러스트짐 입구",
+      "text": "창고 문을 두드리자 알바생이 문을 열었다. 물과 라면 상자를 나눠 배낭에 넣고, 둘이 같이 나가기로 한다. 학관 뒷문을 열자 운동장 건너 트러스트짐 입구 셔터가 반쯤 내려가 있고, 그 앞을 형체 하나가 서성인다.",
+      "a": "알바생과 뒷문 안에서 형체가 입구를 떠나길 기다린다",
+      "b": "알바생과 반대편으로 돌을 던져 형체를 유인하고 달린다",
+      "prompt_en": "A university back door opening onto a dark sports field at night, two silhouettes with backpacks in the doorway, a gym building across the grass with its entrance shutter half lowered, one slow humanoid shape pacing in front, no text."
+    },
+    {
+      "key": "BABBA",
+      "place": "운동장 → 김수환관 트러스트짐 입구",
+      "text": "기둥 뒤에서 형체가 지나가길 기다렸다. 아주머니는 더는 못 걷겠다며 GS25 앞 벤치에 남겠다고 한다. 손을 놓고 혼자 운동장에 나서니 트러스트짐 입구 앞에서 누군가 라디오를 크게 틀어 놓았고, 그 소리에 형체들이 모여든다.",
+      "a": "형체들이 소리에 몰린 사이 운동장 가장자리로 우회한다",
+      "b": "라디오 소리 쪽으로 곧장 달려가 문을 두드린다",
+      "prompt_en": "A dark sports field at night, a gym entrance across the grass with a faint radio glow, several slow humanoid shapes drifting toward the sound, a person's silhouette alone at the field edge looking back at a building, no text."
+    },
+    {
+      "key": "BABBB",
+      "place": "운동장 → 김수환관 트러스트짐 입구",
+      "text": "외침에 알바생이 문을 열어 줬지만 소리를 들은 형체가 뒤따라 들어왔다. 셋이 뒷문으로 빠져나와 아주머니를 번갈아 부축한다. 운동장 한복판에서 아주머니가 주저앉고, 트러스트짐 입구까지는 아직 50m가 남았다.",
+      "a": "아주머니 곁에 앉아 알바생만 먼저 보내 문을 열게 한다",
+      "b": "알바생과 양쪽에서 아주머니를 들어 올려 입구로 뛴다",
+      "prompt_en": "The center of a dark university sports field at night, three silhouettes huddled on the grass with one seated, a gym entrance with a dim light fifty meters away, slow shapes emerging from the building behind them, no text."
+    },
+    {
+      "key": "AAA",
+      "place": "학관 2층 학생식당 주방",
+      "text": "불을 끄고 지켜본 덕에 목소리의 주인이 다리를 절며 가스레인지 곁에 앉은 식당 아주머니라는 걸 알았다. 배식대 뒤에서 나서자 그녀가 국자를 내려놓는다. 주방 뒤 쪽문 너머로 1층 계단이 있다고 한다.",
+      "a": "아주머니 다리를 행주로 묶어 주고 쪽문 계단을 함께 내려간다",
+      "b": "물통만 챙겨 홀 정면 계단으로 혼자 먼저 내려간다",
+      "prompt_en": "A dim university cafeteria kitchen at night, a single gas stove flame lighting steel counters and a sack of rice, a seated figure in silhouette resting a leg, a narrow back door ajar to a stairwell, no text."
+    },
+    {
+      "key": "AAAA",
+      "place": "학관 1층 GS25 매장",
+      "text": "아주머니를 부축해 쪽문 계단을 한 칸씩 내려왔다. 1층 GS25는 셔터가 반쯤 내려가 있고 계산대 등만 켜져 있다. 셔터 틈으로 창고 쪽에서 젊은 목소리가 문 열지 말라고 속삭인다.",
+      "a": "셔터 틈으로 아주머니 사정을 알리고 답을 기다린다",
+      "b": "셔터를 들어 올려 매장 안으로 들어가 창고 문을 두드린다",
+      "prompt_en": "A convenience store at night with its metal shutter half lowered, only the counter light on, shelves of instant noodles in shadow, two figures from behind crouched at the shutter gap, a storage door at the back, no text."
+    },
+    {
+      "key": "AAAB",
+      "place": "학관 1층 GS25 매장",
+      "text": "정면 계단을 뛰어 내려오다 넘어진 의자를 건드려 홀에 소리가 울렸다. 1층에 닿자 GS25 유리문 밖 운동장의 형체들이 이쪽으로 고개를 돌린다. 창고 안에서 젊은 목소리가 들어오지 말라고 한다.",
+      "a": "진열대 뒤에 몸을 숨기고 형체들이 지나가길 기다린다",
+      "b": "창고 문을 열고 알바생에게 같이 나가자고 한다",
+      "prompt_en": "A convenience store interior at night seen from behind a shelf, a wide glass front door facing a dark sports field where slow silhouettes turn toward the light, a closed storage room door at the back, no text."
+    },
+    {
+      "key": "AAAAA",
+      "place": "운동장 → 김수환관 트러스트짐 입구",
+      "text": "기다린 끝에 알바생이 물 두 병과 랜턴을 셔터 틈으로 건네고 자신은 남았다. 아주머니를 부축해 운동장 가장자리를 돌아 김수환관에 닿았다. 트러스트짐 문은 기구로 막혀 있고 안에서 남자 목소리가 누구냐고 묻는다.",
+      "a": "랜턴을 끄고 관장이 확인할 때까지 벽에 붙어 기다린다",
+      "b": "기구 틈을 밀어 열고 아주머니를 먼저 안으로 들여보낸다",
+      "prompt_en": "The entrance of a campus gym at night, glass doors barricaded from inside with weight benches and racks, a faint lantern glow on the ground, two figures from behind, one leaning on the other, a dark sports field behind them, no text."
+    },
+    {
+      "key": "AAAAB",
+      "place": "운동장 → 김수환관 트러스트짐 입구",
+      "text": "셔터를 올리는 소리에 알바생이 창고에서 뛰쳐나왔다. 화를 내면서도 라면 상자 두 개를 안고 따라나섰다. 셋이 운동장을 가로지르는 동안 형체들이 GS25 쪽으로 몰린다. 트러스트짐 문 안쪽에서 관장이 기구를 붙든 채 서 있다.",
+      "a": "상자를 내려놓고 관장이 문을 열어 줄 때까지 기다린다",
+      "b": "상자를 버리고 셋이 기구를 밀어 넘어 들어간다",
+      "prompt_en": "Three silhouettes crossing a dark campus sports field at night carrying cardboard boxes, a lit gym entrance ahead blocked by exercise machines, slow shapes gathering near a distant convenience store glow, no text."
+    },
+    {
+      "key": "AAABA",
+      "place": "운동장 → 김수환관 트러스트짐 입구",
+      "text": "진열대 뒤에서 숨을 죽이자 형체들은 유리문 앞을 느리게 지나갔다. 창고 문이 조금 열리고 알바생이 물 한 병을 굴려 보냈다. 혼자 운동장 100m를 건너 김수환관에 닿았다. 트러스트짐 안쪽에서 손전등 불빛이 당신을 훑는다.",
+      "a": "손전등을 끄고 학생이라고 말한 뒤 제자리에서 기다린다",
+      "b": "기구 틈으로 몸을 밀어 넣어 안으로 들어간다",
+      "prompt_en": "A lone figure from behind standing at a campus gym entrance at night, a flashlight beam from inside cutting through glass doors blocked by weight racks, a single water bottle in hand, a wide dark sports field behind, no text."
+    },
+    {
+      "key": "AAABB",
+      "place": "운동장 → 김수환관 트러스트짐 입구",
+      "text": "창고 문을 열자 알바생은 고개를 저으며 물 두 병과 보조배터리만 쥐여 줬다. 문소리에 형체들이 유리문 앞까지 다가와 당신은 뒷문으로 운동장을 달렸다. 트러스트짐 유리문은 기구로 막혀 있고 안쪽 불은 꺼진 채 라디오 소리만 샌다.",
+      "a": "문 앞에 조용히 앉아 관장이 열어 주기를 기다린다",
+      "b": "유리문을 두드리며 열어 달라고 소리친다",
+      "prompt_en": "A campus gym entrance at night, glass doors blocked from inside by stacked weight racks with the lights off and only a faint radio dial glowing within, a lone figure from behind holding a phone and power bank, slow shapes far across the dark field, no text."
+    },
+    {
+      "key": "BAA",
+      "place": "학관 2층 학생식당 주방",
+      "text": "입구에 선 채 기다리자 가스불 옆에서 한쪽 다리를 끄는 그림자가 나타났다. 식당 아주머니다. 당신을 보고 손가락을 입에 대더니 주방 안으로 손짓한다. 주방 뒷문 너머 계단에서 발 끄는 소리가 올라온다.",
+      "a": "아주머니 곁에 남아 주방 뒷문을 쌀 포대로 막는다",
+      "b": "아주머니에게 1층으로 가는 길만 묻고 바로 내려간다",
+      "prompt_en": "A university cafeteria kitchen at night lit only by a blue gas flame, the silhouette of a woman with a limp beside the stove, rice sacks stacked by a back door, a person's back view in the doorway, no text."
+    },
+    {
+      "key": "BAAA",
+      "place": "학관 1층 GS25 매장",
+      "text": "쌀 포대로 뒷문을 막고 아주머니와 한 시간을 버텼다. 아주머니는 라이터를 쥐여 주며 1층 편의점에서 물을 가져오라 했다. 뒷계단으로 내려온 GS25는 냉장고 불빛만 깜빡이고, 창고 문 안쪽에서 낮은 목소리가 들린다. 문 열지 마세요.",
+      "a": "창고 문 앞에 앉아 낮은 목소리로 안의 사람을 설득한다",
+      "b": "진열대에서 물과 라면만 챙겨 바로 매장을 나간다",
+      "prompt_en": "A dark convenience store interior at night, flickering refrigerator light on empty aisles, a closed storage room door with a thin strip of light beneath it, a person's silhouette crouching before the door, no text."
+    },
+    {
+      "key": "BAAB",
+      "place": "학관 1층 GS25 매장",
+      "text": "아주머니는 식기 반납구 옆 계단을 가리키며 편의점 알바생이 창고에 있을 거라 했다. 계단 끝 문이 뒤틀려 있어 몸을 비틀어 빠져나오니 GS25다. 유리문 밖에 형체 셋이 붙어 서 있고, 창고 문 안쪽에서 무언가 두드리는 소리가 난다.",
+      "a": "카운터 뒤에 숨어 유리문 밖 형체가 흩어지길 기다린다",
+      "b": "매장 뒤 납품구 문을 열고 운동장 쪽으로 나간다",
+      "prompt_en": "A convenience store at night seen from inside, three slow humanoid shapes pressed against the glass front door under a streetlight, overturned shelves, a person hiding behind the counter, no text."
+    },
+    {
+      "key": "BAAAA",
+      "place": "운동장 → 김수환관 트러스트짐 입구",
+      "text": "설득 끝에 창고 문이 열렸다. 알바생은 물과 손전등을 내밀며 김수환관 쪽에서 불빛이 깜빡였다고 했다. 납품구로 나와 운동장 가장자리를 돌아 트러스트짐 앞에 닿았다. 유리문 안쪽에 기구가 쌓여 있고, 너머로 불빛 하나가 움직인다.",
+      "a": "손전등을 두 번 깜빡여 신호를 보내고 벽에 붙어 기다린다",
+      "b": "유리문을 두드려 안에 있는 사람을 부른다",
+      "prompt_en": "A dark campus sports field at night, wet grass under moonlight, a person's back view holding a flashlight approaching a glass gym entrance barricaded with weight machines, a faint light moving inside, no text."
+    },
+    {
+      "key": "BAAAB",
+      "place": "운동장 → 김수환관 트러스트짐 입구",
+      "text": "물과 라면을 가방에 넣고 나오는 동안 창고 안의 목소리는 끝내 멎지 않았다. 운동장을 건너는데 라면 봉지가 부스럭거려 정문 쪽 형체가 고개를 돌렸다. 트러스트짐 유리문은 안쪽에서 벤치로 막혀 있고, 뒤에 남자 그림자가 서 있다.",
+      "a": "가방을 내려놓고 문 옆에 조용히 앉아 날이 밝길 기다린다",
+      "b": "옆쪽 창고 창문을 밀어 열고 안으로 기어 들어간다",
+      "prompt_en": "A glass gym entrance at night blocked from inside by a bench press and dumbbell racks, a man's silhouette standing behind it, a person with a heavy backpack outside, a wide dark sports field behind, no text."
+    },
+    {
+      "key": "BAABA",
+      "place": "운동장 → 김수환관 트러스트짐 입구",
+      "text": "카운터 뒤에서 이십 분을 숨자 형체들은 흩어졌고, 그제야 창고 문이 열려 알바생이 나왔다. 그는 나가지 않겠다며 손전등만 건넸다. 납품구로 나온 운동장은 안개가 깔려 있고, 반대편 김수환관 유리문 안에서 라디오 소리가 새어 나온다.",
+      "a": "관중석 아래 어둠을 따라 운동장 가장자리로 돌아간다",
+      "b": "운동장 한가운데를 가로질러 곧장 뛴다",
+      "prompt_en": "A fog-covered university sports field at night, empty bleachers casting deep shadows, a distant gym building with a faint glow in its glass door, a person's silhouette at the field's edge holding a flashlight, no text."
+    },
+    {
+      "key": "BAABB",
+      "place": "운동장 → 김수환관 트러스트짐 입구",
+      "text": "납품구 문을 열자 바로 앞에 형체 하나가 서 있었다. 몸을 돌려 운동장으로 뛰었고, 형체는 느리게 따라온다. 숨을 몰아쉬며 트러스트짐 앞에 닿았을 때 유리문은 쇠사슬로 잠겨 있었다. 뒤를 보니 형체가 삼십 걸음 뒤까지 왔다.",
+      "a": "입구 옆 계단 밑으로 숨어 따라온 형체를 따돌린다",
+      "b": "유리문을 두드리며 안에 있는 사람에게 열어 달라 외친다",
+      "prompt_en": "A chained glass gym entrance at night, a person's back view pressed against it, a single slow humanoid shape crossing the dark sports field thirty steps behind, sodium streetlight, no text."
+    },
+    {
+      "key": "ABB",
+      "place": "학관 2층 식당 주방",
+      "text": "주방 문을 밀고 들어서자 다리를 절며 서 있던 아주머니가 당신 뒤로 문을 걸어 잠근다. 문 너머로 느린 발소리가 다가와 멈춘다. 그녀는 쌀 포대 쪽을 가리키고, 반대편 구석에는 1층으로 내려가는 배식 계단이 있다.",
+      "a": "쌀 포대로 문을 막고 아주머니와 함께 숨을 죽인다",
+      "b": "아주머니를 부축해 배식 계단으로 지금 내려간다",
+      "prompt_en": "A dark commercial kitchen at night, stacked rice sacks against a steel door, a gas stove with a faint blue pilot flame, a narrow service stairway in the far corner, a limping figure seen from behind, no text."
+    },
+    {
+      "key": "ABBA",
+      "place": "학관 1층 GS25 창고 앞",
+      "text": "포대 뒤에서 한 시간을 버티자 문을 긁던 소리가 홀 쪽으로 사라졌다. 아주머니는 다리를 가리키며 먼저 가라고 손전등을 쥐여 준다. 배식 계단 끝 GS25 창고 문 안쪽에서 낮은 목소리가 들린다. 문 열지 마세요.",
+      "a": "창고 문 앞에서 이름을 밝히고 알바생의 대답을 기다린다",
+      "b": "창고를 지나쳐 셔터가 반쯤 열린 매장으로 들어간다",
+      "prompt_en": "The bottom of a dim service stairwell at night, a closed storage room door with a thin line of light underneath, a half-lowered convenience store shutter glowing with refrigerator light beyond, a flashlight beam on the floor, no text."
+    },
+    {
+      "key": "ABBB",
+      "place": "학관 1층 GS25 창고 앞",
+      "text": "아주머니를 부축해 배식 계단을 한 칸씩 내려왔다. 그녀의 무게에 어깨가 저리고 계단참마다 숨을 골라야 했다. 1층 GS25 창고 문은 잠겨 있고, 매장 쪽 셔터 틈으로 냉장고 불빛이 새어 나온다.",
+      "a": "아주머니를 창고 문 옆에 앉히고 셔터 틈으로 매장을 살핀다",
+      "b": "셔터를 들어 올리고 아주머니와 함께 매장으로 들어간다",
+      "prompt_en": "A narrow service stairwell landing at night, two silhouettes leaning on each other from behind, a locked storage door, a partly lowered metal shutter with cold fridge light leaking through the gap, no text."
+    },
+    {
+      "key": "ABBAA",
+      "place": "운동장 → 김수환관 트러스트짐 입구",
+      "text": "이름을 밝히자 창고 문이 조금 열리고 야간 알바생이 물병 두 개를 건넨다. 그는 나가지 않겠다며 김수환관에 불이 켜져 있었다고만 말한다. 운동장을 건너 트러스트짐 입구에 닿았다. 안쪽에 기구가 쌓여 있고 그 너머로 그림자가 움직인다.",
+      "a": "손전등을 끄고 입구 옆 벽에 붙어 아침까지 기다린다",
+      "b": "기구 사이 틈으로 관장을 부르며 안으로 밀고 들어간다",
+      "prompt_en": "A dark sports field at night crossed by a single figure seen from behind carrying two water bottles, a gym building entrance ahead with barbell racks and benches stacked behind glass doors, a faint light inside, no text."
+    },
+    {
+      "key": "ABBAB",
+      "place": "운동장 → 김수환관 트러스트짐 입구",
+      "text": "셔터 아래를 지나자 매장 도어벨이 울렸다. 선반에서 물과 초코바를 쓸어 담는 사이 유리창 너머 형체 둘이 이쪽으로 몸을 돌린다. 운동장을 가로질러 트러스트짐 입구에 닿았지만 안쪽은 기구로 막혀 있고 뒤에서 발소리가 따라온다.",
+      "a": "손전등을 끄고 입구 옆 기둥 그늘에 몸을 붙여 숨을 죽인다",
+      "b": "기구를 두드리며 관장을 크게 부른다",
+      "prompt_en": "A gym entrance at night blocked by stacked weight racks behind glass doors, a running figure seen from behind reaching the doors, two slow silhouettes far back on a dark sports field, a convenience store glowing at the field's edge, no text."
+    },
+    {
+      "key": "ABBBA",
+      "place": "운동장 → 김수환관 트러스트짐 입구",
+      "text": "셔터 틈으로 본 매장은 비어 있었다. 아주머니가 창고 문을 두드리자 알바생이 문을 열어 그녀를 받아들인다. 두 사람이 남고 당신 혼자 운동장으로 나선다. 트러스트짐 유리문 안쪽에 랙과 벤치가 쌓여 있고 라디오 소리가 새어 나온다.",
+      "a": "유리문을 두 번만 두드리고 물러나 대답을 기다린다",
+      "b": "쌓인 기구 옆 틈으로 몸을 밀어 넣어 안으로 들어간다",
+      "prompt_en": "A lone figure seen from behind standing before a gym's glass doors at night, weight racks and benches piled inside, a small radio glowing on the floor within, an empty dark sports field behind, no text."
+    },
+    {
+      "key": "ABBBB",
+      "place": "운동장 → 김수환관 트러스트짐 입구",
+      "text": "셔터를 올리는 소리에 창고 안 알바생이 문 열지 말라고 소리친다. 아주머니는 선반에서 붕대와 진통제를 챙긴다. 운동장을 절반쯤 건넜을 때 뒤에서 형체 하나가 따라붙는다. 트러스트짐 입구는 기구로 막혀 있고 아주머니는 더 걷지 못한다.",
+      "a": "아주머니를 벽에 기대 앉히고 입구 앞에서 함께 형체를 지켜본다",
+      "b": "아주머니를 업고 기구 틈을 비집어 안으로 밀고 들어간다",
+      "prompt_en": "A gym entrance at night, one silhouette slumped against the wall beside glass doors blocked by stacked gym equipment, another figure standing guard seen from behind, a single slow shape approaching across the dark field, no text."
+    },
+    {
+      "key": "BBB",
+      "place": "학관 2층 학생식당 주방",
+      "text": "문을 놓자 철문이 밀리며 형체 둘이 홀로 들어섰다. 당신은 아주머니를 부축해 주방으로 뛰어들고 배식구 셔터를 내린다. 쌀 포대와 가스레인지. 아주머니가 다친 다리를 짚고 같이 버티자고 한다. 셔터 너머에서 더듬는 소리.",
+      "a": "쌀 포대를 셔터 앞에 쌓고 주방 안에서 버틴다",
+      "b": "주방 뒷문의 배식용 계단으로 아주머니와 함께 1층으로 내려간다",
+      "prompt_en": "A dark cafeteria kitchen at night, a lowered serving shutter with shadows moving beyond it, stacked rice sacks and a gas range, a person's back view supporting a limping figure, faint blue light from a phone, no text."
+    },
+    {
+      "key": "BBBA",
+      "place": "학관 1층 GS25 매장",
+      "text": "쌀 포대를 쌓고 한 시간 버티자 셔터 소리가 잦아들었다. 아주머니는 다리가 부어 걸을 수 없다. 붕대와 물을 부탁받고 뒷계단으로 1층 GS25에 내려선다. 매장은 냉장고 불빛뿐. 창고 문 안쪽의 젊은 목소리가 문 열지 말라고 한다.",
+      "a": "창고 문을 건드리지 않고 진열대의 붕대와 생수만 챙긴다",
+      "b": "창고 문에 대고 아주머니 사정을 말하며 열어 달라고 한다",
+      "prompt_en": "An empty convenience store at night lit only by refrigerator glow, toppled snack shelves, a closed stockroom door at the back, a person's silhouette crouching by a first-aid shelf, no text."
+    },
+    {
+      "key": "BBBB",
+      "place": "학관 1층 GS25 매장",
+      "text": "뒷계단을 내려오는 동안 아주머니의 발이 계단마다 끌렸다. 1층 GS25 매장에 들어서자 아주머니가 카운터에 주저앉는다. 창고 문 안쪽에서 누구냐고, 문 열지 말라고 하는 젊은 목소리. 방금 내려온 계단에서 발 끄는 소리가 따라온다.",
+      "a": "카운터 뒤에 아주머니와 함께 숨어 계단 소리가 지나가길 기다린다",
+      "b": "창고 문을 두드려 알바생을 설득하고 아주머니를 안으로 들여보낸다",
+      "prompt_en": "A convenience store interior at night, a limping figure slumped against the counter seen from behind, a person's silhouette at the stockroom door, a dark stairwell doorway behind them, refrigerator light casting long shadows, no text."
+    },
+    {
+      "key": "BBBAA",
+      "place": "운동장 → 김수환관 트러스트짐 입구",
+      "text": "붕대와 생수를 챙겨 뒷계단으로 돌아섰지만 계단참에 형체 하나가 서 있다. 주방으로 올라갈 길이 막혔다. 당신은 GS25 옆 비상구로 나와 운동장 가장자리에 선다. 100m 앞 김수환관 유리문 안에서 손전등 불빛 하나가 흔들린다.",
+      "a": "스탠드 그늘을 따라 몸을 낮추고 천천히 돌아간다",
+      "b": "운동장 한가운데를 곧장 가로질러 달린다",
+      "prompt_en": "A wide dark university sports field at night, a person's back view at the edge holding a water bottle and bandage roll, a distant glass entrance of a gym building with one flashlight beam inside, slow shapes scattered on the far track, no text."
+    },
+    {
+      "key": "BBBAB",
+      "place": "운동장 → 김수환관 트러스트짐 입구",
+      "text": "창고 문이 조금 열리고 알바생이 구급상자와 손전등을 내민다. 김수환관에 관장님이 남아 있다고 속삭인 뒤 문이 닫힌다. 노크 소리에 형체들이 매장 유리문에 몰려들어 당신은 창고 뒤 하역구로 빠져나온다. 김수환관까지 100m.",
+      "a": "손전등을 끄고 담장을 따라 소리 없이 이동한다",
+      "b": "손전등을 켜 김수환관 쪽에 신호를 보내며 달린다",
+      "prompt_en": "A loading dock behind a campus building opening onto a dark sports field at night, a person's silhouette holding a flashlight and a small first-aid box, a gym building across the field with faint light, shapes pressing against a store's glass front to the side, no text."
+    },
+    {
+      "key": "BBBBA",
+      "place": "운동장 → 김수환관 트러스트짐 입구",
+      "text": "카운터 뒤에 숨은 사이 형체 둘이 매장을 지나 자동문 밖으로 나갔다. 조용해지자 창고 문이 열리고 알바생이 아주머니를 안으로 들인다. 아주머니가 당신 등을 밀며 김수환관에 정말 사람이 있는지 보고 오라고 한다. 운동장 100m.",
+      "a": "운동장 옆 스탠드 아래로 몸을 숨기며 돌아간다",
+      "b": "형체들이 향한 쪽을 피하지 않고 최단 거리로 달린다",
+      "prompt_en": "A convenience store doorway opening onto a dark campus field at night, a person's back view stepping out alone, behind them a half-open stockroom door with two figures inside in silhouette, a gym building far across the field, no text."
+    },
+    {
+      "key": "BBBBB",
+      "place": "운동장 → 김수환관 트러스트짐 입구",
+      "text": "알바생이 아주머니를 들이고 라면 상자 사이에서 꺼낸 하역구 열쇠를 건넨다. 하역구를 나와 운동장을 뛰어 건넜다. 트러스트짐 유리문은 안쪽에서 러닝머신으로 막혀 있고 그 뒤에 라디오를 든 남자의 실루엣. 형체들이 이쪽으로 방향을 튼다.",
+      "a": "문을 두드리지 않고 유리에 열쇠를 비추며 관장이 알아채길 기다린다",
+      "b": "막힌 유리문을 흔들며 관장을 큰 소리로 부른다",
+      "prompt_en": "A gym entrance at night, glass doors blocked from inside by a treadmill and dumbbell racks, a man's silhouette holding a radio behind the glass, a person's back view at the door with a key in hand, slow shapes turning on the field behind, no text."
+    },
+    {
+      "key": "ABA",
+      "place": "학관 2층 학생식당 주방 앞",
+      "text": "테이블 아래에서 숨을 죽인 덕에 형체 둘은 한참 서성이다 쇠문 쪽으로 몸을 돌려 복도로 나갔다. 홀이 비자 주방 문 틈으로 손전등 빛이 새어 나온다. 아주머니가 다리를 절며 문을 조금 열고 이쪽으로 손짓한다.",
+      "a": "몸을 낮춘 채 주방으로 기어가 아주머니와 문을 잠근다",
+      "b": "손짓을 뒤로하고 홀 반대편 1층 계단으로 내려간다",
+      "prompt_en": "An empty dark cafeteria hall at night, overturned chairs and long tables, a kitchen door slightly open with a warm flashlight beam spilling across the floor, a limping figure's silhouette in the doorway, no text."
+    },
+    {
+      "key": "ABAA",
+      "place": "학관 1층 GS25 매장",
+      "text": "주방에서 아주머니 다리에 행주를 감아 주고 손전등을 받았다. 창밖 김수환관에 불이 켜져 있다며 뒷계단을 가리켰다. 내려온 GS25는 셔터가 반쯤 닫혀 있고 냉장고 불빛만 창백하다. 창고 안쪽에서 상자 옮기는 소리가 났다가 멈춘다.",
+      "a": "셔터 안쪽에 웅크려 창고 소리가 다시 나기를 기다린다",
+      "b": "창고 문을 두드리며 학생이라고 작게 말한다",
+      "prompt_en": "A convenience store interior at night with the front shutter half lowered, pale refrigerator light on scattered shelves, a closed storeroom door at the back, a crouching silhouette holding a small flashlight, no text."
+    },
+    {
+      "key": "ABAB",
+      "place": "학관 1층 GS25 매장",
+      "text": "손짓을 외면하고 계단을 내려오자 1층 로비는 유리문 너머 운동장까지 보였다. GS25 유리벽에 금이 가 있고 진열대는 쓰러져 있다. 로비 바깥 형체 하나가 유리에 이마를 대고 서 있고, 계산대 뒤 창고 문 아래로 빛이 샌다.",
+      "a": "쓰러진 진열대 뒤에 엎드려 형체가 떠나기를 기다린다",
+      "b": "창고 문 손잡이를 돌려 안으로 들어간다",
+      "prompt_en": "A dark building lobby at night with a cracked glass wall of a convenience store, toppled shelves inside, a slow silhouette pressing against the glass from outside, a thin line of light under a storeroom door, no text."
+    },
+    {
+      "key": "ABAAA",
+      "place": "운동장 → 김수환관 트러스트짐 입구",
+      "text": "기다린 끝에 창고 문이 손가락만큼 열리고 물 두 병이 바닥으로 밀려 나왔다. 문 열지 말라는 목소리가 뒷문을 알려 주었다. 운동장은 넓고 조용했고, 100m 앞 트러스트짐 입구는 쇠기구로 막혀 있다. 안쪽에서 누군가 이쪽을 본다.",
+      "a": "입구 앞 어둠에 멈춰 서서 안에서 먼저 알아채기를 기다린다",
+      "b": "쇠기구를 두드리며 안쪽 사람을 부른다",
+      "prompt_en": "A wide dark sports field at night under a thin moon, a lone silhouette walking toward a low building whose glass entrance is barricaded with gym equipment, a faint light inside, no text."
+    },
+    {
+      "key": "ABAAB",
+      "place": "운동장 → 김수환관 트러스트짐 입구",
+      "text": "문을 두드리자 안에서 상자 넘어지는 소리가 났고 셔터 밖 발소리가 멈췄다. 알바생이 문을 열고 라면 한 상자를 안기며 뒷문으로 당신을 밀어냈다. 운동장으로 나오니 형체들이 셔터 쪽으로 몰려가고, 김수환관 2층 창에 불이 보인다.",
+      "a": "운동장 가장자리 나무 그늘에 붙어 천천히 돌아간다",
+      "b": "운동장 한가운데를 가로질러 전력으로 달린다",
+      "prompt_en": "A night sports field seen from its edge, a row of dark trees along one side, a silhouette carrying a cardboard box, slow shapes gathering near a lit convenience store shutter in the distance, a building with one lit window ahead, no text."
+    },
+    {
+      "key": "ABABA",
+      "place": "운동장 → 김수환관 트러스트짐 입구",
+      "text": "엎드려 기다린 끝에 형체가 유리에서 떨어져 사라졌다. 물 한 병과 초코바를 챙기자 창고 문 아래 빛이 꺼졌다. 안쪽 사람이 당신 기척에 숨은 것이다. 로비 옆문으로 나온 운동장 끝, 트러스트짐 입구에서 손전등 빛이 당신을 비춘다.",
+      "a": "손전등 빛 앞에 멈춰 서서 두 손을 들어 보인다",
+      "b": "빛을 향해 곧장 달려가 기구 틈으로 손을 넣는다",
+      "prompt_en": "A dark sports field at night, a single strong flashlight beam shining out from a barricaded gym entrance toward a lone figure standing in the open, long shadows on the ground, no text."
+    },
+    {
+      "key": "ABABB",
+      "place": "운동장 → 김수환관 트러스트짐 입구",
+      "text": "창고 문을 열자 소화기를 든 알바생이 물러섰다. 물 한 병을 건네며 김수환관으로 뛰어간 사람들을 봤다고 했다. 유리에 둔탁한 소리가 나자 그는 뒷문을 열고 다시 잠갔다. 운동장 건너 트러스트짐 문이 기구를 치운 채 닫히고 있다.",
+      "a": "닫히는 문 앞에서 멈춰 안에 사람이 있다고 말한다",
+      "b": "닫히기 전에 문틈으로 몸을 밀어 넣는다",
+      "prompt_en": "A gym entrance at night with gym equipment shoved aside, a glass door slowly closing with dim light inside, a running silhouette approaching across a dark field, no text."
+    },
+    {
+      "key": "BBA",
+      "place": "학관 2층 학생식당 주방",
+      "text": "등으로 버티는 사이 아주머니가 절뚝이며 다가와 식탁을 함께 문 앞에 밀어 세웠다. 긁는 소리가 잦아들자 아주머니는 당신을 주방으로 이끈다. 쌀 포대와 가스레인지, 뒷문 너머로 1층 내려가는 좁은 계단이 보인다.",
+      "a": "행주로 아주머니 다리를 싸매고 함께 내려갈 채비를 한다",
+      "b": "아주머니에게 먼저 가겠다고 말하고 뒷계단을 혼자 내려간다",
+      "prompt_en": "A dark university cafeteria kitchen at night, stacked rice sacks and a gas stove, a limping figure silhouetted against a back door opening onto a narrow stairwell, a small flashlight beam on steel counters, no text."
+    },
+    {
+      "key": "BBAA",
+      "place": "학관 1층 GS25 매장",
+      "text": "행주로 다리를 묶은 아주머니가 당신 어깨에 기대 계단을 한 칸씩 내려온다. GS25 매장은 진열대가 쓰러져 있고 창고 문 안쪽에서 낮은 목소리가 들린다. 문 열지 마세요. 유리창 밖 운동장에 형체 하나가 서 있다.",
+      "a": "쓰러진 진열대 뒤에 아주머니와 숨어 창고에 속삭여 답한다",
+      "b": "창고 문을 두드려 안의 알바생에게 문을 열라고 설득한다",
+      "prompt_en": "A dark convenience store interior at night, toppled shelves and scattered snacks, two crouching silhouettes behind a shelf, a closed storeroom door with a thin line of light beneath it, a slow shape standing outside the glass front, no text."
+    },
+    {
+      "key": "BBAB",
+      "place": "학관 1층 GS25 매장",
+      "text": "아주머니는 말리지 않고 주방 라이터를 쥐여 줬다. 혼자 뒷계단을 뛰어 내려와 GS25로 들어서다 쓰러진 진열대에 걸려 요란한 소리를 냈다. 창고 안에서 누군가 속삭인다. 문 열지 마세요. 유리창 밖 형체가 이쪽으로 고개를 돌린다.",
+      "a": "계산대 아래로 기어들어가 형체가 지나가길 기다린다",
+      "b": "물과 라면을 가방에 쓸어 담고 비상구로 빠져나간다",
+      "prompt_en": "A dark convenience store at night, a person's back view crouched beside a fallen shelf, a small lighter flame, a closed storeroom door, a humanoid shape turning toward the glass front from the dark field outside, no text."
+    },
+    {
+      "key": "BBAAA",
+      "place": "운동장 → 김수환관 트러스트짐 입구",
+      "text": "속삭임에 창고 문이 조금 열리고 알바생이 손전등과 물 두 병을 내밀었다. 셋이 형체가 멀어지길 기다렸다 뒷문으로 나선다. 운동장 100m를 아주머니 걸음에 맞춰 건너자 트러스트짐 입구에 기구가 쌓여 있고 관장이 틈으로 내다본다.",
+      "a": "입구 앞에 멈춰 관장이 기구를 치울 때까지 조용히 기다린다",
+      "b": "옆 창문을 두드리며 관장에게 빨리 열라고 소리친다",
+      "prompt_en": "A dark campus sports field at night, three silhouettes crossing slowly toward a gym building, one supported between the others, a flashlight beam on grass, a gym entrance barricaded with weight machines and a figure peering through the gap, no text."
+    },
+    {
+      "key": "BBAAB",
+      "place": "운동장 → 김수환관 트러스트짐 입구",
+      "text": "두드림 끝에 창고 문이 열렸지만 그 소리에 밖의 형체가 다가왔다. 알바생이 물 상자를 안고 먼저 뛰고 당신은 아주머니를 부축해 나온다. 운동장 한가운데서 아주머니 걸음이 멎는다. 앞에선 알바생이 손짓하고 뒤에선 형체들이 따라온다.",
+      "a": "아주머니와 관중석 아래로 숨어 형체들이 흩어지길 기다린다",
+      "b": "아주머니를 업고 트러스트짐 입구까지 남은 거리를 달린다",
+      "prompt_en": "A wide dark sports field at night, a person's back view supporting a limping figure midway across, a distant gym doorway with a small waving silhouette, several slow shapes emerging from a building behind, low moonlight, no text."
+    },
+    {
+      "key": "BBABA",
+      "place": "운동장 → 김수환관 트러스트짐 입구",
+      "text": "계산대 아래에서 형체가 유리창을 스쳐 가는 소리를 들었다. 잠잠해지자 창고에서 나온 알바생이 손전등을 건네며 혼자냐고 묻는다. 2층에 아주머니가 있다고 하자 입을 다문다. 둘이 운동장을 건너자 관장이 기구 틈으로 둘뿐이냐고 묻는다.",
+      "a": "관장에게 아주머니 이야기를 전하고 셋이서 아침까지 기다린다",
+      "b": "알바생을 들여보내고 혼자 학관으로 아주머니를 데리러 돌아간다",
+      "prompt_en": "A dark gym entrance at night blocked by stacked weight machines, two silhouettes standing before the gap with a flashlight pointed down, a figure inside peering out, the dark student hall visible far across the field behind them, no text."
+    },
+    {
+      "key": "BBABB",
+      "place": "운동장 → 김수환관 트러스트짐 입구",
+      "text": "가방에 물과 라면을 쓸어 담고 비상구를 밀자 경보음이 울렸다. 창고 안 목소리는 돌아보지 않았다. 형체들이 경보음 쪽으로 몰리는 사이 반대편으로 100m를 달려 트러스트짐 입구에 닿는다. 기구 너머에서 관장이 누구냐고 묻는다.",
+      "a": "가방을 내려놓고 벽에 붙어 관장이 확인할 때까지 숨죽인다",
+      "b": "기구 틈을 비집고 몸을 밀어 넣어 안으로 들어간다",
+      "prompt_en": "A dark campus field at night, a lone running silhouette with a heavy backpack heading toward a gym, a convenience store behind with its emergency exit flashing red and slow shapes drifting toward it, no text."
+    }
+  ],
+  "endings": [
+    {
+      "key": "AABAAA",
+      "title": "쌀 냄새 나는 아침",
+      "text": "벽을 따라 도착한 입구에서 관장이 러닝머신을 조금 밀어 당신을 들인다. 라디오는 아침 일곱 시 정문 구조를 반복한다. 아주머니 다리 이야기를 하자 관장은 말없이 벤치 판을 떼어 낸다. 새벽에 둘이서 학관 2층으로 올라가니 주방에는 밥이 다 되어 있고 아주머니는 국자를 쥔 채 졸고 있다. 벤치 판에 태워 내려온 세 사람이 정문 버스에 오른다. 손에는 아직 밥 냄새가 남아 있다."
+    },
+    {
+      "key": "AABAAB",
+      "title": "유리문 너머의 밤",
+      "text": "운동장을 뛰는 발소리에 형체들이 방향을 튼다. 관장이 문을 열어 당신을 잡아당기고 러닝머신을 다시 민다. 밤새 유리문에 형체들이 몸을 부딪힌다. 라디오는 정문 구조를 말하지만 학관으로 돌아갈 길은 없다. 아침에 관장과 정문으로 가는 길, 학관 2층 창문에 가스레인지 불빛이 아직 켜져 있는 것이 보인다. 당신은 진통제를 전해 준 것으로 약속을 반쯤은 지켰다고 생각하기로 한다."
+    },
+    {
+      "key": "AABABA",
+      "title": "돌아보지 않은 셔터",
+      "text": "뒷벽에 붙어 기다리자 형체들은 편의점 유리문 쪽으로 몰려가 안을 들여다본다. 그 틈에 운동장을 돌아 헬스장 입구에 닿았고 관장이 당신을 들였다. 라디오는 정문 구조를 말한다. 아침에 정문으로 가는 길, 학관 1층 GS25 셔터는 끝까지 내려져 있고 유리문 앞에 라면 봉지만 남아 있다. 창고의 속삭임이 셔터를 내렸는지 다른 무엇이 내렸는지 당신은 끝내 확인하지 않는다. 가방 속 진통제는 그대로다."
+    },
+    {
+      "key": "AABABB",
+      "title": "정문의 첫 버스",
+      "text": "던진 물병이 스탠드에 부딪히자 형체들이 그쪽으로 몰린다. 입구까지 뛰었지만 관장은 러닝머신을 밀어 낼 시간이 없다며 유리 너머로 정문을 가리킨다. 당신은 김수환관을 돌아 정문 경비실 뒤에 웅크린다. 큰길 쪽에서 밤새 무언가 지나가는 소리가 난다. 여섯 시, 헤드라이트를 끈 버스가 정문에 선다. 당신은 첫 번째로 오른다. 가방 속 진통제는 결국 누구에게도 가지 못했다."
+    },
+    {
+      "key": "AABBAA",
+      "title": "네 사람의 정문",
+      "text": "낮게 두드린 유리 너머에서 관장이 러닝머신을 밀고 둘을 들인다. 라디오는 일곱 시 정문 구조를 반복한다. 알바생이 2층 아주머니 이야기를 꺼내자 관장은 새벽에 들르자고 한다. 동이 트기 전 셋이 학관 2층으로 올라가 밥솥 옆에 졸고 있는 아주머니를 벤치 판에 태운다. 운동장을 가로지르는 네 사람 위로 하늘이 회색으로 밝아 온다. 정문 버스 안에서 아주머니가 주먹밥 네 개를 꺼내 나눈다."
+    },
+    {
+      "key": "AABBAB",
+      "title": "셔터에 붙은 쪽지",
+      "text": "러닝머신을 밀자 쇠 끌리는 소리가 운동장에 퍼진다. 관장이 문틈으로 당신만 끌어들이고 다시 문을 막는다. 뒤따라오던 알바생은 몸을 돌려 학관 쪽으로 사라졌다. 밤새 유리에 그림자가 스친다. 아침에 관장과 정문으로 가는 길에 GS25 셔터가 다시 내려져 있고 그 위에 종이 한 장이 붙어 있다. 안에 있음, 문 열지 마세요. 당신은 셔터를 두 번 두드리고 정문으로 걷는다. 뒤에서 두 번 두드리는 소리가 돌아온다."
+    },
+    {
+      "key": "AABBBA",
+      "title": "관중석 아래 새벽",
+      "text": "관중석 아래 그늘에 엎드리자 형체 셋이 트랙을 따라 지나간다. 발 끄는 소리가 머리 위 계단을 오르내리는 동안 당신은 물병 하나를 끌어안고 숨을 죽인다. 김수환관 입구의 손전등은 새벽 다섯 시에 꺼진다. 여섯 시, 관장이 라디오를 들고 나와 정문으로 걷는 것이 보인다. 당신은 서른 걸음 뒤에서 따라간다. 정문 버스에 올라 첫 물을 마실 때까지 관장은 당신이 있는 줄 모른다."
+    },
+    {
+      "key": "AABBBB",
+      "title": "다섯 병의 물",
+      "text": "백 미터를 달리는 동안 형체들의 방향이 바뀐다. 문을 두드리자 관장이 러닝머신을 한 뼘 밀고 당신은 가방째 틈으로 미끄러진다. 밤새 유리문에 형체들이 부딪히지만 러닝머신은 버틴다. 관장이 가방을 열어 물병을 센다. 다섯 병이면 둘이 이틀은 버틴다고 한다. 라디오는 구조가 오늘이 아니라 내일 아침이라고 정정한다. 당신은 편의점 창고의 목소리를 떠올리며 물 한 병을 따로 놓아 둔다."
+    },
+    {
+      "key": "BABAAA",
+      "title": "관중석의 새벽",
+      "text": "관중석 그늘을 따라 돌아 트러스트짐 뒷문에 닿았다. 관장이 기구를 밀어 틈을 내주고, 당신은 라면 봉지를 내려놓는다. 관장은 라디오에서 구조가 온다는 말을 들었다며 아침에 같이 정문으로 가자고 한다. 창밖 운동장의 형체들은 관중석 쪽을 한 번도 보지 않았다. 식당 아주머니가 남긴 손전등이 새벽까지 켜져 있었고, 당신은 그것을 끄지 않았다."
+    },
+    {
+      "key": "BABAAB",
+      "title": "셔터 너머의 손",
+      "text": "잔디를 가로지르는 동안 형체 셋이 동시에 고개를 돌렸다. 트러스트짐 입구에 닿아 셔터 아래로 몸을 밀어 넣자 관장이 셔터를 내렸다. 숨을 고르기도 전에 셔터 밖에 손바닥이 붙는 소리가 하나, 둘, 셋 이어진다. 관장은 아침에 정문으로 가자던 계획을 접고 라디오 볼륨을 줄인다. 당신은 아주머니가 준 라면을 셔터 소리에 맞춰 천천히 씹으며 새벽을 기다린다."
+    },
+    {
+      "key": "BABABA",
+      "title": "뒷문 안의 두 사람",
+      "text": "뒷문 안에서 알바생과 나란히 앉아 형체가 입구를 떠나기를 기다렸다. 한 시간이 지나 형체는 운동장 반대편으로 사라졌고, 둘은 소리 없이 잔디를 건너 트러스트짐 셔터를 두드렸다. 관장은 두 사람을 들이며 물 상자를 보고 처음으로 웃었다. 아침이 오면 셋이 정문으로 간다. 알바생은 창고에 두고 온 남은 라면 상자 이야기를 하다가 관장의 매트 위에서 잠들었다."
+    },
+    {
+      "key": "BABABB",
+      "title": "돌 하나의 대가",
+      "text": "알바생이 던진 돌이 학관 벽에 부딪혀 크게 울렸다. 입구 앞 형체는 소리 쪽으로 돌아섰지만, 운동장 구석에 있던 다른 형체들도 함께 고개를 들었다. 둘은 셔터 아래로 굴러 들어갔고, 알바생은 배낭 끈이 셔터에 걸려 물 상자를 잃었다. 관장은 셔터 밖에 모인 형체 수를 세다가 그만두었다. 새벽 라디오는 구조 이야기 대신 잡음만 낸다. 그래도 세 사람은 살아 있다."
+    },
+    {
+      "key": "BABBAA",
+      "title": "벤치에 남긴 약속",
+      "text": "형체들이 라디오 소리에 몰린 사이 운동장 가장자리를 돌아 트러스트짐 옆문에 닿았다. 관장은 라디오를 끄고 당신을 들였다. 창밖으로 GS25 앞 벤치는 보이지 않는다. 관장은 아침에 정문으로 가자고 했지만, 당신은 벤치에 남은 아주머니를 먼저 데리러 가겠다고 답한다. 관장이 말없이 기구 하나를 옆으로 밀어 문을 조금 넓혀 둔다. 새벽까지 두 사람은 그 문을 번갈아 지킨다."
+    },
+    {
+      "key": "BABBAB",
+      "title": "정문 앞, 혼자",
+      "text": "라디오 소리를 향해 곧장 달려 문을 두드렸지만, 소리에 몰린 형체들이 당신 등 뒤까지 따라와 있었다. 안에서 관장이 문을 열 수 없다고 외쳤다. 당신은 김수환관 벽을 따라 내리막을 달려 정문까지 왔다. 정문 밖 도로는 텅 비어 있고 가로등 하나만 깜빡인다. 폰 배터리는 3%. 뒤편 언덕 위에서 라디오 소리가 아직 흘러나오고, 아주머니의 벤치는 너무 멀다. 당신은 정문 기둥에 등을 대고 첫 새소리를 기다린다."
+    },
+    {
+      "key": "BABBBA",
+      "title": "운동장 한복판의 밤",
+      "text": "알바생만 먼저 보냈다. 당신은 아주머니 곁에 잔디 위로 몸을 낮추고 형체들의 발소리를 셌다. 십 분 뒤 트러스트짐 셔터가 올라가고 관장과 알바생이 함께 달려와 아주머니를 들어 옮겼다. 셔터가 내려간 뒤에야 당신은 자기 손이 떨리는 것을 알았다. 아주머니는 매트에 누워 쌀 포대를 두고 온 것을 아쉬워했다. 네 사람. 관장의 라디오가 새벽 다섯 시 구조 이야기를 다시 반복한다."
+    },
+    {
+      "key": "BABBBB",
+      "title": "50m의 전력",
+      "text": "알바생과 양쪽에서 아주머니를 들어 올리고 50m를 달렸다. 뒤에서 발 끄는 소리가 빨라지는 것처럼 들렸지만 돌아보지 않았다. 셔터 앞에서 관장이 셔터를 반쯤 올려 세 사람을 차례로 끌어들였고, 마지막 순간 알바생의 배낭이 밖에 남았다. 물도 라면도 없이 네 사람이 트러스트짐 바닥에 누웠다. 아주머니가 당신 손을 잡고 같이 버텼다고 말했다. 관장은 아침에 정문으로 간다는 계획을 다시 꺼내지 않았다."
+    },
+    {
+      "key": "AAAAAA",
+      "title": "세 사람의 아침",
+      "text": "랜턴을 끄고 기다리자 관장이 벤치 하나를 치우고 문을 열었다. 아주머니는 매트 위에 눕고 당신은 알바생이 준 물을 셋이 나눠 마셨다. 관장의 라디오는 새벽까지 같은 말을 반복했다. 구조는 정문으로 온다. 창밖 운동장의 형체들은 밤새 GS25 불빛 주변만 맴돌았다. 동이 트자 관장이 벤치를 다시 치우며 말한다. 아주머니는 내가 업겠다고, 정문까지 같이 가자고. 당신은 배터리 1%짜리 폰을 주머니에 넣고 앞장선다."
+    },
+    {
+      "key": "AAAAAB",
+      "title": "문 앞의 파수",
+      "text": "기구를 밀어낸 소리가 운동장까지 울렸다. 아주머니를 들여보내자마자 관장이 당신 멱살을 잡았고, 그 뒤로 형체들이 김수환관 유리문 앞까지 몰려왔다. 셋은 밤새 벤치와 랙을 다시 쌓았다. 아주머니는 행주로 묶은 다리를 붙들고 앉아 랜턴 불빛만 지켰다. 관장은 당신에게 말을 걸지 않았지만 새벽에 물 한 모금을 건넸다. 아침이 와도 유리문 밖의 형체들은 흩어지지 않았다. 정문까지 100m가 그 어느 때보다 멀다."
+    },
+    {
+      "key": "AAAABA",
+      "title": "네 사람과 상자",
+      "text": "라면 상자를 내려놓고 조용히 기다리자 관장이 한참 만에 문을 열었다. 알바생이 안고 온 상자 두 개, 아주머니의 쌀 이야기, 관장의 라디오가 한 방에 모였다. 넷은 헬스장 매트 위에서 번갈아 잠들었고 당신이 마지막 불침번을 섰다. 형체들은 GS25 셔터 앞에서 밤을 보냈다. 동이 틀 때 관장이 말한다. 넷이면 정문까지 갈 수 있다. 알바생이 상자 하나를 어깨에 올리고 당신은 아주머니 팔을 잡는다. 문이 열린다."
+    },
+    {
+      "key": "AAAABB",
+      "title": "무너진 바리케이드",
+      "text": "셋이 동시에 기구를 밀자 랙이 쓰러지며 유리문이 통째로 흔들렸다. 알바생은 넘어지며 손목을 접질렸고 아주머니는 문턱에서 주저앉았다. 관장이 소리쳤지만 형체들은 이미 운동장 한복판까지 와 있었다. 입구는 더 이상 막을 수 없어 넷은 안쪽 샤워실로 옮겨 문을 잠갔다. 라면 상자는 운동장에 버리고 왔다. 타일 바닥에 앉아 라디오를 켜자 구조가 온다는 말이 한 번 더 나온다. 아무도 대꾸하지 않는다."
+    },
+    {
+      "key": "AAABAA",
+      "title": "혼자 남긴 사람들",
+      "text": "손전등을 끄고 이름을 말하자 관장이 벤치를 치웠다. 안에는 관장 혼자였다. 당신은 알바생이 굴려 준 물 한 병을 반씩 나누고 2층 식당에 다리를 다친 아주머니가 있다고 말했다. 관장은 라디오를 껐다 켰다 하며 듣기만 했다. 새벽에 창밖을 보니 학관 2층 창문 하나에 가스불 같은 빛이 아직 켜져 있다. 관장이 덤벨 봉 하나를 당신에게 건네며 말한다. 정문 가기 전에 학관부터 들르자. 당신은 고개를 끄덕인다."
+    },
+    {
+      "key": "AAABAB",
+      "title": "닫히지 않는 눈",
+      "text": "기구 틈으로 몸을 밀어 넣자 관장이 덤벨을 든 채 당신을 내려다보고 있었다. 형체가 아닌 걸 확인하고도 그는 덤벨을 내려놓지 않았다. 관장은 창가에, 당신은 반대편 매트에 따로 앉아 밤을 보냈다. 물 한 병은 혼자 마셨다. 새벽에 학관 2층 창문의 희미한 빛이 꺼지는 것을 당신만 보았다. 관장이 라디오를 들고 일어선다. 정문으로 간다고, 따라오려면 따라오라고. 당신은 빈 물병을 들고 뒤에 선다."
+    },
+    {
+      "key": "AAABBA",
+      "title": "계단참의 새벽",
+      "text": "문 앞에 앉아 기다렸지만 관장은 끝내 열지 않았다. 라디오 소리가 작아지더니 꺼졌다. 당신은 김수환관 1층 계단참으로 올라가 알바생이 준 물 두 병과 보조배터리를 껴안고 앉았다. 폰은 충전이 되었지만 신호는 여전히 없었다. 형체들은 새벽까지 GS25 뒷문 근처를 맴돌았다. 동이 틀 무렵 정문 쪽에서 헤드라이트 두 줄이 천천히 지나갔다. 당신은 계단을 내려간다. 유리문 안쪽의 기구는 그대로다."
+    },
+    {
+      "key": "AAABBB",
+      "title": "정문 앞의 침묵",
+      "text": "유리문을 두드리며 소리치자 운동장의 형체들이 일제히 방향을 바꿨다. 관장이 랙 하나를 밀어내고 당신 팔을 잡아 끌어들였다. 밀려난 랙은 다시 세울 틈이 없었다. 둘은 밤새 벤치로 틈을 메우며 버텼고 보조배터리로 라디오를 살렸다. 동이 트자 관장이 말했다. 어차피 여긴 끝났다, 정문으로 간다. 두 사람은 형체들이 뜸해진 새벽 운동장을 가로질러 정문 앞에 섰다. 도로에는 차도 사람도 없다. 관장이 먼저 한 발을 내딛는다."
+    },
+    {
+      "key": "BAAAAA",
+      "title": "네 사람의 아침",
+      "text": "두 번 깜빡인 불빛에 안쪽 불빛이 두 번 답했다. 관장은 기구를 조용히 옮겨 당신을 들이고 다시 막았다. 라디오는 아침 여덟 시 정문에 구조 차량이 온다고 했다. 당신은 식당 아주머니의 다리와 창고의 알바생 이야기를 했다. 동틀 무렵 관장이 역기 봉을 들고 앞장섰다. GS25 창고 문이 열리고 알바생이 물 상자를 안고 나왔다. 식당에서는 아주머니가 두 사람의 부축을 받으며 계단을 내려왔다. 정문에 네 사람이 함께 섰다."
+    },
+    {
+      "key": "BAAAAB",
+      "title": "문을 쓸던 손바닥",
+      "text": "두드리는 소리가 운동장 너머까지 울렸다. 관장이 급히 문을 열어 당신을 끌어들였지만, 정문 쪽 형체 둘이 이미 방향을 바꾼 뒤였다. 밤새 유리문 밖에서 손바닥이 문을 쓸었다. 관장은 말없이 라디오 볼륨을 낮췄다. 새벽에 구조 방송이 나왔고, 두 사람은 뒷문으로 나가 정문까지 돌아갔다. 학관에 남은 아주머니와 알바생 이야기는 당신이 구조대에 했다. 그들이 무사한지는 아직 모른다."
+    },
+    {
+      "key": "BAAABA",
+      "title": "무거운 가방",
+      "text": "문 옆에 앉아 가방을 안고 밤을 보냈다. 새벽 다섯 시, 관장이 벤치를 밀어내고 당신을 들였다. 당신이 꺼낸 물을 관장은 반만 마시고 나머지를 돌려주었다. 라디오는 정오에 정문 구조를 알렸다. 나란히 정문으로 걷는 동안 당신은 GS25 창고 창문을 돌아보았다. 문 안쪽의 목소리는 밤새 당신을 따라왔다. 구조대에 창고 위치를 말했다. 가방은 여전히 무거웠다."
+    },
+    {
+      "key": "BAAABB",
+      "title": "닫히지 않는 창문",
+      "text": "창문으로 기어 들어간 창고에서 관장이 역기 봉을 치켜들었다가 당신의 목소리에 멈췄다. 창문은 틀이 휘어 다시 닫히지 않았다. 두 사람은 밤새 창문 앞에 덤벨 랙을 쌓고 번갈아 지켰다. 라디오가 새벽 구조를 알리자 관장은 창문을 마지막으로 살피고 정문으로 향했다. 정문 앞에서 당신은 가방의 라면을 관장에게 건넸다. 창고의 알바생 이야기는 끝내 꺼내지 못했다."
+    },
+    {
+      "key": "BAABAA",
+      "title": "안개 속의 세 사람",
+      "text": "관중석 아래로 돌아 도착한 당신을 관장은 문틈으로 한참 살핀 뒤 들였다. 라디오는 아침 일곱 시 정문 구조를 알렸다. 동이 트자 관장이 앞장섰고, 운동장 안개 너머 GS25에서 손전등 불빛이 깜빡였다. 알바생이 물 상자를 안고 뒤따라 나왔다. 정문 앞 구조 차량에 세 사람이 올랐다. 당신은 식당 주방의 가스불과 다리를 끄는 아주머니를 구조대에 알렸다."
+    },
+    {
+      "key": "BAABAB",
+      "title": "스무 걸음 차이",
+      "text": "운동장 한가운데서 안개 속 형체가 당신 쪽으로 몸을 틀었다. 유리문에 닿았을 때 형체는 스무 걸음 뒤였다. 관장이 문을 열고 당신을 끌어들인 뒤 함께 벤치를 밀어 막았다. 밤새 유리문에 손바닥 자국이 늘었다. 새벽 구조 방송에 두 사람은 뒷문으로 빠져나가 정문으로 뛰었다. 알바생의 손전등은 운동장에 떨어뜨렸다. 정문 앞에서 당신은 손전등 대신 GS25 창고 위치를 말했다."
+    },
+    {
+      "key": "BAABBA",
+      "title": "계단 밑의 새벽",
+      "text": "계단 밑에 웅크리자 따라온 형체는 문 앞을 한참 서성이다 운동장으로 돌아갔다. 당신은 새벽까지 그 자리에서 나오지 못했다. 다섯 시, 창문으로 밖을 살피던 관장이 당신을 발견하고 쇠사슬을 풀었다. 라디오는 정문 구조를 알렸다. 정문으로 걷는 동안 당신의 주머니에는 배터리가 꺼진 폰만 있었다. 알바생은 끝내 만나지 못했다. 관장에게 식당 주방의 아주머니 이야기를 했다."
+    },
+    {
+      "key": "BAABBB",
+      "title": "정문까지 뛴다",
+      "text": "외침에 관장이 쇠사슬을 풀었을 때 형체는 열 걸음 뒤였다. 관장이 역기 봉을 앞으로 내밀어 형체를 물러서게 하고 당신을 안으로 끌었다. 형체는 밤새 유리문에 이마를 대고 서 있었다. 관장은 말없이 라디오만 틀었다. 새벽 구조 방송이 나오자 두 사람은 뒷문으로 나가 정문까지 뛰었다. 뒤돌아보니 형체는 아직 유리문 앞에 있었다. 정문 앞에서 당신은 학관에 남은 두 사람 이야기를 구조대에 했다."
+    },
+    {
+      "key": "ABBAAA",
+      "title": "새벽의 유리문",
+      "text": "손전등을 끈 채 벽에 붙어 앉아 밤을 넘겼다. 물병 두 개는 새벽에 다 비웠다. 하늘이 회색으로 바뀔 무렵 유리문 안쪽에서 랙을 미는 소리가 나고 관장이 당신을 발견한다. 라디오는 정문에 구조 차량이 온다고 반복한다. 당신은 2층 주방의 아주머니와 창고의 알바생 이야기를 먼저 꺼낸다. 관장은 말없이 고개를 끄덕이고 둘이서 학관 쪽으로 걸음을 돌린다. 정문은 그 다음이다."
+    },
+    {
+      "key": "ABBAAB",
+      "title": "유리문 밖의 형체",
+      "text": "기구 틈을 비집으며 관장을 부르자 안에서 덤벨 하나가 굴러 떨어졌다. 관장은 놀란 얼굴로 당신을 끌어들이고 다시 랙을 밀어 막는다. 그 소리에 운동장의 형체 하나가 유리문 앞까지 와서 밤새 서 있었다. 당신은 매트 위에 누워 알바생이 준 물을 나눠 마셨다. 새벽에 관장은 뒷문을 가리킨다. 정문은 유리문 앞의 그것을 지나야 한다. 두 사람은 뒷문으로 나가 김수환관 뒤편 언덕을 돌아 정문을 향한다."
+    },
+    {
+      "key": "ABBABA",
+      "title": "도어벨이 부른 것들",
+      "text": "기둥 그늘에 붙어 있자 따라오던 발소리가 입구 앞에서 멈췄다가 흩어졌다. 한참 뒤 안쪽에서 관장이 손전등 없이 다가와 당신을 끌어들였다. 아침이 왔지만 운동장은 밤보다 형체가 늘어 있었다. 도어벨 소리가 정문 쪽의 것들을 캠퍼스 안으로 불러들인 것이다. 관장은 라디오를 끄고 하루 더 버티자고 말한다. 당신은 주머니의 초코바 여섯 개를 매트 위에 늘어놓고 둘이서 나눈다. 정문은 내일이다."
+    },
+    {
+      "key": "ABBABB",
+      "title": "정문을 넘다",
+      "text": "기구를 두드리며 소리치자 관장이 랙을 밀어 당신을 끌어들였고, 뒤따르던 형체 둘이 유리문에 부딪혀 밤새 문을 긁었다. 관장은 이대로는 아침이 없다고 말한다. 하늘이 밝기 전 두 사람은 뒷문으로 나가 운동장을 크게 돌아 정문까지 달렸다. 관장은 철봉으로 문을 밀다 팔을 다쳤고 당신은 매장에서 챙긴 물로 상처를 씻어 준다. 정문 밖 도로는 텅 비어 있다. 라디오가 말한 구조는 아직 없지만 두 사람은 캠퍼스 밖에 서 있다."
+    },
+    {
+      "key": "ABBBAA",
+      "title": "창고 문을 여는 아침",
+      "text": "두 번 두드리고 물러나자 한참 뒤 유리문 안쪽에서 랙이 움직였다. 관장은 라디오를 껐다 켰다 하며 밤을 새우던 참이었다. 당신은 GS25 창고에 남은 두 사람 이야기를 했고 관장은 아침에 같이 가자고 했다. 동이 트자 셋이 창고 문을 열었다. 알바생은 물 한 상자를 등에 지고 아주머니는 관장의 어깨에 기댔다. 네 사람이 운동장을 가로질러 정문으로 향한다. 걸음은 느리지만 아무도 뒤처지지 않는다."
+    },
+    {
+      "key": "ABBBAB",
+      "title": "창고의 불빛",
+      "text": "기구 틈으로 몸을 밀어 넣다 랙이 무너졌다. 관장은 덤벨을 든 채 당신을 노려보다 사람인 것을 알고 손을 내렸다. 그 소리에 형체들이 유리문 앞으로 모여들어 두 사람은 김수환관 2층으로 올라가 밤을 보냈다. 새벽, 2층 창 너머 GS25 창고 창문에 아직 불이 켜져 있다. 아주머니와 알바생이 있는 곳이다. 관장은 정문을 말했지만 당신은 창고를 먼저 가리켰다. 두 사람은 뒷문으로 나와 운동장 가장자리를 따라 학관 쪽을 향한다."
+    },
+    {
+      "key": "ABBBBA",
+      "title": "벤치로 만든 들것",
+      "text": "아주머니를 벽에 기대 앉히고 형체를 지켜보는 동안 유리문 안쪽에서 관장이 랙을 밀었다. 그는 두 사람을 끌어들이고 다시 문을 막았다. 형체는 유리 앞에서 한참 서 있다가 새벽에야 돌아섰다. 아주머니는 매장에서 챙긴 붕대로 다리를 감고 진통제를 삼켰다. 아침이 오자 관장은 벤치 두 개에 매트를 묶어 들것을 만들었다. 당신과 관장이 양 끝을 잡고 정문을 향해 운동장을 건넌다. 아주머니가 라디오를 무릎에 올려 두고 소리를 낮춘다."
+    },
+    {
+      "key": "ABBBBB",
+      "title": "밤에 나선 정문",
+      "text": "아주머니를 업고 기구 틈으로 밀고 들어가자 랙이 쓰러졌고 관장이 안에서 당신을 잡아당겼다. 뒤따르던 형체가 유리문에 부딪혔다. 관장은 기다릴 것 없다고 말했다. 셋은 뒷문으로 나가 정문까지 걸었다. 관장이 아주머니를 업고 당신이 앞장서 길을 살폈다. 정문 앞에 구조 차량은 없었다. 아주머니는 라디오를 켜 두고 도로를 따라 걷자고 한다. 아침이 오기 전에 세 사람은 캠퍼스 밖 첫 번째 가로등 아래에 닿았다."
+    },
+    {
+      "key": "BBBAAA",
+      "title": "붕대를 든 새벽",
+      "text": "스탠드 그늘을 따라 돌아 트러스트짐 옆 창에 닿았다. 안쪽의 관장이 창을 열어 주었고 당신은 붕대와 생수를 품에 안은 채 기구 사이에서 밤을 넘겼다. 라디오는 구조가 온다는 말만 되풀이했다. 새벽에 관장이 정문으로 가자고 했지만 당신은 학관 쪽을 가리켰다. 관장이 덤벨 하나를 들고 따라나섰다. 주방 셔터 앞의 쌀 포대는 그대로였고 아주머니는 국자를 쥔 채 잠들어 있었다. 부은 다리에 붕대를 감는 동안 창밖이 밝아졌다."
+    },
+    {
+      "key": "BBBAAB",
+      "title": "떨어뜨린 생수",
+      "text": "운동장 한가운데를 달리자 형체들이 일제히 방향을 틀었다. 트러스트짐 문 앞에서 관장이 러닝머신을 밀어내는 데 시간이 걸렸고 당신은 생수 한 병을 떨어뜨렸다. 문이 닫힌 뒤 형체들은 굴러간 생수병 주위에 모여 밤새 유리문을 두드렸다. 라디오는 아침 여섯 시 정문이라고 했다. 당신은 붕대 한 통만 남은 손을 내려다보았다. 새벽에 관장과 정문으로 향하면서 학관 3층 창을 올려다보았지만 불빛은 없었다."
+    },
+    {
+      "key": "BBBABA",
+      "title": "꺼진 손전등",
+      "text": "손전등을 끄고 담장을 따라 움직인 덕에 형체들은 당신을 보지 못했다. 트러스트짐 뒷문을 세 번 두드리자 관장이 열어 주었다. 라디오 앞에서 밤을 보내며 알바생이 준 구급상자를 열어 보니 진통제와 소독약이 들어 있었다. 새벽, 관장은 정문으로 가겠다고 했고 당신은 학관으로 돌아가겠다고 했다. 손전등을 켜지 않은 채 운동장을 건너 GS25 창고 문을 두드렸다. 알바생이 문을 열었고 당신은 주방으로 오르는 뒷계단에 발을 올렸다."
+    },
+    {
+      "key": "BBBABB",
+      "title": "신호가 부른 것",
+      "text": "손전등 불빛을 본 관장이 문을 열었지만 빛을 본 형체들도 함께 몰려왔다. 관장과 당신은 2층 창으로 올라가 밤을 보냈다. 라디오가 처음으로 정식 방송을 내보냈다. 정문 구조 트럭, 아침 여섯 시. 새벽 정문 앞에 헤드라이트가 섰을 때 당신은 트럭에 오르지 않았다. 학관 주방의 아주머니와 GS25 창고의 알바생 이야기를 하며 확성기를 든 사람에게 학관을 가리켰다. 손전등은 배터리가 다 되어 꺼져 있었다."
+    },
+    {
+      "key": "BBBBAA",
+      "title": "넷이 되어 정문으로",
+      "text": "스탠드 아래를 따라 돌아 트러스트짐에 닿자 관장이 문을 열었다. 라디오에서 나오는 것은 구조가 온다는 소문뿐이었지만 관장은 그 말을 믿고 있었다. 당신은 밤새 기다렸다가 하늘이 흐려질 때 GS25로 돌아갔다. 창고 문을 두드리자 알바생이 열어 주었고 아주머니는 라면 상자에 기대 앉아 있었다. 관장이 아주머니를 업고, 알바생이 생수 상자를 들고, 당신이 앞장서서 정문으로 걸었다. 네 사람의 발소리가 텅 빈 캠퍼스에 울렸다."
+    },
+    {
+      "key": "BBBBAB",
+      "title": "잃어버린 신발 한 짝",
+      "text": "형체들이 향한 쪽으로 곧장 달렸다. 트러스트짐 문 앞에서 소매가 무언가에 걸렸고 당신은 신발 한 짝을 남긴 채 몸을 빼냈다. 관장이 덤벨로 벽을 두드려 소리를 돌린 틈에 문이 열렸다. 맨발로 매트 위에 앉아 밤을 보내는 동안 유리문 밖에서 신발 한 짝이 이리저리 차였다. 아침이 왔지만 아주머니와 알바생에게 사람이 있다는 말을 전할 방법이 없었다. 관장이 건넨 운동화를 신고 당신은 먼저 GS25로 향했다."
+    },
+    {
+      "key": "BBBBBA",
+      "title": "열쇠와 라디오",
+      "text": "유리에 비친 열쇠를 알아본 관장이 소리 없이 러닝머신을 밀어 당신을 들였다. 형체들은 문 앞에서 잠시 멈췄다가 흩어졌다. 라디오 옆에 앉아 알바생이 준 하역구 열쇠 이야기를 하자 관장은 새벽에 그 문으로 가겠다고 했다. 하늘이 밝기 전 두 사람은 하역구를 열고 창고로 들어섰다. 아주머니는 라면 상자를 베개 삼아 잠들어 있었고 알바생이 손가락을 입에 댔다. 네 사람이 모인 창고에서 라디오가 정문 구조 시각을 불러 주었다."
+    },
+    {
+      "key": "BBBBBB",
+      "title": "옥상에서 본 헤드라이트",
+      "text": "당신의 외침에 관장이 문을 열었지만 운동장의 형체들도 전부 몰려왔다. 문을 다시 막기도 전에 유리에 형체들이 들러붙었다. 관장과 당신은 2층 창을 넘어 김수환관 옥상으로 올라갔다. 밤새 옥상 난간에 기대 라디오를 들었고 주머니 속 하역구 열쇠를 만지작거렸다. 새벽 정문 쪽에서 헤드라이트 두 줄이 나타났다. 관장이 손을 흔들었고 당신은 GS25 창고 쪽을 내려다보았다. 아직 그 문은 닫혀 있었다."
+    },
+    {
+      "key": "ABAAAA",
+      "title": "손전등을 건넨 밤",
+      "text": "어둠 속에 서 있자 안쪽 손전등이 당신의 빈손과 발목을 차례로 훑었다. 관장이 기구 하나를 빼내 틈을 만들었고 당신은 아주머니의 손전등과 알바생이 밀어 준 물 두 병을 안고 들어갔다. 라디오는 아침 구조 소문을 반복했다. 2층 식당에 다리 다친 사람이 있다고 말하자 관장은 새벽에 함께 데리러 가겠다고 했다. 당신은 손전등을 끄지 않고 창가에 앉아 학관 2층 창을 밤새 지켜보았다."
+    },
+    {
+      "key": "ABAAAB",
+      "title": "쇠기구 너머의 손",
+      "text": "쇠기구를 두드리는 소리에 관장이 급히 틈을 열었지만 운동장 저편 형체 하나도 그 소리를 따라왔다. 관장은 당신을 끌어들이고 곧바로 기구를 다시 쌓았다. 밤새 유리문 밖에서 무언가가 천천히 긁는 소리가 이어졌고 두 사람은 교대로 기구를 등으로 받쳤다. 물 두 병은 반씩 나누었다. 새벽에 관장이 정문 대신 학관 식당부터 들르자고 말했을 때 당신은 아주머니의 손전등을 한 번 켰다 껐다."
+    },
+    {
+      "key": "ABAABA",
+      "title": "라면 상자를 안고",
+      "text": "나무 그늘을 따라 돌아가는 동안 형체들은 셔터 앞에만 몰려 있었다. 김수환관 옆문 앞에서 라면 상자를 내려놓자 관장이 안에서 문을 열었다. 그는 상자를 보고 처음으로 말을 길게 했다. 라디오에서 오전 여섯 시 정문이라는 말이 흘러나왔고 관장은 물을 끓여 라면 두 개를 나누었다. 당신은 학관에 남은 아주머니와 알바생 이야기를 했고 관장은 새벽에 정문보다 학관에 먼저 들르자고 했다."
+    },
+    {
+      "key": "ABAABB",
+      "title": "빈손으로 달린 밤",
+      "text": "운동장 한가운데를 달리다 라면 상자가 팔에서 빠져나갔고 흩어진 봉지 소리에 형체들이 셔터에서 몸을 돌렸다. 당신은 멈추지 않았다. 입구에서 관장이 기구 틈으로 팔을 끌어당겼고 유리문이 닫히자마자 바깥에서 둔탁한 소리가 시작됐다. 관장은 당신의 빈손을 보고 아무 말도 하지 않았다. 라디오는 밤새 잡음뿐이었다. 새벽에 관장이 혼자 정문으로 가겠다고 했을 때 당신은 신발끈을 다시 묶었다."
+    },
+    {
+      "key": "ABABAA",
+      "title": "두 번 외면한 문",
+      "text": "두 손을 든 채 서 있자 손전등이 한참 당신을 살피다 내려갔다. 관장은 발목과 팔을 확인하고서야 기구를 치워 주었다. 안에 들어가 물과 초코바를 내려놓으며 당신은 주방에서 손짓하던 아주머니와, 당신 기척에 불을 끈 창고 안 사람 이야기를 했다. 관장은 라디오를 끄고 새벽에 학관에 함께 가자고만 했다. 당신은 밤새 창가에서 학관 2층과 1층 창을 번갈아 보았다. 두 곳 다 불이 켜지지 않았다."
+    },
+    {
+      "key": "ABABAB",
+      "title": "빛을 향해 달린 대가",
+      "text": "빛을 향해 달려들자 관장이 놀라 손전등을 휘둘렀고 당신은 기구 틈에 팔을 넣은 채 학생이라고 외쳤다. 그가 당신을 끌어들이는 사이 운동장에서 따라온 형체 둘이 기구에 몸을 부딪쳤다. 밤새 두 사람은 말없이 기구를 밀어 받쳤고 물 한 병을 뚜껑으로 나눠 마셨다. 초코바는 관장이 먹지 않았다. 새벽 라디오가 정문을 말했을 때 관장은 당신을 보지 않고 먼저 나갈 준비를 했다."
+    },
+    {
+      "key": "ABABBA",
+      "title": "닫히던 문이 열리고",
+      "text": "문 앞에서 멈춰 사람이 있다고 말하자 닫히던 유리문이 다시 열렸다. 안에는 관장과 먼저 도착한 학생 하나가 있었다. 알바생이 본 사람들이었다. 관장은 당신이 소리를 지르지 않은 것을 보고 바로 기구를 다시 쌓았다. 당신은 창고에서 소화기를 든 채 남은 알바생 이야기를 했고 관장은 새벽에 GS25 뒷문부터 두드리자고 했다. 세 사람은 라디오 소리를 낮추고 물을 돌려 마시며 아침을 기다렸다."
+    },
+    {
+      "key": "ABABBB",
+      "title": "다시 쌓은 기구",
+      "text": "문틈으로 몸을 밀어 넣는 순간 반쯤 치워진 기구가 넘어지며 유리에 부딪쳤다. 안에 있던 관장과 학생 하나가 당신을 노려보았다. 소리를 들은 형체들이 운동장에서 방향을 틀었고 세 사람은 밤새 넘어진 기구를 다시 쌓아 문을 막았다. 알바생이 건넨 물은 세 사람 몫으로 쪼개졌다. 새벽 라디오가 정문을 말했을 때 관장은 다 같이 간다고 했지만 당신이 먼저 나서면 안 된다고 못 박았다."
+    },
+    {
+      "key": "BBAAAA",
+      "title": "넷이서 맞은 아침",
+      "text": "관장이 기구를 하나씩 내리는 동안 아무도 입을 열지 않았다. 문이 열리고 아주머니는 매트 위에 다리를 뻗었다. 알바생이 물을 나누고 관장은 라디오를 켰다. 당신은 문 앞에 앉아 밤새 운동장을 지켜봤고 형체들은 끝내 이쪽으로 오지 않았다. 아침이 밝자 넷이서 정문을 향해 걸었다. 아주머니가 당신 어깨를 짚고 알바생이 물병을 안고 관장이 앞장섰다. 배터리 2%의 폰에 처음으로 신호 한 칸이 잡혔다."
+    },
+    {
+      "key": "BBAAAB",
+      "title": "다시 쌓인 기구",
+      "text": "창문을 두드리는 소리에 관장이 서둘러 기구를 치웠다. 셋이 들어가자마자 관장은 기구를 다시 쌓기 시작했다. 소리를 듣고 운동장의 형체들이 입구로 몰려온 것이다. 밤새 문 밖에서 긁는 소리가 이어졌고 아주머니는 당신 손을 잡은 채 잠들지 못했다. 아침이 밝았을 때 정문 쪽 운동장은 형체들로 가득했다. 관장은 뒷문을 가리켰고 넷은 담을 따라 돌아서 나갔다. 당신은 창문을 두드린 손을 오래 바라봤다."
+    },
+    {
+      "key": "BBAABA",
+      "title": "관중석 아래의 밤",
+      "text": "관중석 아래로 아주머니를 밀어 넣고 당신도 웅크렸다. 트러스트짐 문이 알바생 뒤에서 닫히는 소리가 들렸다. 형체들이 관중석 위를 느리게 오가는 동안 아주머니는 당신 소매를 붙잡고 숨을 참았다. 이슬이 등을 적셨고 다리를 감은 행주는 흙에 젖었다. 새벽빛에 형체들이 흩어지자 둘은 천천히 걸어 나왔다. 관장이 문을 열었고 아주머니는 매트에 앉고서도 당신 소매를 놓지 않았다. 아침에 정문으로 갈 때도 그 손은 그대로였다."
+    },
+    {
+      "key": "BBAABB",
+      "title": "업고 달린 오십 미터",
+      "text": "아주머니를 업고 남은 거리를 달렸다. 두 번 무릎이 꺾였고 두 번 일어났다. 관장이 기구 하나를 치우고 팔을 뻗어 두 사람을 한꺼번에 끌어들였다. 문이 닫히고 나서야 등에 아주머니의 손자국이 뜨겁게 남은 걸 알았다. 관장이 붕대를 꺼내 행주를 풀었고 아주머니는 소리 없이 이를 악물었다. 알바생이 물 상자를 열었다. 아침이 오자 넷이서 정문으로 향했다. 아주머니는 관장의 부축을 받았고 당신은 빈 등으로 앞장섰다."
+    },
+    {
+      "key": "BBABAA",
+      "title": "미뤄둔 계단",
+      "text": "관장에게 2층 주방의 아주머니 이야기를 전했다. 관장은 아침에 셋이 함께 가자고 했다. 밤새 당신은 매트에 누워 주방 뒷문 소리를 떠올렸고 알바생은 벽을 보고 누웠다. 새벽에 셋은 정문 대신 학관으로 먼저 올라갔다. 식당 문 앞 식탁은 그대로였고 주방 쌀 포대 사이에 아주머니가 국자를 안고 잠들어 있었다. 살아 있었다. 아주머니는 당신을 보고 늦었다고만 말했다. 정문으로 내려가는 동안 당신은 그 말을 계속 듣고 있었다."
+    },
+    {
+      "key": "BBABAB",
+      "title": "돌아간 발걸음",
+      "text": "알바생을 들여보내고 손전등을 끈 채 운동장을 되짚어 갔다. 학관 뒷계단은 올라갈 때가 더 길었다. 주방 뒷문을 두드리자 아주머니가 국자를 든 채 문을 열었고 아무 말도 하지 않았다. 둘이 내려오는 데 두 배가 걸렸다. 새벽 운동장 끝에 트러스트짐 문이 열려 있었고 관장과 알바생이 입구에 서 있었다. 아주머니가 매트에 앉자 당신 다리가 그제야 떨리기 시작했다. 당신 주머니에는 아주머니가 건넨 주방 라이터가 그대로 있었다."
+    },
+    {
+      "key": "BBABBA",
+      "title": "가방만 무거운 아침",
+      "text": "가방을 내려놓고 벽에 붙어 숨을 죽였다. 관장이 틈으로 확인한 뒤 기구를 치우고 당신을 들였다. 안에는 둘뿐이었다. 관장이 다른 사람은 없느냐고 물었고 당신은 창고와 주방을 말하려다 입을 다물었다. 물과 라면이 든 가방은 밤새 발치에 놓인 채 아무도 열지 않았다. 아침에 정문으로 가는 길에 GS25 셔터는 내려져 있었고 창고 쪽 작은 불빛만 켜져 있었다. 당신은 가방끈을 고쳐 메고 걸음을 늦추지 않았다."
+    },
+    {
+      "key": "BBABBB",
+      "title": "교대로 붙잡은 밤",
+      "text": "기구 틈에 몸을 밀어 넣자 벤치 하나가 쓰러지며 쇳소리가 울렸다. 관장이 당신을 끌어들이고 기구를 다시 쌓았지만 틈이 남았다. 소리를 들은 형체들이 운동장을 가로질러 왔고 둘은 밤새 교대로 기구를 붙잡았다. 가방 속 물병은 마실 틈이 없었다. 아침이 밝자 관장은 정문은 안 된다고 했다. 둘은 김수환관 뒤쪽 담을 넘어 나갔다. 당신은 학관 쪽을 한 번 돌아봤고 관장은 돌아보지 않았다."
+    }
+  ]
+}

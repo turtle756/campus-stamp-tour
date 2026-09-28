@@ -13,9 +13,14 @@
   box-sizing: border-box;
 }
 
+/* 브라우저 자동 다크 모드가 페이지 색을 뒤집지 않도록 밝은 페이지는 only light 선언 */
 html {
-  color-scheme: light dark;
+  color-scheme: only light;
   -webkit-text-size-adjust: 100%;
+}
+
+html:has(body.page-gym) {
+  color-scheme: dark;
 }
 
 body {

@@ -13,7 +13,7 @@
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%93%93%3C/text%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="assets/css/style.css?v=3">
+    <link rel="stylesheet" href="assets/css/style.css?v=4">
   </head>
   <body class="page-home">
     <a class="skip-link" href="#main-content">본문 바로가기</a>
@@ -37,6 +37,7 @@
           <li><a href="#why">이 세 곳을 고른 이유</a></li>
           <li><a href="#places">탐험할 장소 3곳</a></li>
           <li><a href="#route">추천 탐험 경로</a></li>
+          <li><a href="#nearby">지금 내 위치에서 가까운 곳</a></li>
         </ul>
       </nav>
     </header>
@@ -62,6 +63,10 @@
 
       <section id="places" class="place-list-section">
         <h2>탐험할 장소 3곳</h2>
+        <div class="plan-bar">
+          <p id="plan-summary" aria-live="polite"></p>
+          <button type="button" class="link-button" id="plan-clear" hidden>모두 지우기</button>
+        </div>
 
         <ul class="place-list">
           <li class="place-card"
@@ -80,7 +85,10 @@
             <p class="place-summary">
               살 게 없어도 한 바퀴 돌게 되는, 어느새 하루의 기본값이 된 자리.
             </p>
-            <p><a class="primary-action" href="store.html">자세히 보기 →</a></p>
+            <p class="card-actions">
+              <a class="primary-action" href="store.html">자세히 보기 →</a>
+              <button type="button" class="plan-toggle" data-plan="store" data-plan-name="학관 1층 GS25" aria-pressed="false">방문 예정에 추가</button>
+            </p>
           </li>
 
           <li class="place-card"
@@ -99,7 +107,10 @@
             <p class="place-summary">
               혼자 먹어도 아무도 신경 쓰지 않는 곳. 그게 이 식당의 가장 큰 장점이다.
             </p>
-            <p><a class="primary-action" href="cafeteria.html">자세히 보기 →</a></p>
+            <p class="card-actions">
+              <a class="primary-action" href="cafeteria.html">자세히 보기 →</a>
+              <button type="button" class="plan-toggle" data-plan="cafeteria" data-plan-name="학관 2층 학생식당" aria-pressed="false">방문 예정에 추가</button>
+            </p>
           </li>
 
           <li class="place-card"
@@ -118,7 +129,10 @@
             <p class="place-summary">
               밖에 있었으면 절대 안 다녔을 헬스장. 교내라는 사실 하나가 이유의 전부다.
             </p>
-            <p><a class="primary-action" href="gym.html">자세히 보기 →</a></p>
+            <p class="card-actions">
+              <a class="primary-action" href="gym.html">자세히 보기 →</a>
+              <button type="button" class="plan-toggle" data-plan="gym" data-plan-name="교내 트러스트짐" aria-pressed="false">방문 예정에 추가</button>
+            </p>
           </li>
         </ul>
       </section>
@@ -155,6 +169,17 @@
 
         <p>이 순서대로 하루를 보내면 캠퍼스 밖으로 나갈 일이 없다.</p>
       </section>
+
+      <section id="nearby" class="nearby">
+        <h2>지금 내 위치에서 가까운 곳</h2>
+        <p>
+          버튼을 누르면 브라우저가 위치 권한을 묻습니다. 허용하면 현재 위치에서 세 장소까지의 거리를 계산해 가까운 순서로 보여 줍니다.
+          <strong>좌표는 저장하거나 어디로도 보내지 않고</strong>, 이 계산에만 쓰고 버립니다.
+        </p>
+        <p><button type="button" class="primary-action" id="nearby-btn">내 위치에서 거리 보기</button></p>
+        <p class="nearby-status" id="nearby-status" role="status" aria-live="polite">아직 위치를 확인하지 않았습니다.</p>
+        <ul class="nearby-list" id="nearby-list" hidden></ul>
+      </section>
     </main>
 
     <footer class="site-footer">
@@ -168,5 +193,8 @@
       </ul>
       <p><a class="primary-action" href="#why">맨 위로 ↑</a></p>
     </footer>
+
+    <script src="assets/js/planned.js?v=1"></script>
+    <script src="assets/js/nearby.js?v=1"></script>
   </body>
 </html>

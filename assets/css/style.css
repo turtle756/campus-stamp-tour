@@ -902,6 +902,97 @@ hr {
 }
 
 /* ========================================================================
+   5주차 · 방문 예정 토글(localStorage) + 가까운 장소(Geolocation)
+   ======================================================================== */
+.plan-toggle {
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0.55em 1.1em;
+  border-radius: 999px;
+  border: 2px solid currentColor;
+  background: transparent;
+  color: inherit;
+  transition: background-color 150ms ease, color 150ms ease, transform 150ms ease;
+}
+
+.plan-toggle:hover {
+  transform: translateY(-2px);
+}
+
+.plan-toggle[aria-pressed="true"] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.place-card.is-planned {
+  box-shadow: 0 0 0 3px var(--accent-soft), 0 6px 18px rgb(0 0 0 / 6%);
+}
+
+.plan-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
+  margin: 0.4rem 0 1rem;
+  font-size: 0.95rem;
+}
+
+.plan-bar p {
+  margin: 0;
+}
+
+.link-button {
+  font: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+  background: none;
+  border: 0;
+  padding: 0;
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1rem;
+  align-items: center;
+}
+
+.nearby-status {
+  min-height: 1.5em;
+  padding: 0.7em 1em;
+  border-radius: 10px;
+  background: rgb(0 0 0 / 5%);
+  font-size: 0.95rem;
+}
+
+.nearby-status[data-state="pending"] { background: #fff7e0; }
+.nearby-status[data-state="success"] { background: var(--accent-soft, #e4efdd); }
+.nearby-status[data-state="denied"],
+.nearby-status[data-state="timeout"],
+.nearby-status[data-state="error"],
+.nearby-status[data-state="unsupported"] { background: #ffe9e9; }
+
+.nearby-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0;
+}
+
+.nearby-list li {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.3rem 1rem;
+  padding: 0.6em 0;
+  border-bottom: 1px dashed rgb(0 0 0 / 15%);
+}
+
+/* ========================================================================
    Responsive — 모바일 전용 @media (필수 요구사항)
    ------------------------------------------------------------------------
    글자 크기 · 여백 · 링크 크기 · 인터랙션 영역을 모두 조정한다.

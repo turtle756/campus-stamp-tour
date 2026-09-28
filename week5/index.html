@@ -1,0 +1,735 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="dark">
+    <title>학관에서 눈을 떴다 · 캠퍼스 스탬프 투어</title>
+    <meta name="description" content="좀비가 나타난 밤, 성심교정 학관에서 눈을 뜬 당신의 여덟 가지 선택. sessionStorage로 이어하기, localStorage로 완료 기록을 남기는 5주차 밸런스 게임.">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%99%3C/text%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap">
+    <style>
+      /* ============================================================
+         기본값 · 팔레트 (밤의 성심교정 · 장면 이미지의 청록·남색에 맞춤)
+         ============================================================ */
+      *, *::before, *::after { box-sizing: border-box; }
+      html { color-scheme: dark; -webkit-text-size-adjust: 100%; }
+      :root {
+        --paper: #0e1a1f;
+        --panel: #142329;
+        --ink: #e4ecee;
+        --muted: #93a7ad;
+        --line: #24373f;
+        --accent: #5ad1b8;
+        --accent-ink: #0b1d1a;
+        --accent-soft: #163a37;
+        --danger: #ff6b6b;
+        --prologue: #7f9aa6;
+        --cafeteria: #d4a574;
+        --store: #4fc3f7;
+        --gym: #ff6b35;
+      }
+      body {
+        margin: 0;
+        font-family: "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.7;
+        background: var(--paper);
+        color: var(--ink);
+      }
+      .site-header, main, .site-footer {
+        width: 92%;
+        max-width: 560px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .site-header { padding: 1.6rem 0 0.4rem; }
+      main { padding: 0.4rem 0 2rem; }
+      .site-footer {
+        padding: 1.2rem 0 2.5rem;
+        border-top: 1px solid var(--line);
+        font-size: 0.85rem;
+        color: var(--muted);
+      }
+      h1 { font-size: 1.9rem; font-weight: 900; line-height: 1.25; margin: 0.6rem 0 0.2rem; }
+      h2 { font-size: 1.3rem; margin: 0 0 0.6rem; line-height: 1.3; }
+      .sub { margin: 0; color: var(--muted); }
+      .back-link { margin: 0; font-size: 0.9rem; }
+      a { color: inherit; text-underline-offset: 3px; }
+      a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+      code { font-family: "JetBrains Mono", monospace; font-size: 0.85em; }
+
+      /* ============================================================
+         화면 전환 · 카드 · 버튼
+         ============================================================ */
+      .screen[hidden] { display: none; }
+      .screen {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 1.3rem 1.2rem 1.4rem;
+        margin-top: 1rem;
+      }
+      .btn {
+        font: inherit;
+        font-weight: 700;
+        cursor: pointer;
+        width: 100%;
+        min-height: 48px;
+        padding: 0.7em 1em;
+        border-radius: 12px;
+        border: 2px solid var(--accent);
+        background: var(--accent);
+        color: var(--accent-ink);
+        touch-action: manipulation;
+        transition: transform 150ms ease, box-shadow 150ms ease;
+      }
+      .btn:active { transform: scale(0.98); }
+      .btn:disabled { opacity: 0.45; cursor: default; }
+      .btn-ghost { background: transparent; color: var(--accent); }
+      .btn-danger { border-color: var(--danger); background: transparent; color: var(--danger); }
+      .btn-row { display: flex; gap: 0.6rem; margin-top: 0.9rem; }
+      .btn-row .btn { flex: 1; }
+      .stack { display: grid; gap: 0.7rem; }
+
+      label { display: block; font-weight: 700; margin-bottom: 0.3rem; }
+      input[type="text"] {
+        font: inherit;
+        width: 100%;
+        min-height: 48px;
+        padding: 0.5em 0.9em;
+        border: 2px solid var(--line);
+        border-radius: 12px;
+        background: #0b1519;
+        color: var(--ink);
+      }
+      input[type="text"]:focus { border-color: var(--accent); outline: none; }
+      .hint { font-size: 0.88rem; color: var(--muted); margin: 0.4rem 0 1rem; }
+      .notice {
+        background: var(--accent-soft);
+        border-radius: 12px;
+        padding: 0.8rem 1rem;
+        margin-bottom: 1rem;
+        font-size: 0.95rem;
+      }
+      .intro-text p { margin: 0 0 0.5rem; }
+      .intro-text p:last-child { color: var(--muted); }
+
+      /* ============================================================
+         장면 이미지 · 문항 화면
+         ============================================================ */
+      .scene {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        aspect-ratio: 4 / 3;
+        object-fit: cover;
+        border-radius: 12px;
+        border: 1px solid var(--line);
+        margin: 0 0 0.9rem;
+        background: #0b1519;
+      }
+      .progress {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.82rem;
+        color: var(--muted);
+        margin-bottom: 0.6rem;
+        gap: 0.6rem;
+      }
+      .tag {
+        font-weight: 700;
+        padding: 0.15em 0.7em;
+        border-radius: 999px;
+        color: #0b1519;
+        background: var(--tag-color, var(--prologue));
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .big-badge {
+        font-weight: 700;
+        color: var(--gym);
+        border: 1px solid var(--gym);
+        border-radius: 999px;
+        padding: 0.1em 0.6em;
+        white-space: nowrap;
+      }
+      .bar { height: 6px; background: var(--line); border-radius: 999px; overflow: hidden; margin-bottom: 1rem; }
+      .bar span { display: block; height: 100%; background: var(--accent); transition: width 200ms ease; }
+      .question { font-size: 1.15rem; font-weight: 500; line-height: 1.55; margin: 0 0 1rem; }
+      .choice {
+        font: inherit;
+        cursor: pointer;
+        width: 100%;
+        min-height: 64px;
+        text-align: left;
+        padding: 0.8rem 1rem;
+        border: 2px solid var(--line);
+        border-radius: 14px;
+        background: #0f1e24;
+        color: var(--ink);
+        display: flex;
+        gap: 0.8rem;
+        align-items: center;
+        touch-action: manipulation;
+        transition: transform 150ms ease, border-color 150ms ease;
+      }
+      .choice:active { transform: scale(0.98); }
+      /* 터치 기기는 탭 뒤 hover가 남아 "선택됨"처럼 보이므로 마우스 환경에서만 hover 효과 */
+      @media (hover: hover) {
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgb(0 0 0 / 35%); }
+        .choice:hover { transform: translateY(-2px); border-color: var(--accent); }
+      }
+      .choice[aria-pressed="true"] { border-color: var(--accent); box-shadow: inset 0 0 0 2px var(--accent); }
+      .choice b {
+        font-family: "JetBrains Mono", monospace;
+        flex: 0 0 2.2rem;
+        height: 2.2rem;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        background: var(--accent-soft);
+        color: var(--accent);
+      }
+      .choice small { display: block; color: var(--muted); font-size: 0.8rem; }
+
+      /* ============================================================
+         결말 · 거점 카드
+         ============================================================ */
+      .result-name { font-size: 1.7rem; font-weight: 900; color: var(--accent); margin: 0; line-height: 1.25; }
+      .result-desc { margin: 0.3rem 0 0.8rem; font-size: 1.02rem; }
+      .rule { font-family: "JetBrains Mono", monospace; font-size: 0.8rem; color: var(--muted); margin: 0 0 1rem; }
+      .epilogue {
+        border-left: 3px solid var(--accent);
+        padding: 0.2rem 0 0.2rem 1rem;
+        margin: 0 0 1.1rem;
+        font-size: 1.02rem;
+        line-height: 1.75;
+      }
+      .base-card {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.6rem;
+        padding: 0.9rem;
+        border: 2px dashed var(--line);
+        border-radius: 14px;
+        background: #0b1519;
+        margin: 0 0 1rem;
+      }
+      .slot { text-align: center; font-size: 0.78rem; color: var(--muted); }
+      .slot .place { display: block; font-weight: 700; color: var(--ink); }
+      .slot .circle {
+        width: 54px;
+        height: 54px;
+        margin: 0.2rem auto 0.3rem;
+        border-radius: 50%;
+        border: 3px solid var(--slot-color);
+        display: grid;
+        place-items: center;
+        font-size: 1.3rem;
+        font-weight: 900;
+        color: var(--slot-color);
+      }
+      .slot.stayed .circle { background: var(--slot-color); color: #0b1519; transform: rotate(-8deg); }
+      .base-card.small { gap: 0.3rem; padding: 0.4rem; margin: 0.4rem 0 0; max-width: 200px; }
+      .base-card.small .circle { width: 28px; height: 28px; font-size: 0.8rem; border-width: 2px; margin: 0.1rem auto 0.15rem; }
+      .base-card.small .slot { font-size: 0.62rem; }
+      .base-card.small .place { font-size: 0.66rem; }
+
+      /* ============================================================
+         기록 화면
+         ============================================================ */
+      .history-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.7rem; }
+      .record {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 0.8rem 0.9rem;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 0.5rem 0.8rem;
+        align-items: start;
+      }
+      .record-head { font-weight: 700; }
+      .record-head span { color: var(--accent); }
+      .record-meta { font-family: "JetBrains Mono", monospace; font-size: 0.75rem; color: var(--muted); }
+      .record-answers { font-size: 0.85rem; color: var(--muted); overflow-wrap: anywhere; }
+      .btn-small { min-height: 48px; min-width: 56px; width: auto; padding: 0.4em 0.9em; font-size: 0.85rem; }
+      .empty { color: var(--muted); text-align: center; padding: 1.2rem 0; }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <p class="back-link"><a href="../index.html">← 캠퍼스 스탬프 투어 첫 화면</a></p>
+      <h1>학관에서 눈을 떴다</h1>
+      <p class="sub">성심교정 생존 밸런스 · 여덟 번의 선택 · 5주차 실습</p>
+    </header>
+
+    <main id="main-content">
+      <!-- 1. 시작 화면 -->
+      <section class="screen" id="screen-intro">
+        <img class="scene" src="../images/week5/classroom.jpg" alt="밤의 학관 3층 강의실. 달빛이 든 창 너머 운동장에 형체들이 서 있다." width="960" height="720">
+        <div id="intro-resume" class="notice" hidden>
+          <p style="margin:0 0 0.6rem"><strong id="resume-text"></strong></p>
+          <button type="button" class="btn" id="btn-resume">이어하기</button>
+        </div>
+        <div class="intro-text">
+          <p>학관 3층 강의실. 눈을 뜨니 밤이다.</p>
+          <p>깜빡 잠이 든 줄 알았는데, 복도는 불이 꺼져 있고 창밖 운동장에는 느리게 움직이는 형체들이 있다.</p>
+          <p>폰은 배터리 9%, 신호 없음. 이 건물을 내려가 김수환관까지 가야 한다. 선택은 여덟 번, 큰 갈림길은 세 번.</p>
+        </div>
+        <label for="nickname">생존자 이름 (1~12자)</label>
+        <input type="text" id="nickname" maxlength="12" autocomplete="off" placeholder="예: 학관지박령">
+        <p class="hint">A는 머무는 선택(0점), B는 움직이는 선택(1점). 여덟 번의 합으로 당신의 생존 유형이 정해집니다.</p>
+        <div class="stack">
+          <button type="button" class="btn" id="btn-start">눈을 뜬다</button>
+          <button type="button" class="btn btn-ghost" id="btn-history-intro">생존 기록 보기</button>
+        </div>
+      </section>
+
+      <!-- 2. 문항 화면 -->
+      <section class="screen" id="screen-quiz" hidden>
+        <div class="progress">
+          <span id="quiz-tag" class="tag"></span>
+          <span id="quiz-big" class="big-badge" hidden>큰 선택</span>
+          <span id="quiz-count">1/8</span>
+        </div>
+        <div class="bar"><span id="quiz-bar" style="width:0%"></span></div>
+        <img class="scene" id="quiz-scene" src="../images/week5/classroom.jpg" alt="" width="960" height="720">
+        <p class="question" id="quiz-text"></p>
+        <div class="stack">
+          <button type="button" class="choice" id="btn-a"><b>A</b><span></span></button>
+          <button type="button" class="choice" id="btn-b"><b>B</b><span></span></button>
+        </div>
+        <div class="btn-row">
+          <button type="button" class="btn btn-ghost" id="btn-prev">이전 선택</button>
+          <button type="button" class="btn btn-danger" id="btn-clear-draft">임시 삭제</button>
+        </div>
+      </section>
+
+      <!-- 3. 결말 화면 -->
+      <section class="screen" id="screen-result" hidden>
+        <img class="scene" id="result-scene" src="../images/week5/gym.jpg" alt="" width="960" height="720">
+        <p class="sub" id="result-nick"></p>
+        <p class="result-name" id="result-name"></p>
+        <p class="result-desc" id="result-desc"></p>
+        <p class="rule" id="result-rule"></p>
+        <p class="epilogue" id="result-epilogue"></p>
+        <h2 style="font-size:1rem;margin-bottom:0.4rem">거점 카드 · 세 번의 큰 선택</h2>
+        <div id="result-bases"></div>
+        <div class="stack">
+          <button type="button" class="btn" id="btn-next-friend">다음 생존자</button>
+          <button type="button" class="btn btn-ghost" id="btn-history-result">생존 기록 보기</button>
+        </div>
+      </section>
+
+      <!-- 4. 내 데이터 조회 화면 -->
+      <section class="screen" id="screen-history" hidden>
+        <h2>생존 기록</h2>
+        <div id="history-resume" class="notice" hidden></div>
+        <ul class="history-list" id="history-list"></ul>
+        <div class="btn-row">
+          <button type="button" class="btn btn-ghost" id="btn-back">돌아가기</button>
+          <button type="button" class="btn btn-danger" id="btn-clear-all">전체 삭제</button>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>
+        저장 위치 — <code>sessionStorage</code>: 이 탭이 열려 있는 동안 임시 답변(이어하기) ·
+        <code>localStorage</code>: 이 브라우저에 완료 기록(재방문해도 남음)
+      </p>
+      <p>장면 그림: fal.ai FLUX.1 [dev]로 생성 · 등장인물·건물 배치는 이야기용 설정입니다.</p>
+    </footer>
+
+    <script>
+      /* ============================================================
+         상수 — 문항 · 결과 · 에필로그 · 저장 키
+         ============================================================ */
+      const VERSION = 2;
+      const KEYS = { draft: "week5.balance.draft", history: "week5.balance.history" };
+      const HISTORY_MAX = 20;
+
+      // 막(act): 장면 이미지·태그 색. 큰 선택의 key는 거점 카드 순서와 같다.
+      const ACTS = {
+        prologue:  { label: "학관 3층 강의실",   scene: "../images/week5/classroom.jpg", alt: "밤의 학관 3층 강의실. 달빛이 든 창 너머 운동장에 형체들이 서 있다." },
+        cafeteria: { label: "학관 2층 학생식당", scene: "../images/week5/cafeteria.jpg", alt: "비상등만 켜진 학생식당. 식판이 쌓인 배식대와 살짝 열린 주방 문." },
+        store:     { label: "학관 1층 GS25",     scene: "../images/week5/store.jpg",     alt: "형광등이 깜빡이는 편의점. 반쯤 빈 진열대와 빛나는 냉장고, 닫힌 창고 문." },
+        gym:       { label: "김수환관 트러스트짐", scene: "../images/week5/gym.jpg",       alt: "어두운 헬스장. 덤벨 랙과 러닝머신, 기구로 막힌 입구, 램프 하나." },
+      };
+      const BASES = ["cafeteria", "store", "gym"];
+
+      const QUESTIONS = [
+        // ── 프롤로그 · 학관 3층
+        { act: "prologue",
+          text: "강의실 불은 꺼져 있다. 창밖, 운동장 가장자리를 따라 형체 서넛이 같은 방향으로 느리게 걷는다.",
+          a: "불을 켜지 않고 창가에 붙어 밖을 더 지켜본다.",
+          b: "복도로 나가 비상계단 문이 잠겼는지 확인한다." },
+        { act: "prologue",
+          text: "복도 끝에서 무언가 끌리는 소리가 난다. 강의실 문은 안에서 잠기지 않는다.",
+          a: "책상으로 문을 막고 소리가 멀어질 때까지 기다린다.",
+          b: "소리 반대편 계단으로 지금 내려간다." },
+        // ── 1막 · 학관 2층 학생식당
+        { act: "cafeteria",
+          text: "식당은 비상등만 켜져 있다. 배식대에 식판이 엎어져 있고, 주방 안쪽에서 냄비 뚜껑이 규칙적으로 달그락거린다.",
+          a: "홀의 식탁 밑부터 뒤진다. 남은 물과 음식이 먼저다.",
+          b: "주방 문을 열어 소리의 정체를 확인한다." },
+        { act: "cafeteria", big: true,
+          text: "주방에 사람이 있다. 식당 아주머니다. 다리를 다쳤고, 옆에는 쌀 포대와 가스레인지. \"여기서 같이 버티자\"고 한다.",
+          a: "식당에 남는다. 문을 막고, 아주머니와 여기를 거점으로 삼는다.",
+          b: "먹을 것을 나눠 받고 1층으로 내려간다. 더 넓은 곳을 봐야 한다.",
+          aLabel: "식당에 남았다", bLabel: "식당을 떠났다" },
+        // ── 2막 · 학관 1층 GS25
+        { act: "store",
+          text: "편의점 유리문이 반쯤 열려 있다. 형광등이 깜빡이고 진열대는 거의 비었지만, 안쪽 냉장고는 손을 안 댄 것 같다.",
+          a: "어두운 안쪽으로 들어가기 전에 문밖에서 3분을 센다.",
+          b: "바로 들어가 냉장고 뒤부터 챙긴다." },
+        { act: "store", big: true,
+          text: "계산대 뒤 창고 문이 안에서 잠겨 있다. 두드리자 작은 목소리. \"문 열지 마세요. 밖에 뭐가 있는지 모르잖아요.\" 창고엔 물과 라면이 몇 상자.",
+          a: "문을 잠긴 채 둔다. 물품 일부를 문 앞에 남기고, 편의점 앞을 정리해 거점으로 삼는다.",
+          b: "설득해 문을 열고 물자를 반씩 나눈다. 그리고 김수환관으로 간다. 더 튼튼한 건물이 필요하다.",
+          aLabel: "GS25에 남았다", bLabel: "GS25를 떠났다" },
+        // ── 3막 · 김수환관 트러스트짐
+        { act: "gym",
+          text: "학관과 김수환관 사이 운동장, 100m쯤. 가로등은 꺼졌고 트러스트짐 창에만 불빛이 하나 켜져 있다.",
+          a: "건물 벽을 따라 도는 긴 길로 간다.",
+          b: "운동장을 가로질러 뛴다." },
+        { act: "gym", big: true,
+          text: "트러스트짐 안. 관장이 기구로 입구를 막고 혼자 버티고 있다. \"밤새 여기 있으면 살아. 아침에 같이 정문으로 나가자. 밖에 구조가 온댔어.\" 라디오는 지직거릴 뿐이다.",
+          a: "여기서 밤을 넘긴다. 정문 얘기는 아침에 다시 판단한다.",
+          b: "관장과 지금 정문으로 향한다. 어둠 속이지만 구조가 있다면 지금이다.",
+          aLabel: "정문을 등졌다", bLabel: "정문으로 나섰다" },
+      ];
+
+      // 결과 유형 3개 — 강의 규칙: 합계가 절반보다 작으면 / 크면 / 같으면
+      const RESULTS = {
+        low:  { name: "농성자", desc: "학교 안에서 밤을 넘기는 사람. 문을 막고, 소리를 세고, 아침을 기다린다. 여덟 번 중 대부분 머무는 쪽을 골랐다." },
+        high: { name: "개척자", desc: "어둠 속에서도 움직이는 사람. 위험을 계산하고, 그래도 문을 연다. 여덟 번 중 대부분 나아가는 쪽을 골랐다." },
+        tie:  { name: "조율자", desc: "반은 지키고 반은 나가는 사람. 남을 때와 갈 때를 가른다. 머문 선택과 움직인 선택이 정확히 네 번씩이다." },
+      };
+
+      // 나만의 표현: 큰 선택 3개(식당·GS25·트러스트짐, A=남음 B=떠남)의 조합마다 다른 에필로그
+      const EPILOGUES = {
+        AAA: "아침. 학관 2층 창으로 첫 햇빛이 든다. 아주머니가 밥을 안쳤고, 1층 창고 문은 아직 닫혀 있다. 정문은 멀다. 오늘 하루는 여기서 산다.",
+        AAB: "식당과 편의점을 거점으로 두고도, 새벽에는 관장을 따라 정문으로 걸었다. 뒤를 돌아보니 학관 2층 창의 불빛이 오래 보였다.",
+        ABA: "식당에 거점을 두고, 편의점 창고 문은 열었다. 트러스트짐에서 밤을 넘긴 뒤 셋이 학관으로 돌아왔다. 사람이 늘었다.",
+        ABB: "식당에는 남겠다고 했지만, 결국 물자를 나눠 들고 관장과 정문으로 나섰다. 아주머니에게는 돌아오겠다고만 말했다.",
+        BAA: "식당을 떠나 편의점 앞을 지켰고, 트러스트짐에서 밤을 넘겼다. 아침에 다시 학관으로 올라가 아주머니를 데리러 갔다.",
+        BAB: "식당을 떠나고 편의점을 지켰지만, 정문 앞에서는 멈추지 않았다. 창고 안의 그 사람은 끝내 문을 열지 않았다.",
+        BBA: "두 번 떠났고 마지막에 남았다. 트러스트짐의 기구 뒤에서 라디오를 밤새 들었다. 지직거림 사이로 한 번, 사람 목소리가 났다.",
+        BBB: "세 번 다 문을 열었다. 정문 앞, 관장이 먼저 나가고 당신이 따랐다. 구조가 있었는지는 이 이야기가 말해 주지 않는다.",
+      };
+
+      /* ============================================================
+         저장 — sessionStorage(임시 답변) · localStorage(완료 기록)
+         ============================================================ */
+      function newId() {
+        if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
+        return Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 8);
+      }
+
+      function loadDraft() {
+        try {
+          const data = JSON.parse(sessionStorage.getItem(KEYS.draft));
+          // 형태·버전이 다르면 없는 것으로 취급 (읽기 실패 처리)
+          if (!data || typeof data !== "object" || data.version !== VERSION) return null;
+          if (typeof data.id !== "string" || typeof data.nickname !== "string" || !Array.isArray(data.answers)) return null;
+          if (!Number.isInteger(data.current) || data.current < 0 || data.current >= QUESTIONS.length) return null;
+          if (data.current > data.answers.length) return null;
+          return data;
+        } catch (err) {
+          return null;
+        }
+      }
+
+      function saveDraft(draft) {
+        sessionStorage.setItem(KEYS.draft, JSON.stringify(draft));
+      }
+
+      function clearDraft() {
+        sessionStorage.removeItem(KEYS.draft);
+      }
+
+      function loadHistory() {
+        try {
+          const list = JSON.parse(localStorage.getItem(KEYS.history));
+          if (!Array.isArray(list)) return [];
+          // 기록 하나하나도 형태를 검사해, 깨진 항목은 버리고 나머지만 보여준다
+          return list.filter((r) =>
+            r && typeof r === "object" && r.version === VERSION &&
+            typeof r.id === "string" && typeof r.nickname === "string" &&
+            Array.isArray(r.answers) && r.answers.length === QUESTIONS.length &&
+            r.answers.every((a) => a === 0 || a === 1) &&
+            Object.prototype.hasOwnProperty.call(RESULTS, r.result) &&
+            typeof r.completedAt === "string"
+          );
+        } catch (err) {
+          return [];
+        }
+      }
+
+      function saveHistory(list) {
+        localStorage.setItem(KEYS.history, JSON.stringify(list.slice(0, HISTORY_MAX)));
+      }
+
+      function deleteHistory(id) {
+        saveHistory(loadHistory().filter((r) => r.id !== id));
+      }
+
+      function clearAll() {
+        if (!confirm("임시 답변과 생존 기록을 모두 지울까요? 되돌릴 수 없습니다.")) return;
+        clearDraft();
+        localStorage.removeItem(KEYS.history);
+        renderHistory();
+      }
+
+      /* ============================================================
+         계산 — 점수 · 결과 유형 · 큰 선택 · 에필로그
+         ============================================================ */
+      function scoreOf(answers) {
+        return answers.reduce((sum, a) => sum + (a === 1 ? 1 : 0), 0);
+      }
+
+      function resultOf(score) {
+        const half = QUESTIONS.length / 2;
+        if (score < half) return "low";
+        if (score > half) return "high";
+        return "tie";
+      }
+
+      // 큰 선택 3개를 {cafeteria: 0|1, store: 0|1, gym: 0|1} 로 뽑는다
+      function bigChoicesOf(answers) {
+        const picked = {};
+        QUESTIONS.forEach((q, i) => { if (q.big) picked[q.act] = answers[i]; });
+        return picked;
+      }
+
+      function epilogueOf(answers) {
+        const picked = bigChoicesOf(answers);
+        const key = BASES.map((act) => (picked[act] === 0 ? "A" : "B")).join("");
+        return EPILOGUES[key];
+      }
+
+      function endingTitle(record) {
+        const gymQ = QUESTIONS.find((q) => q.big && q.act === "gym");
+        const last = bigChoicesOf(record.answers).gym === 0 ? gymQ.aLabel : gymQ.bLabel;
+        return RESULTS[record.result].name + " · " + last;
+      }
+
+      function esc(text) {
+        return String(text).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;" }[c]));
+      }
+
+      // 거점 카드: 큰 선택마다 남았으면 채운 도장, 떠났으면 빈 원
+      function baseCard(answers, small) {
+        const picked = bigChoicesOf(answers);
+        const slots = BASES.map((act) => {
+          const q = QUESTIONS.find((x) => x.big && x.act === act);
+          const stayed = picked[act] === 0;
+          return (
+            "<div class=\"slot" + (stayed ? " stayed" : "") + "\" style=\"--slot-color: var(--" + act + ")\">" +
+            "<span class=\"place\">" + esc(ACTS[act].label.replace(/^.*? /, "")) + "</span>" +
+            "<div class=\"circle\">" + (stayed ? "✓" : "→") + "</div>" +
+            esc(stayed ? q.aLabel : q.bLabel) + "</div>"
+          );
+        });
+        return "<div class=\"base-card" + (small ? " small" : "") + "\">" + slots.join("") + "</div>";
+      }
+
+      /* ============================================================
+         렌더 — 화면 전환 · 시작 · 문항 · 결말 · 기록
+         ============================================================ */
+      let draft = null;
+      let lastRecord = null;
+
+      function showScreen(name) {
+        document.querySelectorAll(".screen").forEach((s) => { s.hidden = s.id !== "screen-" + name; });
+        window.scrollTo({ top: 0 });
+      }
+
+      function renderIntro() {
+        draft = loadDraft();
+        const box = document.getElementById("intro-resume");
+        box.hidden = !draft;
+        if (draft) {
+          document.getElementById("resume-text").textContent =
+            draft.nickname + "님, " + (draft.current + 1) + "번째 선택부터 이어하기";
+        }
+        showScreen("intro");
+      }
+
+      function renderQuestion() {
+        const q = QUESTIONS[draft.current];
+        const act = ACTS[q.act];
+        const n = draft.current + 1;
+        const tag = document.getElementById("quiz-tag");
+        tag.textContent = act.label;
+        tag.style.setProperty("--tag-color", "var(--" + q.act + ")");
+        document.getElementById("quiz-big").hidden = !q.big;
+        document.getElementById("quiz-count").textContent = n + "/" + QUESTIONS.length;
+        document.getElementById("quiz-bar").style.width = ((n - 1) / QUESTIONS.length) * 100 + "%";
+        const scene = document.getElementById("quiz-scene");
+        if (scene.getAttribute("src") !== act.scene) scene.src = act.scene;
+        scene.alt = act.alt;
+        document.getElementById("quiz-text").textContent = q.text;
+        const btnA = document.getElementById("btn-a");
+        const btnB = document.getElementById("btn-b");
+        btnA.querySelector("span").innerHTML = esc(q.a) + "<small>머문다 · 0점</small>";
+        btnB.querySelector("span").innerHTML = esc(q.b) + "<small>움직인다 · 1점</small>";
+        const picked = draft.answers[draft.current];
+        btnA.setAttribute("aria-pressed", picked === 0);
+        btnB.setAttribute("aria-pressed", picked === 1);
+        document.getElementById("btn-prev").disabled = draft.current === 0;
+        showScreen("quiz");
+      }
+
+      function renderResult(record) {
+        const r = RESULTS[record.result];
+        const score = scoreOf(record.answers);
+        const half = QUESTIONS.length / 2;
+        const compare = score < half ? "작아서" : score > half ? "커서" : "같아서";
+        const scene = document.getElementById("result-scene");
+        scene.src = ACTS.gym.scene;
+        scene.alt = ACTS.gym.alt;
+        document.getElementById("result-nick").textContent = record.nickname + "님의 밤";
+        document.getElementById("result-name").textContent = endingTitle(record);
+        document.getElementById("result-desc").textContent = r.desc;
+        document.getElementById("result-rule").textContent =
+          "움직인 선택 " + score + "점 / " + QUESTIONS.length + "번 — 절반(" + half + ")보다 " + compare + " " + r.name;
+        document.getElementById("result-epilogue").textContent = epilogueOf(record.answers);
+        document.getElementById("result-bases").innerHTML = baseCard(record.answers, false);
+        showScreen("result");
+      }
+
+      function renderHistory() {
+        const list = loadHistory();
+        const box = document.getElementById("history-list");
+        const resume = document.getElementById("history-resume");
+        draft = loadDraft();
+        resume.hidden = !draft;
+        if (draft) {
+          resume.textContent = draft.nickname + "님의 임시 답변이 있습니다. 돌아가기 → 이어하기를 누르면 " +
+            (draft.current + 1) + "번째 선택부터 계속됩니다.";
+        }
+        if (list.length === 0) {
+          box.innerHTML = "<li class=\"empty\">아직 밤을 끝까지 넘긴 기록이 없습니다.</li>";
+        } else {
+          box.innerHTML = list.map((rec) => {
+            const when = new Date(rec.completedAt).toLocaleString("ko-KR", {
+              month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit"
+            });
+            const summary = rec.answers.map((a) => (a === 0 ? "A" : "B")).join("·");
+            return (
+              "<li class=\"record\">" +
+              "<div><div class=\"record-head\">" + esc(rec.nickname) + " · <span>" + esc(endingTitle(rec)) + "</span></div>" +
+              "<div class=\"record-meta\">" + when + " · 움직임 " + scoreOf(rec.answers) + "점</div>" +
+              "<div class=\"record-answers\">" + summary + "</div>" +
+              baseCard(rec.answers, true) + "</div>" +
+              "<button type=\"button\" class=\"btn btn-danger btn-small\" data-delete=\"" + esc(rec.id) + "\">삭제</button>" +
+              "</li>"
+            );
+          }).join("");
+        }
+        document.getElementById("btn-clear-all").disabled = list.length === 0 && !draft;
+        showScreen("history");
+      }
+
+      /* ============================================================
+         흐름 — 시작 · 답변 · 완료 · 다음 생존자
+         ============================================================ */
+      function startQuiz() {
+        const input = document.getElementById("nickname");
+        const nickname = input.value.trim();
+        if (nickname.length < 1 || nickname.length > 12) {
+          input.focus();
+          input.setCustomValidity("이름은 1~12자로 입력하세요.");
+          input.reportValidity();
+          return;
+        }
+        input.setCustomValidity("");
+        if (loadDraft() && !confirm("진행 중인 임시 답변을 버리고 처음부터 시작할까요?")) return;
+        draft = { id: newId(), version: VERSION, nickname: nickname, answers: [], current: 0 };
+        saveDraft(draft);
+        renderQuestion();
+      }
+
+      function answer(value) {
+        draft.answers[draft.current] = value;
+        if (draft.current === QUESTIONS.length - 1) {
+          finishQuiz();
+          return;
+        }
+        draft.current += 1;
+        saveDraft(draft);
+        renderQuestion();
+      }
+
+      function finishQuiz() {
+        lastRecord = {
+          id: draft.id,
+          version: VERSION,
+          nickname: draft.nickname,
+          answers: draft.answers.slice(0, QUESTIONS.length),
+          result: resultOf(scoreOf(draft.answers)),
+          completedAt: new Date().toISOString()
+        };
+        saveHistory([lastRecord].concat(loadHistory()));
+        clearDraft();
+        draft = null;
+        renderResult(lastRecord);
+      }
+
+      function nextFriend() {
+        clearDraft();
+        draft = null;
+        lastRecord = null;
+        document.getElementById("nickname").value = "";
+        renderIntro();
+        document.getElementById("nickname").focus();
+      }
+
+      /* ============================================================
+         이벤트 등록
+         ============================================================ */
+      document.getElementById("btn-start").addEventListener("click", startQuiz);
+      document.getElementById("nickname").addEventListener("keydown", (e) => {
+        if (e.isComposing || e.keyCode === 229) return; // 한글 조합 중 Enter는 무시
+        if (e.key === "Enter") startQuiz();
+      });
+      document.getElementById("btn-resume").addEventListener("click", () => { draft = loadDraft(); if (draft) renderQuestion(); else renderIntro(); });
+      document.getElementById("btn-a").addEventListener("click", () => answer(0));
+      document.getElementById("btn-b").addEventListener("click", () => answer(1));
+      document.getElementById("btn-prev").addEventListener("click", () => {
+        if (draft.current === 0) return;
+        draft.current -= 1;
+        saveDraft(draft);
+        renderQuestion();
+      });
+      document.getElementById("btn-clear-draft").addEventListener("click", () => {
+        clearDraft();
+        draft = null;
+        renderIntro();
+      });
+      document.getElementById("btn-next-friend").addEventListener("click", nextFriend);
+      document.getElementById("btn-history-intro").addEventListener("click", renderHistory);
+      document.getElementById("btn-history-result").addEventListener("click", renderHistory);
+      document.getElementById("history-list").addEventListener("click", (e) => {
+        const btn = e.target.closest("[data-delete]");
+        if (!btn) return;
+        deleteHistory(btn.dataset.delete);
+        renderHistory();
+      });
+      document.getElementById("btn-clear-all").addEventListener("click", clearAll);
+      document.getElementById("btn-back").addEventListener("click", () => {
+        if (lastRecord) renderResult(lastRecord);
+        else renderIntro();
+      });
+
+      renderIntro();
+    </script>
+  </body>
+</html>

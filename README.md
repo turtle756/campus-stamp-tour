@@ -29,6 +29,8 @@
 ```
 campus-stamp-tour/
 ├── README.md
+├── 실행-6주차-점자.bat   # 더블클릭: 6주차 TTS·점자 서버(5000) + 브라우저
+├── 실행-7주차-게시판.bat # 더블클릭: 7주차 게시판 서버(5001) + 브라우저
 ├── index.html          # 첫 화면 · 장소 3곳 소개와 제보 폼
 ├── store.html          # 장소 1 · 학관 1층 GS25
 ├── cafeteria.html      # 장소 2 · 학관 2층 학생식당
@@ -319,6 +321,9 @@ Copilot 대신 Claude Code(터미널 에이전트)를 사용했습니다. 실제
 ### 실습 2 · 서버 TTS
 - 실행 명령과 로컬 주소:
 
+  **한 번에 실행(Windows)**: 저장소 루트의 `실행-6주차-점자.bat`을 더블클릭하면 가상환경·패키지·모델(처음 한 번)을 확인하고 서버(포트 5000)를 켠 뒤 브라우저로 `/braille`을 엽니다. 아래는 같은 일을 손으로 하는 명령입니다.
+
+
   저장소 루트의 `.venv`(uv로 만든 가상환경, Windows PowerShell):
   ```powershell
   uv pip install --python .venv\Scripts\python.exe -r week6\requirements-tts.txt
@@ -398,6 +403,8 @@ Copilot 대신 Claude Code(터미널 에이전트)를 사용했습니다. 실제
 `schema.sql`·`auth.html`·`error.html`·`mini_storage.py`·`week7/README.md`는 교수 ZIP 그대로입니다.
 
 ### 실행 명령
+
+**한 번에 실행(Windows)**: 저장소 루트의 `실행-7주차-게시판.bat`을 더블클릭하면 `SECRET_KEY`를 처음 한 번 만들어 `instance/secret_key.txt`(Git 제외)에 두고, `init-db` → `promote-admin`(admin7으로 가입해 둔 경우) → 서버(포트 5001)를 켠 뒤 브라우저를 엽니다. 아래는 같은 일을 손으로 하는 명령입니다.
 
 **Windows · 저장소 루트의 `.venv` 사용(PowerShell)** — `.venv`는 uv로 만든 Python 3.12 환경이고 Flask가 이미 설치되어 있습니다.
 

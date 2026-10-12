@@ -1,0 +1,2 @@
+# Windows 실행 파일은 줄바꿈을 CRLF로 유지 (cmd가 LF만 있으면 오작동할 수 있음)
+*.bat text eol=crlf

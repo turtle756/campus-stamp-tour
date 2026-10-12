@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <p class="eyebrow">성심교정 · 어젯밤 21시</p>
+  <h1>{{ board_title }}</h1>
+  <p class="lead">{{ board_question }}</p>
+  {# 7주차 게임: 사건 진행 중이면 오프닝·방법, 판결 뒤에는 판결만 보여 줍니다. #}
+  {% if case_view.status == 'open' %}
+    <p>{{ case_view.opening }}</p>
+    <p class="suspects">용의자: {{ case_view.suspects|join(' · ') }}</p>
+    <ol class="how-to">
+      {% for step in case_view.how_to %}<li>{{ step }}</li>{% endfor %}
+    </ol>
+  {% elif case_view.status == 'closed' %}
+    <div class="verdict" role="status">
+      <strong>{{ case_view.headline }}</strong>
+      <p>{{ case_view.evidence }}</p>
+    </div>
+  {% else %}
+    <p>진행 중인 사건이 없습니다. 수사반장이 새 사건을 만들면 이곳에 사건 개요가 뜹니다.</p>
+  {% endif %}
+</section>
+
+<section class="panel" aria-labelledby="write-heading">
+  <h2 id="write-heading">제보하기</h2>
+  {% if current_user %}
+    <form method="post" action="{{ url_for('add_comment') }}">
+      <input type="hidden" name="_csrf_token" value="{{ csrf_token }}">
+      <label for="content">{{ current_user['username'] }}님의 제보 · 1~300자</label>
+      <textarea id="content" name="content" rows="3" maxlength="300" required placeholder="예: 21:10 도서관 3층에서 노란우산 봤음 · 결론: 회색후드 / 트러스트짐 / 덤벨"></textarea>
+      <button class="primary" type="submit">제보 올리기</button>
+    </form>
+  {% else %}
+    <p>제보하려면 실습용 계정으로 로그인하세요. 글은 로그인하지 않아도 볼 수 있습니다.</p>
+    <p><a class="button-link" href="{{ url_for('login') }}">로그인하기</a></p>
+  {% endif %}
+</section>
+
+<section class="panel" aria-labelledby="list-heading">
+  <div class="section-heading"><h2 id="list-heading">제보 글</h2><span>{{ comments|length }}개</span></div>
+  {% if request.args.get('reported') %}<p class="notice">신고를 받았습니다. 수사반장이 관리 화면에서 확인합니다.</p>{% endif %}
+  {% if comments %}
+    <ol class="comment-list">
+      {% for comment in comments %}
+        <li class="comment-card">
+          <div class="comment-meta">
+            <strong><span class="post-id">#{{ comment['id'] }}</span> {{ comment['username'] }}</strong>
+            {# 사건 글은 사건 시각(HH:MM)만, 그 밖의 글은 원래대로 UTC 시각 #}
+            {% if comment['id'] in case_view.post_ids %}<time>어젯밤 {{ comment['created_at'][11:16] }}</time>
+            {% else %}<time>{{ comment['created_at'] }} UTC</time>{% endif %}
+          </div>
+          <p class="comment-text">{{ comment['content'] }}</p>
+          {% if current_user and current_user['id'] == comment['author_id'] %}
+            <form method="post" action="{{ url_for('delete_comment', comment_id=comment['id']) }}">
+              <input type="hidden" name="_csrf_token" value="{{ csrf_token }}">
+              <button class="delete-button" type="submit">내 글 삭제</button>
+            </form>
+          {% elif current_user %}
+            <form class="report-form" method="post" action="{{ url_for('report_comment', comment_id=comment['id']) }}">
+              <input type="hidden" name="_csrf_token" value="{{ csrf_token }}">
+              <label for="reason-{{ comment['id'] }}">신고 이유 · 3~100자 · 근거 글 번호를 #으로</label>
+              <input id="reason-{{ comment['id'] }}" name="reason" minlength="3" maxlength="100" required placeholder="예: #17 21시 도서관에 없었다는 글과 모순">
+              <button class="report-button" type="submit">신고</button>
+            </form>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ol>
+  {% else %}
+    <p class="empty">아직 제보가 없습니다.</p>
+  {% endif %}
+</section>
+{% endblock %}

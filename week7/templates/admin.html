@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% block title %}관리 화면 · {{ board_title }}{% endblock %}
+{% block content %}
+<section class="hero">
+  <p class="eyebrow">ADMIN · 수사반장</p>
+  <h1>관리 화면</h1>
+  <p>신고와 글을 확인하고 필요할 때 글 삭제·계정 차단을 합니다. 이 화면은 관리자만 열 수 있습니다.</p>
+</section>
+{# 7주차 게임: 사건 만들기·판결 영역. 정답은 판결 전까지 이 화면에도 나오지 않습니다. #}
+<section class="panel case-panel" aria-labelledby="case-heading">
+  <h2 id="case-heading">사건</h2>
+  {% if case_notice %}<p class="notice" role="status">{{ case_notice }}</p>{% endif %}
+  {% if case_view.status == 'none' %}
+    <p>누르면 인물 계정 9개(용의자 5·목격자 3·피해자 1)와 사건 글 35~45개가 생깁니다. 인물 계정 비밀번호는 아래 연습 데이터 칸에 한 번만 표시됩니다.</p>
+  {% elif case_view.status == 'open' %}
+    <p>사건 진행 중 · 사건 글 {{ case_view.post_ids|length }}개. 용의자 계정을 차단하면 그 순간 한 번만 판결합니다. 목격자·피해자 차단은 판결하지 않습니다.</p>
+  {% else %}
+    <div class="verdict" role="status">
+      <strong>{{ case_view.headline }}</strong>
+      <p>{{ case_view.evidence }}</p>
+    </div>
+  {% endif %}
+  {% if case_view.status != 'none' %}<p class="empty">새 사건은 아래 '연습 데이터 모두 삭제'로 정리한 뒤 만들 수 있습니다.</p>{% endif %}
+  <form method="post" action="{{ url_for('create_case') }}">
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}">
+    <button class="primary" type="submit" {% if case_view.status != 'none' %}disabled{% endif %}>새 사건 발생</button>
+  </form>
+</section>
+<section class="panel test-data-panel">
+  <h2>먼저, 연습 데이터 만들기</h2>
+  <p>버튼을 누르면 임의의 이름을 가진 <strong>연습 계정 2개와 글 4개</strong>가 생깁니다. 두 계정의 비밀번호는 이번 묶음에서 같고, 아래에 한 번만 표시됩니다. 이름과 비밀번호를 적어 두고 로그아웃한 뒤 각각 로그인해 글 신고를 시험해 보세요.</p>
+  <p>현재 연습 계정 {{ test_user_count }}개 · 연습 글 {{ test_comment_count }}개</p>
+  {% if test_credentials %}
+    <div class="test-credentials" role="status">
+      <strong>방금 만든 계정 · 이 화면에서 한 번만 표시</strong>
+      <p>아이디: <code>{{ test_credentials.names|join(' / ') }}</code></p>
+      <p>공통 비밀번호: <code>{{ test_credentials.password }}</code></p>
+      <p>새로고침하면 비밀번호 표시는 사라집니다. 이 계정은 실습용으로만 사용하세요.</p>
+    </div>
+  {% endif %}
+  {% if test_notice %}<p class="notice" role="status">{{ test_notice }}</p>{% endif %}
+  <div class="test-data-actions">
+    <form method="post" action="{{ url_for('create_test_data') }}">
+      <input type="hidden" name="_csrf_token" value="{{ csrf_token }}">
+      <button class="primary" type="submit">연습 계정·글 무작위 생성</button>
+    </form>
+    <form method="post" action="{{ url_for('delete_test_data') }}" onsubmit="return confirm('연습 계정과 그 계정의 글을 모두 삭제할까요? 진행 중인 사건도 함께 지워집니다.')">
+      <input type="hidden" name="_csrf_token" value="{{ csrf_token }}">
+      <button class="delete-button" type="submit" {% if not test_user_count and case_view.status == 'none' %}disabled{% endif %}>연습 데이터 모두 삭제</button>
+    </form>
+  </div>
+  <p class="empty">삭제는 연습 표시가 붙은 계정(사건 인물 포함)과 그 글·관련 신고, 사건 기록에만 적용됩니다. 직접 가입한 계정과 글은 남습니다.</p>
+</section>
+<section class="panel">
+  <h2>글 검색·신고 확인</h2>
+  <form method="get" action="{{ url_for('admin') }}" class="search-form">
+    <label for="query">내용으로 검색</label>
+    <input id="query" name="q" value="{{ query }}" maxlength="100" placeholder="예: 도서관">
+    <label class="inline-check"><input type="checkbox" name="reported" value="1" {% if reported_only %}checked{% endif %}> 신고된 글만 보기</label>
+    <button class="primary" type="submit">찾기</button>
+  </form>
+  <p>{{ comments|length }}개의 글</p>
+  <ol class="comment-list">
+    {% for comment in comments %}
+      <li class="comment-card">
+        <div class="comment-meta">
+          <strong><span class="post-id">#{{ comment['id'] }}</span> {{ comment['username'] }}</strong>
+          {% if comment['id'] in case_view.post_ids %}<time>어젯밤 {{ comment['created_at'][11:16] }}</time>
+          {% else %}<time>{{ comment['created_at'] }} UTC</time>{% endif %}
+        </div>
+        <p class="comment-text">{{ comment['content'] }}</p>
+        <p>신고 {{ comment['report_count'] }}건
+          {% if badges.get(comment['id']) %}<span class="badge badge-{{ badges[comment['id']][1] }}">{{ badges[comment['id']][0] }}</span>{% endif %}
+          {% if comment['report_reasons'] %} · 이유: {{ comment['report_reasons'] }}{% endif %}</p>
+        <form method="post" action="{{ url_for('admin_delete_comment', comment_id=comment['id']) }}">
+          <input type="hidden" name="_csrf_token" value="{{ csrf_token }}">
+          <button class="delete-button" type="submit">관리자 삭제</button>
+        </form>
+      </li>
+    {% else %}
+      <li>조건에 맞는 글이 없습니다.</li>
+    {% endfor %}
+  </ol>
+</section>
+<section class="panel">
+  <h2>사용자 관리</h2>
+  <ul class="user-list">
+    {% for user in users %}
+      <li>
+        <span><strong>{{ user['username'] }}</strong>{% if case_view.roles.get(user['id']) %} · {{ case_view.roles[user['id']] }}{% endif %}{% if user['is_test'] %} · 연습{% endif %}{% if user['is_admin'] %} · 관리자{% elif user['is_blocked'] %} · 차단됨{% endif %}</span>
+        {% if not user['is_admin'] %}
+          <form method="post" action="{{ url_for('block_user', user_id=user['id']) }}">
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}">
+            <button class="delete-button" type="submit">{{ '차단 해제' if user['is_blocked'] else '차단' }}</button>
+          </form>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+</section>
+{% endblock %}

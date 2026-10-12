@@ -52,7 +52,8 @@ form.addEventListener("submit", async function (event) {
   event.preventDefault();
   const data = {
     text: document.querySelector("#text").value,
-    length_scale: Number(document.querySelector("#length-scale").value)
+    length_scale: Number(document.querySelector("#length-scale").value),
+    voice: document.querySelector("#voice").value
   };
   audio.pause();
   audio.removeAttribute("src");

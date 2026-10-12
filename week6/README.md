@@ -12,25 +12,23 @@ python -m flask --app app run --debug --port 5000
 브라우저에서 http://127.0.0.1:5000 을 엽니다. VS Code Live Server로 HTML을 열지 않습니다.
 샘플 이미지는 `static/sample.png`입니다. 사진은 JPEG/PNG, 5 MiB 및 800만 픽셀 이하입니다.
 
-## 서버 TTS
+## 서버 TTS · 점자 읽기 모드 (Supertonic 3, 내 노트북에서만)
 
-이미지 서버를 Ctrl+C로 종료한 뒤 실행합니다.
+교수 예제의 Piper(영어 전용) 대신 한국어를 지원하는 **Supertonic 3**를 씁니다. 구조(최초 요청 때 모델 1회 로드, Lock, 메모리 WAV, `send_file`)는 예제와 같습니다.
+이미지 서버를 Ctrl+C로 종료한 뒤 week6 폴더에서 실행합니다.
 
 ```sh
 python -m pip install -r requirements-tts.txt
-python -m piper.download_voices en_US-lessac-low --download-dir models
-python -m flask --app tts_app run --debug --port 5000
+python -m flask --app tts_app download-model      # 처음 한 번, 약 385MB → week6/models/ (Git 제외)
+python -m flask --app tts_app run --port 5000
 ```
 
-http://127.0.0.1:5000/tts 를 엽니다. 기본 모델은 영어용입니다.
-영어 문장을 보내면 서버가 WAV를 만들고 브라우저가 파형, 서버 생성 시간, 음성 길이와 파일 크기를 표시합니다.
-실습실에 스피커가 없어도 파형으로 결과를 확인할 수 있습니다. 재생과 다운로드는 선택 기능입니다.
-이 TTS 실습은 Windows PC의 로컬 서버에서 실행하며 별도 배포하지 않습니다.
-모델은 직접 내려받으며 이 배포 파일에는 포함하지 않습니다.
-엔진과 음성 모델의 이용 조건은 각 프로젝트에서 확인합니다.
-
-- Piper: https://github.com/OHF-Voice/piper1-gpl
-- 모델 카드: https://huggingface.co/rhasspy/piper-voices/blob/main/en/en_US/lessac/low/MODEL_CARD
+- http://127.0.0.1:5000/tts : 문장 입력 → 서버 합성 → 파형·생성 시간·음성 길이·WAV 크기 (강의 기본 흐름)
+- http://127.0.0.1:5000/braille : 점자 읽기 모드 「손끝 한 줄」. 점자 변환은 `braille.py`(한국 점자 규정, 문화체육관광부고시 제2020-38호), 문장은 `braille_levels.py`의 `LEVELS`
+- 한국어·영어 문장을 읽고, 그 밖의 언어·빈 문장·301자 이상은 400, 모델이 없으면 503과 내려받기 안내가 나옵니다.
+- 나오는 목소리는 모두 AI 합성 음성입니다. 모델: Supertone `Supertone/supertonic-3`(코드 MIT, 가중치 OpenRAIL-M — AI 합성 음성임을 표시하고 실존 인물을 흉내 내지 않을 것).
+- 이 노트북(CPU만)에서는 스레드 2개가 짧은 입력에 가장 빨라 `SUPERTONIC_INTRA_OP_THREADS=2`를 기본으로 둡니다. 음성 앞뒤 무음은 서버에서 잘라 보냅니다.
+- TTS 앱은 Render에 배포하지 않습니다. Render의 `app:app`에는 `/tts`·`/braille`이 없습니다.
 
 ## Render 이미지 앱 설정
 

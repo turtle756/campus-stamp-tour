@@ -275,7 +275,7 @@ Copilot 대신 Claude Code(터미널 에이전트)를 사용했습니다. 실제
 ## 6주차 · Flask 서버 계산 실습
 
 ### 실습 1 · 이미지 처리
-- Render 주소: **https://seongsim-photo-lab.onrender.com** (무료 플랜 · 싱가포르 · Root Directory `week6` · gunicorn · `PYTHON_VERSION=3.12.12` · Health Check `/health` · `main`에 push하면 자동 재배포). 무료 서비스라 한동안 접속이 없으면 잠들어 첫 접속이 30초~1분 걸릴 수 있습니다.
+- Render 주소: **https://seongsim-photo-lab.onrender.com** (무료 플랜 · 싱가포르 · Root Directory `week6` · gunicorn · `PYTHON_VERSION=3.12.12` · Health Check `/health` · 저장소를 GitHub 앱 연결 없이 공개 주소로 연결해서 push만으로는 다시 배포되지 않음 → 코드를 바꾸면 Render 대시보드의 **Manual Deploy → Deploy latest commit**). 무료 서비스라 한동안 접속이 없으면 잠들어 첫 접속이 30초~1분 걸릴 수 있습니다.
 - 휴대폰 확인 화면: (스크린샷 자리 — 휴대폰으로 Render 주소를 열어 캠퍼스 사진 → Edge 처리, 원본·결과가 함께 보이는 화면)
 - 내가 수정한 내용:
   - 캠퍼스 사진 버튼 3개(GS25 · 학생식당 · 트러스트짐): 서버의 `static/campus/*.jpg`를 받아 파일 선택 칸에 넣고, 이후는 직접 고른 사진과 똑같이 `FormData → POST /api/process`로 처리

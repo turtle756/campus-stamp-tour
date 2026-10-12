@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="ko">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>서버가 만든 인사</title><link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"></head>
+<body><main><section>
+<p class="eyebrow">GET /hello</p>
+<h1>{{ name }}님, 반갑습니다!</h1>
+<p>성심교정 사진 실험실에 온 걸 환영해요. 학관 GS25·학생식당, 트러스트짐 사진을 서버에서 바꿔 볼 수 있어요.</p>
+<p>Flask가 URL의 name 값을 읽고 이 HTML을 만들어 보냈습니다.</p>
+<form action="/hello" method="get">
+<label for="name">다른 이름으로 요청</label><input id="name" name="name" maxlength="30" value="{{ name }}">
+<button>새 HTML 받기</button>
+</form>
+<p><a href="/">이미지 실험실로 돌아가기</a></p>
+</section></main></body></html>

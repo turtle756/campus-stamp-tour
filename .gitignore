@@ -1,0 +1,4 @@
+# Python 가상환경·캐시 (6·7주차 Flask)
+.venv/
+__pycache__/
+*.py[cod]

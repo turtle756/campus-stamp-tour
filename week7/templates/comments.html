@@ -18,6 +18,14 @@
     </div>
   {% else %}
     <p>진행 중인 사건이 없습니다. 수사반장이 새 사건을 만들면 이곳에 사건 개요가 뜹니다.</p>
+    {% if current_user and current_user['is_admin'] %}
+      {# 7주차 게임: 관리자에게만 보이는 사건 시작 버튼(권한은 서버의 create_case가 다시 확인) #}
+      <form method="post" action="{{ url_for('create_case') }}">
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}">
+        <input type="hidden" name="next" value="board">
+        <button class="primary" type="submit">새 사건 시작</button>
+      </form>
+    {% endif %}
   {% endif %}
 </section>
 

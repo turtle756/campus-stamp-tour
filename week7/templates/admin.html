@@ -5,9 +5,10 @@
   <p class="eyebrow">ADMIN · 수사반장</p>
   <h1>관리 화면</h1>
   <p>신고와 글을 확인하고 필요할 때 글 삭제·계정 차단을 합니다. 이 화면은 관리자만 열 수 있습니다.</p>
+  <p class="jump-links"><a href="#users">계정 차단</a> · <a href="#test-data">연습 데이터</a> · <a href="#posts">글 검색·신고</a> · <a href="#case">수사 게임(새 사건)</a></p>
 </section>
 {% if case_notice %}<p class="notice" role="status">{{ case_notice }}</p>{% endif %}
-<section class="panel">
+<section id="users" class="panel">
   <h2>사용자 관리 · 계정 차단</h2>
   <p>가입한 계정과 연습 계정 {{ users|length }}개 · 차단됨 {{ users|selectattr("is_blocked")|list|length }}개. 차단한 계정은 새로 로그인할 수 없고 글도 쓸 수 없습니다. 관리자 계정은 차단할 수 없습니다.</p>
   <ul class="user-list">
@@ -24,7 +25,7 @@
     {% endfor %}
   </ul>
 </section>
-<section class="panel test-data-panel">
+<section id="test-data" class="panel test-data-panel">
   <h2>먼저, 연습 데이터 만들기</h2>
   <p>버튼을 누르면 임의의 이름을 가진 <strong>연습 계정 2개와 글 4개</strong>가 생깁니다. 두 계정의 비밀번호는 이번 묶음에서 같고, 아래에 한 번만 표시됩니다. 이름과 비밀번호를 적어 두고 로그아웃한 뒤 각각 로그인해 글 신고를 시험해 보세요.</p>
   <p>현재 연습 계정 {{ test_user_count }}개 · 연습 글 {{ test_comment_count }}개</p>
@@ -49,7 +50,7 @@
   </div>
   <p class="empty">삭제는 연습 표시가 붙은 계정(사건 인물 포함)과 그 글·관련 신고, 사건 기록에만 적용됩니다. 직접 가입한 계정과 글은 남습니다.</p>
 </section>
-<section class="panel">
+<section id="posts" class="panel">
   <h2>글 검색·신고 확인</h2>
   <form method="get" action="{{ url_for('admin') }}" class="search-form">
     <label for="query">내용으로 검색</label>
@@ -81,7 +82,7 @@
   </ol>
 </section>
 {# 7주차 게임: 사건 만들기·판결 영역. 정답은 판결 전까지 이 화면에도 나오지 않습니다. #}
-<section class="panel case-panel" aria-labelledby="case-heading">
+<section id="case" class="panel case-panel" aria-labelledby="case-heading">
   <h2 id="case-heading">수사 게임 (선택)</h2>
   {% if case_view.status == 'none' %}
     <p>누르면 인물 계정 9개(용의자 5·목격자 3·피해자 1)와 사건 글 35~45개가 생깁니다. 인물 계정 비밀번호는 위의 연습 데이터 칸에 한 번만 표시됩니다.</p>

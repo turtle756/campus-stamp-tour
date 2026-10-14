@@ -365,6 +365,8 @@ def create_case():
     names, password = case_store.create_case(db, case_file())
     session["test_credentials"] = {"names": names, "password": password}
     session["case_notice"] = "새 사건이 시작됐습니다. 정답은 판결 전까지 공개하지 않습니다."
+    if request.form.get("next") == "board":   # 게시판의 '새 사건 시작' 버튼이면 게시판으로 돌아감
+        return redirect(url_for("comments"))
     return redirect(url_for("admin"))
 
 

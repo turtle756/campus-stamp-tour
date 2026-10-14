@@ -68,6 +68,27 @@ def init_db_command():
     print(f"DB 준비 완료: {app.config['DATABASE']}")
 
 
+@app.cli.command("auto-case")
+def auto_case_command():
+    """7주차 게임: 실행 파일이 서버를 켜기 전에 부릅니다.
+    사건이 없으면 새로 만들고, 판결까지 끝난 사건이면 정리한 뒤 새로 만들고, 진행 중이면 그대로 둡니다."""
+    db = get_db()
+    case = case_store.load_case(case_file())
+    if case is not None and case["verdict"] is None:
+        print("진행 중인 사건이 있어 그대로 이어 갑니다.")
+        return
+    if case is not None or case_store.npcs_exist(db):
+        # 관리 화면의 '연습 데이터 모두 삭제'와 같은 순서: 연습 계정의 신고 → 글 → 계정, 그리고 사건 파일
+        db.execute("DELETE FROM reports WHERE reporter_id IN (SELECT id FROM users WHERE is_test = 1)")
+        db.execute("DELETE FROM comments WHERE user_id IN (SELECT id FROM users WHERE is_test = 1)")
+        db.execute("DELETE FROM users WHERE is_test = 1")
+        db.commit()
+        case_store.delete_case(case_file())
+        print("지난 사건을 정리했습니다.")
+    names, password = case_store.create_case(db, case_file())
+    print(f"새 사건을 만들었습니다. 인물 계정 {len(names)}개 · 공통 비밀번호 {password} (인물 계정으로 로그인해 볼 때만 필요)")
+
+
 @app.cli.command("promote-admin")
 def promote_admin_command():
     """로컬 터미널에서만 첫 관리자 계정을 지정합니다."""

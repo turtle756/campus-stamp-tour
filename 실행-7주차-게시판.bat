@@ -30,7 +30,10 @@ rem 4) 관리자 지정: admin7로 가입해 두었다면 관리자가 된다(�
 set "WEEK7_ADMIN_USERNAME=admin7"
 "%PY%" -m flask --app app promote-admin >nul 2>nul && (echo admin7 = 관리자) || (echo admin7이 아직 없습니다. 웹에서 admin7으로 가입한 뒤 이 파일을 다시 실행하면 관리자가 됩니다.)
 
-rem 5) 서버가 준비되면 브라우저를 연다 (NO_BROWSER=1이면 열지 않음)
+rem 5) 사건 자동 준비: 없으면 새로 만들고, 판결이 끝났으면 정리하고 새로 만들고, 진행 중이면 이어 간다
+"%PY%" -m flask --app app auto-case
+
+rem 6) 서버가 준비되면 브라우저를 연다 (NO_BROWSER=1이면 열지 않음)
 if not defined NO_BROWSER start "" /b powershell -NoProfile -Command "for($i=0;$i -lt 120;$i++){try{Invoke-WebRequest -UseBasicParsing http://127.0.0.1:5001/ -TimeoutSec 1 | Out-Null; Start-Process 'http://127.0.0.1:5001/'; break}catch{Start-Sleep -Milliseconds 500}}"
 
 echo.

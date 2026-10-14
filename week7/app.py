@@ -103,6 +103,31 @@ def promote_admin_command():
     print(f"관리자 지정 완료: {username}")
 
 
+@app.cli.command("ensure-admin")
+def ensure_admin_command():
+    """배포 시작 시 환경변수의 실습용 관리자를 준비합니다."""
+    username = os.environ.get("WEEK7_ADMIN_USERNAME", "").strip()
+    password = os.environ.get("WEEK7_ADMIN_PASSWORD", "")
+    if not USERNAME_RULE.fullmatch(username) or not 12 <= len(password) <= 128:
+        raise RuntimeError("WEEK7_ADMIN_USERNAME과 12자 이상 실습용 WEEK7_ADMIN_PASSWORD를 설정하세요.")
+    db = get_db()
+    user = db.execute("SELECT id, is_admin FROM users WHERE username = ?", (username,)).fetchone()
+    if user is None:
+        db.execute(
+            "INSERT INTO users (username, password_hash, is_admin) VALUES (?, ?, 1)",
+            (username, generate_password_hash(password)),
+        )
+    elif user["is_admin"]:
+        db.execute(
+            "UPDATE users SET password_hash = ?, is_blocked = 0 WHERE id = ?",
+            (generate_password_hash(password), user["id"]),
+        )
+    else:
+        raise RuntimeError("같은 아이디의 일반 계정이 있습니다. 다른 관리자 아이디를 정하세요.")
+    db.commit()
+    print(f"배포 관리자 준비 완료: {username}")
+
+
 @app.before_request
 def load_user_and_check_csrf():
     g.user = None

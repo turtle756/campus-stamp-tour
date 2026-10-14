@@ -21,8 +21,7 @@ os.environ.setdefault("SUPERTONIC_INTRA_OP_THREADS", "2")
 import numpy as np
 from flask import render_template, request, send_file
 from app import app
-from braille import UnsupportedText, to_cells
-from braille_levels import prepare_levels
+from braille_items import build_items
 
 MODEL_DIR = Path(os.environ.get("TTS_MODEL_DIR", str(Path(__file__).parent / "models" / "supertonic-3")))
 VOICES = ("F1", "F2", "F3", "F4", "F5", "M1", "M2", "M3", "M4", "M5")
@@ -38,12 +37,8 @@ tts_lock = Lock()
 # 이미지 실험실(/) 하단의 TTS 링크는 tts_app으로 실행했을 때만 보이게 합니다(Render의 app:app에는 TTS가 없음).
 app.config["TTS_PAGES"] = True
 
-# 서버를 켤 때 레벨 문장을 전부 점자로 바꿔 보고, 문제가 있으면 터미널에 알립니다(오류는 화면에도 표시).
-LEVEL_DATA, LEVEL_ERRORS, LEVEL_WARNINGS = prepare_levels()
-for message in LEVEL_ERRORS:
-    app.logger.warning("[점자 레벨 오류] %s", message)
-for message in LEVEL_WARNINGS:
-    app.logger.warning("[점자 레벨 경고] %s", message)
+# 서버를 켤 때 점자 문장을 한 번 바꿔 둡니다(지원하지 않는 글자가 있으면 여기서 바로 오류가 납니다).
+BRAILLE_ITEMS = build_items()
 
 
 def model_ready():
@@ -107,22 +102,8 @@ def tts_page():
 
 @app.get("/braille")
 def braille_page():
-    # 점자 변환은 서버가 맡습니다: 규정 표를 braille.py 한곳에서 관리하고, 브라우저는 받은 칸을 그리기만 합니다.
-    return render_template("braille.html", levels=LEVEL_DATA, level_errors=LEVEL_ERRORS)
-
-
-@app.post("/api/braille")
-def braille_cells():
-    """직접 입력한 답을 점자 칸으로 바꿔 돌려줍니다. 틀린 답에서 '처음 다른 칸'을 찾을 때 씁니다."""
-    data = request.get_json(silent=True)
-    text = data.get("text") if isinstance(data, dict) else None
-    if not isinstance(text, str) or len(text) > 100:
-        return {"error": "1~100자의 문장을 보내세요."}, 400
-    text = " ".join(text.split())          # 여러 칸 띄어쓰기·줄바꿈은 한 칸으로 맞춥니다
-    try:
-        return {"text": text, "cells": to_cells(text)}
-    except UnsupportedText as error:
-        return {"error": str(error)}, 400
+    # 점자 변환은 서버가 맡습니다: 규정 표를 braille.py 한곳에서 관리하고, 브라우저는 받은 점을 그리기만 합니다.
+    return render_template("braille.html", items=BRAILLE_ITEMS)
 
 
 @app.get("/api/tts/status")

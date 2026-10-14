@@ -6,25 +6,23 @@
   <h1>관리 화면</h1>
   <p>신고와 글을 확인하고 필요할 때 글 삭제·계정 차단을 합니다. 이 화면은 관리자만 열 수 있습니다.</p>
 </section>
-{# 7주차 게임: 사건 만들기·판결 영역. 정답은 판결 전까지 이 화면에도 나오지 않습니다. #}
-<section class="panel case-panel" aria-labelledby="case-heading">
-  <h2 id="case-heading">사건</h2>
-  {% if case_notice %}<p class="notice" role="status">{{ case_notice }}</p>{% endif %}
-  {% if case_view.status == 'none' %}
-    <p>누르면 인물 계정 9개(용의자 5·목격자 3·피해자 1)와 사건 글 35~45개가 생깁니다. 인물 계정 비밀번호는 아래 연습 데이터 칸에 한 번만 표시됩니다.</p>
-  {% elif case_view.status == 'open' %}
-    <p>사건 진행 중 · 사건 글 {{ case_view.post_ids|length }}개. 용의자 계정을 차단하면 그 순간 한 번만 판결합니다. 목격자·피해자 차단은 판결하지 않습니다.</p>
-  {% else %}
-    <div class="verdict" role="status">
-      <strong>{{ case_view.headline }}</strong>
-      <p>{{ case_view.evidence }}</p>
-    </div>
-  {% endif %}
-  {% if case_view.status != 'none' %}<p class="empty">새 사건은 아래 '연습 데이터 모두 삭제'로 정리한 뒤 만들 수 있습니다.</p>{% endif %}
-  <form method="post" action="{{ url_for('create_case') }}">
-    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}">
-    <button class="primary" type="submit" {% if case_view.status != 'none' %}disabled{% endif %}>새 사건 발생</button>
-  </form>
+{% if case_notice %}<p class="notice" role="status">{{ case_notice }}</p>{% endif %}
+<section class="panel">
+  <h2>사용자 관리 · 계정 차단</h2>
+  <p>가입한 계정과 연습 계정 {{ users|length }}개 · 차단됨 {{ users|selectattr("is_blocked")|list|length }}개. 차단한 계정은 새로 로그인할 수 없고 글도 쓸 수 없습니다. 관리자 계정은 차단할 수 없습니다.</p>
+  <ul class="user-list">
+    {% for user in users %}
+      <li>
+        <span><strong>{{ user['username'] }}</strong>{% if case_view.roles.get(user['id']) %} · {{ case_view.roles[user['id']] }}{% endif %}{% if user['is_test'] %} · 연습{% endif %}{% if user['is_admin'] %} · 관리자{% elif user['is_blocked'] %} · 차단됨{% endif %}</span>
+        {% if not user['is_admin'] %}
+          <form method="post" action="{{ url_for('block_user', user_id=user['id']) }}">
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}">
+            <button class="delete-button" type="submit">{{ '차단 해제' if user['is_blocked'] else '차단' }}</button>
+          </form>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
 </section>
 <section class="panel test-data-panel">
   <h2>먼저, 연습 데이터 만들기</h2>
@@ -82,20 +80,23 @@
     {% endfor %}
   </ol>
 </section>
-<section class="panel">
-  <h2>사용자 관리</h2>
-  <ul class="user-list">
-    {% for user in users %}
-      <li>
-        <span><strong>{{ user['username'] }}</strong>{% if case_view.roles.get(user['id']) %} · {{ case_view.roles[user['id']] }}{% endif %}{% if user['is_test'] %} · 연습{% endif %}{% if user['is_admin'] %} · 관리자{% elif user['is_blocked'] %} · 차단됨{% endif %}</span>
-        {% if not user['is_admin'] %}
-          <form method="post" action="{{ url_for('block_user', user_id=user['id']) }}">
-            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}">
-            <button class="delete-button" type="submit">{{ '차단 해제' if user['is_blocked'] else '차단' }}</button>
-          </form>
-        {% endif %}
-      </li>
-    {% endfor %}
-  </ul>
+{# 7주차 게임: 사건 만들기·판결 영역. 정답은 판결 전까지 이 화면에도 나오지 않습니다. #}
+<section class="panel case-panel" aria-labelledby="case-heading">
+  <h2 id="case-heading">수사 게임 (선택)</h2>
+  {% if case_view.status == 'none' %}
+    <p>누르면 인물 계정 9개(용의자 5·목격자 3·피해자 1)와 사건 글 35~45개가 생깁니다. 인물 계정 비밀번호는 위의 연습 데이터 칸에 한 번만 표시됩니다.</p>
+  {% elif case_view.status == 'open' %}
+    <p>사건 진행 중 · 사건 글 {{ case_view.post_ids|length }}개. 용의자 계정을 차단하면 그 순간 한 번만 판결합니다. 목격자·피해자 차단은 판결하지 않습니다.</p>
+  {% else %}
+    <div class="verdict" role="status">
+      <strong>{{ case_view.headline }}</strong>
+      <p>{{ case_view.evidence }}</p>
+    </div>
+  {% endif %}
+  {% if case_view.status != 'none' %}<p class="empty">새 사건은 위의 '연습 데이터 모두 삭제'로 정리한 뒤 만들 수 있습니다.</p>{% endif %}
+  <form method="post" action="{{ url_for('create_case') }}">
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}">
+    <button class="primary" type="submit" {% if case_view.status != 'none' %}disabled{% endif %}>새 사건 발생</button>
+  </form>
 </section>
 {% endblock %}
